@@ -115,15 +115,16 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* TÍTULO CON AZUL CORPORATIVO */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
-            <span className="block text-white mb-2">Transformamos</span>
-            <span className="block text-white mb-2">ideas en</span>
-            <span className="block" style={{
+          {/* TÍTULO - TECNOLOGÍA PROTAGONISTA */}
+          <h1 className="font-black mb-8 leading-tight">
+            <span className="block text-white text-4xl md:text-6xl lg:text-7xl mb-2">Transformamos</span>
+            <span className="block text-white text-4xl md:text-6xl lg:text-7xl mb-4">ideas en</span>
+            <span className="block text-6xl md:text-8xl lg:text-9xl relative" style={{
               color: '#00a8ff',
-              textShadow: '0 0 40px rgba(0, 168, 255, 0.6), 0 0 80px rgba(0, 168, 255, 0.4), 0 0 120px rgba(0, 168, 255, 0.2)'
+              textShadow: '0 0 40px rgba(0, 168, 255, 0.8), 0 0 80px rgba(0, 168, 255, 0.6), 0 0 120px rgba(0, 168, 255, 0.4), 0 0 160px rgba(0, 168, 255, 0.2)',
+              letterSpacing: '0.05em'
             }}>
-              tecnología
+              TECNOLOGÍA
             </span>
           </h1>
 
