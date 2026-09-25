@@ -88,10 +88,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* Gradient transition to next section - organic blend */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 z-20 pointer-events-none" style={{
-        background: 'linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.7) 70%, rgb(255, 255, 255) 100%)'
-      }} />
     </section>
   )
 }

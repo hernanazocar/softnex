@@ -120,10 +120,6 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Gradient transition to next section - organic blend */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 z-20 pointer-events-none" style={{
-        background: 'linear-gradient(to bottom, transparent 0%, rgba(10, 22, 40, 0.3) 40%, rgba(10, 22, 40, 0.7) 70%, rgb(10, 22, 40) 100%)'
-      }} />
     </section>
   )
 }
