@@ -31,6 +31,8 @@ export default function Contact() {
 
   return (
     <section id="contacto" className="relative py-20 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+      {/* Gradient transition from previous section */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-softnex-dark/50 to-transparent pointer-events-none" />
       {/* Light background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-dots-pattern opacity-5" />
@@ -169,6 +171,9 @@ export default function Contact() {
           </div>
         </div>
       </div>
+
+      {/* Gradient transition to footer */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-softnex-dark z-20 pointer-events-none" />
     </section>
   )
 }

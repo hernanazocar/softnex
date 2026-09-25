@@ -196,6 +196,9 @@ export default function Hero() {
         <div className="w-px h-12 bg-gradient-to-b from-softnex-blue via-softnex-cyan to-transparent" />
       </div>
 
+      {/* Gradient transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-gray-50 z-20" />
+
       <style jsx>{`
         @keyframes gridMove {
           0% { transform: translateY(0); }

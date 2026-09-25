@@ -2,7 +2,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative border-t border-white/10 overflow-hidden bg-softnex-dark">
+    <footer className="relative overflow-hidden bg-softnex-dark">
+      {/* Gradient transition from previous section */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
       {/* Subtle background */}
       <div className="absolute inset-0">
         <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-gradient-to-r from-softnex-blue/8 to-softnex-cyan/4 rounded-full blur-[80px]" />
