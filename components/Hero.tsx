@@ -47,7 +47,9 @@ export default function Hero() {
     }
 
     const particles: Particle[] = []
-    for (let i = 0; i < 80; i++) {
+    // Reduce particles on mobile for better performance
+    const particleCount = window.innerWidth < 768 ? 40 : 60
+    for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle())
     }
 
