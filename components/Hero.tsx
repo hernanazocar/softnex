@@ -115,12 +115,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* TÍTULO ARREGLADO */}
+          {/* TÍTULO CON AZUL CORPORATIVO */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
             <span className="block text-white mb-2">Transformamos</span>
             <span className="block text-white mb-2">ideas en</span>
-            <span className="block text-softnex-blue" style={{
-              textShadow: '0 0 40px rgba(0, 168, 255, 0.5), 0 0 80px rgba(0, 168, 255, 0.3)'
+            <span className="block" style={{
+              color: '#00a8ff',
+              textShadow: '0 0 40px rgba(0, 168, 255, 0.6), 0 0 80px rgba(0, 168, 255, 0.4), 0 0 120px rgba(0, 168, 255, 0.2)'
             }}>
               tecnología
             </span>
