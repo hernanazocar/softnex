@@ -117,13 +117,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* TÍTULO - TECNOLOGÍA PROTAGONISTA */}
+          {/* TÍTULO BALANCEADO - TECNOLOGÍA PROTAGONISTA */}
           <h1 className="font-black mb-8 leading-tight">
-            <span className="block text-white text-4xl md:text-6xl lg:text-7xl mb-2">Transformamos</span>
-            <span className="block text-white text-4xl md:text-6xl lg:text-7xl mb-4">ideas en</span>
-            <span className="block text-6xl md:text-8xl lg:text-9xl relative" style={{
+            <span className="block text-white text-4xl md:text-5xl lg:text-6xl mb-2">Transformamos</span>
+            <span className="block text-white text-4xl md:text-5xl lg:text-6xl mb-3">ideas en</span>
+            <span className="block text-5xl md:text-7xl lg:text-8xl relative" style={{
               color: '#00a8ff',
-              letterSpacing: '0.05em'
+              letterSpacing: '0.02em'
             }}>
               TECNOLOGÍA
             </span>
