@@ -22,10 +22,10 @@ export default function Header() {
       <div className="fixed top-0 left-0 right-0 h-2 bg-[#1a2332] z-[60]" />
 
       <header
-        className={`fixed top-2 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-2 left-0 right-0 z-50 transition-all duration-300 bg-[#1a2332] ${
           isScrolled
-            ? 'glass-strong shadow-lg shadow-softnex-blue/5 border-b border-white/10'
-            : 'bg-transparent'
+            ? 'shadow-lg shadow-softnex-blue/5 border-b border-white/10'
+            : 'border-b border-white/5'
         }`}
       >
         <nav className="container mx-auto px-6 py-4">
