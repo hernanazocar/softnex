@@ -1,19 +1,34 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, memo } from 'react'
 
-export default function Hero() {
+function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const animationFrameRef = useRef<number | undefined>(undefined)
+  const isVisibleRef = useRef(true)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    if (!canvas || !isMounted) return
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d', { alpha: true, willReadFrequently: false })
     if (!ctx) return
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    // Optimización: usar devicePixelRatio para pantallas de alta densidad
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    const width = window.innerWidth
+    const height = window.innerHeight
+
+    canvas.width = width * dpr
+    canvas.height = height * dpr
+    canvas.style.width = `${width}px`
+    canvas.style.height = `${height}px`
+    ctx.scale(dpr, dpr)
 
     // Capturados como primitivos para que TypeScript no pierda el
     // null-check de `canvas` dentro de la clase anidada (closures).
@@ -28,8 +43,8 @@ export default function Hero() {
       size: number
 
       constructor() {
-        this.x = Math.random() * canvasWidth
-        this.y = Math.random() * canvasHeight
+        this.x = Math.random() * width
+        this.y = Math.random() * height
         this.vx = (Math.random() - 0.5) * 0.5
         this.vy = (Math.random() - 0.5) * 0.5
         this.size = Math.random() * 2 + 1
@@ -38,8 +53,10 @@ export default function Hero() {
       update() {
         this.x += this.vx
         this.y += this.vy
-        if (this.x < 0 || this.x > canvasWidth) this.vx *= -1
-        if (this.y < 0 || this.y > canvasHeight) this.vy *= -1
+
+        // Optimización: bounce sin recalcular
+        if (this.x < 0 || this.x > width) this.vx *= -1
+        if (this.y < 0 || this.y > height) this.vy *= -1
       }
 
       draw() {
@@ -52,65 +69,123 @@ export default function Hero() {
     }
 
     const particles: Particle[] = []
-    for (let i = 0; i < 80; i++) {
+    // Optimización: menos partículas en mobile y tablets
+    const particleCount = width < 640 ? 20 : width < 1024 ? 30 : 50
+    for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle())
     }
 
-    function animate() {
-      if (!ctx || !canvas) return
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+    // Optimización: pre-calcular valores constantes
+    const maxDistance = 150
+    const maxDistanceSquared = maxDistance * maxDistance
 
-      particles.forEach((particle, i) => {
+    function animate() {
+      if (!ctx || !canvas || !isVisibleRef.current) {
+        animationFrameRef.current = requestAnimationFrame(animate)
+        return
+      }
+
+      ctx.clearRect(0, 0, width, height)
+
+      // Optimización: evitar nested loops cuando sea posible
+      const len = particles.length
+      for (let i = 0; i < len; i++) {
+        const particle = particles[i]
         particle.update()
         particle.draw()
 
-        particles.slice(i + 1).forEach(otherParticle => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+        // Optimización: usar distancia al cuadrado para evitar sqrt
+        for (let j = i + 1; j < len; j++) {
+          const other = particles[j]
+          const dx = particle.x - other.x
+          const dy = particle.y - other.y
+          const distSquared = dx * dx + dy * dy
 
-          if (distance < 150) {
-            ctx.strokeStyle = `rgba(0, 168, 255, ${0.2 * (1 - distance / 150)})`
+          if (distSquared < maxDistanceSquared) {
+            const dist = Math.sqrt(distSquared)
+            const alpha = 0.2 * (1 - dist / maxDistance)
+            ctx.strokeStyle = `rgba(0, 168, 255, ${alpha})`
             ctx.lineWidth = 1
             ctx.beginPath()
             ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(otherParticle.x, otherParticle.y)
+            ctx.lineTo(other.x, other.y)
             ctx.stroke()
           }
-        })
-      })
+        }
+      }
 
-      requestAnimationFrame(animate)
+      animationFrameRef.current = requestAnimationFrame(animate)
     }
 
     animate()
 
+    // Optimización: debounce del resize
+    let resizeTimeout: NodeJS.Timeout
     const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(() => {
+        const newWidth = window.innerWidth
+        const newHeight = window.innerHeight
+        canvas.width = newWidth * dpr
+        canvas.height = newHeight * dpr
+        canvas.style.width = `${newWidth}px`
+        canvas.style.height = `${newHeight}px`
+        ctx.scale(dpr, dpr)
+      }, 150)
     }
 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    // Optimización: pausar animación cuando no está visible
+    const handleVisibilityChange = () => {
+      isVisibleRef.current = !document.hidden
+    }
+
+    window.addEventListener('resize', handleResize, { passive: true })
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+    }
+  }, [isMounted])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#050b15] via-softnex-dark to-[#0a1628]">
-      <canvas ref={canvasRef} className="absolute inset-0 z-0" />
+      {/* Optimización: canvas con will-change y transform para GPU acceleration */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-0"
+        style={{ willChange: 'transform' }}
+      />
 
-      <div className="absolute inset-0 z-0" style={{
-        backgroundImage: `linear-gradient(rgba(0, 168, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 168, 255, 0.03) 1px, transparent 1px)`,
-        backgroundSize: '50px 50px',
-        animation: 'gridMove 20s linear infinite'
-      }} />
+      {/* Optimización: grid simplificado con CSS puro */}
+      <div
+        className="absolute inset-0 z-0 opacity-30"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 168, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 168, 255, 0.03) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px',
+          animation: 'gridMove 20s linear infinite',
+          willChange: 'transform'
+        }}
+      />
 
-      <div className="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-gradient-to-r from-softnex-blue/20 to-softnex-cyan/10 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '4s' }} />
-      <div className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] bg-gradient-to-r from-softnex-purple/20 to-softnex-pink/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s' }} />
+      {/* Optimización: reducir blur y usar will-change */}
+      <div
+        className="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-gradient-to-r from-softnex-blue/15 to-softnex-cyan/8 rounded-full blur-[80px] animate-pulse"
+        style={{ animationDuration: '4s', willChange: 'opacity, transform' }}
+      />
+      <div
+        className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] bg-gradient-to-r from-softnex-purple/15 to-softnex-pink/8 rounded-full blur-[80px] animate-pulse"
+        style={{ animationDuration: '6s', willChange: 'opacity, transform' }}
+      />
 
       <div className="relative z-10 container mx-auto px-6 text-center pt-20">
         <div className="max-w-6xl mx-auto">
+          {/* Optimización: reducir blur en el badge */}
           <div className="inline-block mb-8 relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-50 group-hover:opacity-100 blur transition duration-500" />
+            <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-50 group-hover:opacity-100 blur-sm transition duration-300" />
             <div className="relative px-8 py-3 glass-card rounded-full border border-softnex-blue/30">
               <p className="text-xs tracking-[0.3em] text-softnex-blue font-bold uppercase flex items-center gap-2 justify-center">
                 <span className="w-2 h-2 bg-softnex-blue rounded-full animate-pulse" />
@@ -142,12 +217,13 @@ export default function Hero() {
             </p>
           </div>
 
+          {/* Optimización: CTAs con blur reducido */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
             <a
               href="#contacto"
-              className="group relative px-10 py-4 overflow-hidden rounded-full transition-all duration-300 hover:scale-110"
+              className="group relative px-10 py-4 overflow-hidden rounded-full transition-all duration-200 hover:scale-105"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-75 blur" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-75 blur-sm" />
               <div className="relative px-8 py-3 bg-gradient-to-r from-softnex-blue to-softnex-cyan rounded-full text-white font-bold text-base tracking-wide flex items-center gap-3">
                 <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
                 Comienza tu proyecto
@@ -170,7 +246,7 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* STATS ARREGLADAS */}
+          {/* Optimización: stats con blur reducido y transiciones más rápidas */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {[
               { value: '50+', label: 'Proyectos' },
@@ -178,9 +254,9 @@ export default function Hero() {
               { value: '5+', label: 'Años' },
               { value: '24/7', label: 'Soporte' },
             ].map((stat, index) => (
-              <div key={index} className="group relative">
-                <div className="absolute -inset-0.5 bg-softnex-blue/30 rounded-2xl blur opacity-50 group-hover:opacity-100 transition duration-500" />
-                <div className="relative glass-card p-8 rounded-2xl hover:scale-110 transition-all duration-300 border border-white/10">
+              <div key={stat.label} className="group relative">
+                <div className="absolute -inset-0.5 bg-softnex-blue/30 rounded-2xl blur-sm opacity-50 group-hover:opacity-100 transition duration-300" />
+                <div className="relative glass-card p-8 rounded-2xl hover:scale-105 transition-all duration-200 border border-white/10">
                   <div className="text-4xl md:text-5xl font-black text-softnex-blue mb-2">
                     {stat.value}
                   </div>
@@ -212,3 +288,5 @@ export default function Hero() {
     </section>
   )
 }
+
+export default memo(Hero)

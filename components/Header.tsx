@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -26,15 +27,15 @@ export default function Header() {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="group flex items-center space-x-2">
-            <div className="text-2xl font-black tracking-tight">
-              <span className="text-white group-hover:text-softnex-blue transition-colors">
-                softnex
-              </span>
-              <span className="text-softnex-blue group-hover:text-softnex-cyan transition-colors">
-                .
-              </span>
-            </div>
+          <Link href="/" className="group flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Softnex"
+              width={140}
+              height={140}
+              className="object-contain group-hover:scale-105 transition-transform duration-300 h-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
