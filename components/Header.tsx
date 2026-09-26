@@ -18,11 +18,11 @@ export default function Header() {
 
   return (
     <>
-      {/* Barra superior con color del logo */}
-      <div className="fixed top-0 left-0 right-0 h-2 bg-[#1a2332] z-[60]" />
+      {/* Barra superior con color exacto del fondo del logo (#06111F) */}
+      <div className="fixed top-0 left-0 right-0 h-2 bg-[#06111F] z-[60]" />
 
       <header
-        className={`fixed top-2 left-0 right-0 z-50 transition-all duration-300 bg-[#1a2332] ${
+        className={`fixed top-2 left-0 right-0 z-50 transition-all duration-300 bg-[#06111F] ${
           isScrolled
             ? 'shadow-lg shadow-softnex-blue/5 border-b border-white/10'
             : 'border-b border-white/5'
