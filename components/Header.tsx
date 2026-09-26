@@ -35,9 +35,9 @@ export default function Header() {
             <Image
               src="/logo.png"
               alt="Softnex"
-              width={140}
-              height={140}
-              className="object-contain group-hover:scale-105 transition-transform duration-300 h-auto"
+              width={220}
+              height={220}
+              className="object-contain group-hover:scale-105 transition-transform duration-300 h-16 md:h-20 w-auto"
               priority
             />
           </Link>

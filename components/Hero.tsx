@@ -181,7 +181,7 @@ function Hero() {
         style={{ animationDuration: '6s', willChange: 'opacity, transform' }}
       />
 
-      <div className="relative z-10 container mx-auto px-6 text-center pt-20">
+      <div className="relative z-10 container mx-auto px-6 text-center pt-32 md:pt-28">
         <div className="max-w-6xl mx-auto">
           {/* Optimización: reducir blur en el badge */}
           <div className="inline-block mb-8 relative group">
