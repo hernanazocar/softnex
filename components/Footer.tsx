@@ -1,5 +1,13 @@
+import { Mail, Link2, Globe } from 'lucide-react'
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+
+  const socials = [
+    { icon: Mail, href: 'mailto:contacto@softnex.com', label: 'Email' },
+    { icon: Globe, href: '#', label: 'LinkedIn' },
+    { icon: Link2, href: '#', label: 'GitHub' },
+  ]
 
   return (
     <footer className="relative overflow-hidden bg-softnex-dark">
@@ -22,25 +30,25 @@ export default function Footer() {
               SOLUCIONES PARA EL FUTURO
             </p>
             <p className="text-white/60 text-sm leading-relaxed max-w-md">
-              Transformamos ideas en tecnología. Creamos soluciones digitales
-              innovadoras que impulsan el crecimiento de tu negocio.
+              Transformamos ideas en tecnología. Diseñamos y construimos software a medida,
+              apps móviles, ERP y soluciones de IA que impulsan el crecimiento de tu negocio.
             </p>
 
             {/* Social links */}
             <div className="flex space-x-3 pt-2">
-              {[
-                { icon: '📧', href: 'mailto:contacto@softnex.com' },
-                { icon: '🔗', href: '#' },
-                { icon: '💼', href: '#' },
-              ].map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="w-10 h-10 glass rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300"
-                >
-                  <span className="text-lg">{social.icon}</span>
-                </a>
-              ))}
+              {socials.map((social) => {
+                const Icon = social.icon
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    aria-label={social.label}
+                    className="w-10 h-10 glass rounded-full flex items-center justify-center hover:scale-110 hover:border-softnex-blue/40 transition-all duration-300"
+                  >
+                    <Icon className="w-[18px] h-[18px] text-white/80" strokeWidth={2} />
+                  </a>
+                )
+              })}
             </div>
           </div>
 
@@ -55,8 +63,8 @@ export default function Footer() {
                 'Sistemas ERP',
                 'Automatización',
                 'Agentes IA',
-              ].map((item, index) => (
-                <li key={index}>
+              ].map((item) => (
+                <li key={item}>
                   <a
                     href="#servicios"
                     className="text-white/60 hover:text-softnex-blue text-sm transition-colors"
@@ -74,10 +82,12 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: 'Nosotros', href: '#nosotros' },
+                { label: 'Proceso', href: '#proceso' },
                 { label: 'Servicios', href: '#servicios' },
+                { label: 'FAQ', href: '#faq' },
                 { label: 'Contacto', href: '#contacto' },
-              ].map((item, index) => (
-                <li key={index}>
+              ].map((item) => (
+                <li key={item.label}>
                   <a
                     href={item.href}
                     className="text-white/60 hover:text-softnex-cyan text-sm transition-colors"
