@@ -43,16 +43,16 @@ export default function Header() {
             : 'border-b border-white/5'
         }`}
       >
-        <nav className="container mx-auto px-6 py-4">
+        <nav className="container mx-auto px-6 py-2.5">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="group flex items-center">
               <Image
                 src="/logo.png"
                 alt="Softnex"
-                width={220}
-                height={220}
-                className="object-contain group-hover:scale-105 transition-transform duration-300 h-16 md:h-20 w-auto"
+                width={180}
+                height={180}
+                className="object-contain group-hover:scale-105 transition-transform duration-300 h-10 md:h-12 w-auto"
                 priority
               />
             </Link>
