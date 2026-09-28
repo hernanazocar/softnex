@@ -72,16 +72,16 @@ function Hero() {
       constructor() {
         this.x = Math.random() * dimensions.width
         this.y = Math.random() * dimensions.height
-        this.vx = (Math.random() - 0.5) * 0.5
-        this.vy = (Math.random() - 0.5) * 0.5
-        this.depth = Math.random() // 0-1, determina profundidad
-        this.size = 0.5 + this.depth * 2.5 // Varía de 0.5 a 3
-        this.opacity = 0.2 + this.depth * 0.6 // Varía de 0.2 a 0.8
+        this.vx = (Math.random() - 0.5) * (0.4 + Math.random() * 0.4) // Velocidad variable 0.4-0.8
+        this.vy = (Math.random() - 0.5) * (0.4 + Math.random() * 0.4)
+        this.depth = Math.random()
+        this.size = 2 + this.depth * 2 // Nodos sutiles: 2-4px
+        this.opacity = 0.3 + this.depth * 0.4 // Opacidad sutil: 0.3-0.7
       }
 
       update() {
-        this.x += this.vx * (0.5 + this.depth * 0.5) // Más rápidas las más "cercanas"
-        this.y += this.vy * (0.5 + this.depth * 0.5)
+        this.x += this.vx * (0.4 + this.depth * 0.2)
+        this.y += this.vy * (0.4 + this.depth * 0.2)
 
         // Bounce usando dimensiones actuales
         if (this.x < 0 || this.x > dimensions.width) this.vx *= -1
@@ -94,10 +94,28 @@ function Hero() {
 
       draw() {
         if (!ctx) return
-        ctx.fillStyle = `rgba(0, 168, 255, ${this.opacity})`
+
+        // Glow sutil
+        const glowGradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2.5)
+        glowGradient.addColorStop(0, `rgba(0, 212, 255, ${this.opacity * 0.2})`)
+        glowGradient.addColorStop(1, 'rgba(0, 212, 255, 0)')
+        ctx.fillStyle = glowGradient
+        ctx.beginPath()
+        ctx.arc(this.x, this.y, this.size * 2.5, 0, Math.PI * 2)
+        ctx.fill()
+
+        // Nodo minimalista
+        ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity * 0.9})`
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
+
+        // Borde sutil
+        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity * 0.3})`
+        ctx.lineWidth = 0.5
+        ctx.beginPath()
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        ctx.stroke()
       }
     }
 
@@ -115,7 +133,7 @@ function Hero() {
     initParticles()
 
     // Optimización: pre-calcular valores constantes
-    const maxDistance = 150
+    const maxDistance = 180 // Aumentado para más conexiones visibles
     const maxDistanceSquared = maxDistance * maxDistance
 
     function animate() {
@@ -155,16 +173,16 @@ function Hero() {
 
           if (distSquared < maxDistanceSquared) {
             const dist = Math.sqrt(distSquared)
-            const alpha = 0.15 * (1 - dist / maxDistance) * Math.min(particle.opacity, other.opacity)
+            const alpha = 0.5 * (1 - dist / maxDistance) * Math.min(particle.opacity, other.opacity)
 
-            // Gradiente de línea con colores de marca
+            // Conexión destacada como red de nodos
             const gradient = ctx.createLinearGradient(particle.x, particle.y, other.x, other.y)
-            gradient.addColorStop(0, `rgba(0, 168, 255, ${alpha})`) // softnex-blue
-            gradient.addColorStop(0.5, `rgba(0, 212, 255, ${alpha})`) // softnex-cyan
-            gradient.addColorStop(1, `rgba(99, 102, 241, ${alpha * 0.8})`) // softnex-purple
+            gradient.addColorStop(0, `rgba(0, 212, 255, ${alpha * 1.1})`)
+            gradient.addColorStop(0.5, `rgba(0, 168, 255, ${alpha * 1.3})`)
+            gradient.addColorStop(1, `rgba(99, 102, 241, ${alpha})`)
 
             ctx.strokeStyle = gradient
-            ctx.lineWidth = 0.8
+            ctx.lineWidth = 1.8
             ctx.beginPath()
             ctx.moveTo(particle.x, particle.y)
             ctx.lineTo(other.x, other.y)
