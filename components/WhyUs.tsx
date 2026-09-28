@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Gauge, Users, Code, Headset, Quote } from 'lucide-react'
+import { Gauge, Users, Code, Headset, Quote, UserCircle2 } from 'lucide-react'
 
 const differentiators = [
   {
@@ -131,9 +131,14 @@ export default function WhyUs() {
               <p className="text-gray-700 text-sm leading-relaxed mb-5 italic">
                 &ldquo;{t.quote}&rdquo;
               </p>
-              <div className="pt-4 border-t border-gray-100">
-                <p className="text-gray-900 font-bold text-sm">{t.name}</p>
-                <p className="text-gray-500 text-xs">{t.role}</p>
+              <div className="pt-4 border-t border-gray-100 flex items-center gap-3">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-softnex-blue/10 border border-softnex-blue/20 flex items-center justify-center">
+                  <UserCircle2 className="w-5 h-5 text-softnex-blue" strokeWidth={2} />
+                </div>
+                <div>
+                  <p className="text-gray-900 font-bold text-sm">{t.name}</p>
+                  <p className="text-gray-500 text-xs">{t.role}</p>
+                </div>
               </div>
             </motion.div>
           ))}

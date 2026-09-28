@@ -5,6 +5,7 @@ import Process from '@/components/Process'
 import About from '@/components/About'
 import WhyUs from '@/components/WhyUs'
 import FAQ from '@/components/FAQ'
+import CTAFinal from '@/components/CTAFinal'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
@@ -18,6 +19,7 @@ export default function Home() {
       <About />
       <WhyUs />
       <FAQ />
+      <CTAFinal />
       <Contact />
       <Footer />
     </div>

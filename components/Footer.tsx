@@ -5,8 +5,9 @@ export default function Footer() {
 
   const socials = [
     { icon: Mail, href: 'mailto:contacto@softnex.com', label: 'Email' },
-    { icon: Globe, href: '#', label: 'LinkedIn' },
-    { icon: Link2, href: '#', label: 'GitHub' },
+    // LinkedIn y GitHub ocultos hasta tener URLs reales
+    // { icon: Globe, href: '#', label: 'LinkedIn' },
+    // { icon: Link2, href: '#', label: 'GitHub' },
   ]
 
   return (
@@ -20,16 +21,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 mb-2">
               <div className="text-2xl font-black tracking-tight">
                 <span className="text-white">softnex</span>
                 <span className="text-softnex-blue">.</span>
               </div>
             </div>
-            <p className="text-xs tracking-[0.25em] text-white/50 font-semibold">
-              SOLUCIONES PARA EL FUTURO
-            </p>
-            <p className="text-white/60 text-sm leading-relaxed max-w-md">
+            <p className="text-white/80 text-sm leading-relaxed max-w-md">
               Transformamos ideas en tecnología. Diseñamos y construimos software a medida,
               apps móviles, ERP y soluciones de IA que impulsan el crecimiento de tu negocio.
             </p>
@@ -67,7 +65,7 @@ export default function Footer() {
                 <li key={item}>
                   <a
                     href="#servicios"
-                    className="text-white/60 hover:text-softnex-blue text-sm transition-colors"
+                    className="text-white/80 hover:text-softnex-blue text-sm transition-colors"
                   >
                     {item}
                   </a>
@@ -90,7 +88,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="text-white/60 hover:text-softnex-cyan text-sm transition-colors"
+                    className="text-white/80 hover:text-softnex-cyan text-sm transition-colors"
                   >
                     {item.label}
                   </a>
@@ -102,17 +100,18 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-white/40 text-sm">
+          <p className="text-white/70 text-sm">
             © {currentYear} <span className="text-softnex-blue">Softnex</span>. Todos los derechos reservados.
           </p>
-          <div className="flex space-x-6">
-            <a href="#" className="text-white/40 hover:text-softnex-blue text-sm transition-colors">
+          {/* Links de Privacidad y Términos ocultos hasta tener páginas reales */}
+          {/* <div className="flex space-x-6">
+            <a href="#" className="text-white/70 hover:text-softnex-blue text-sm transition-colors">
               Privacidad
             </a>
-            <a href="#" className="text-white/40 hover:text-softnex-cyan text-sm transition-colors">
+            <a href="#" className="text-white/70 hover:text-softnex-cyan text-sm transition-colors">
               Términos
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

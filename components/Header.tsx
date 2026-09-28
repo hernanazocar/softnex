@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { Menu, X, ArrowRight, Sparkles } from 'lucide-react'
 
 const NAV_LINKS = [
   { href: '#servicios', label: 'SERVICIOS' },
@@ -34,25 +34,25 @@ export default function Header() {
   return (
     <>
       {/* Barra superior con color exacto del fondo del logo (#06111F) */}
-      <div className="fixed top-0 left-0 right-0 h-2 bg-[#06111F] z-[60]" />
+      <div className="fixed top-0 left-0 right-0 h-1 bg-[#06111F] z-[60]" />
 
       <header
-        className={`fixed top-2 left-0 right-0 z-50 transition-all duration-300 bg-[#06111F] ${
+        className={`fixed top-1 left-0 right-0 z-50 transition-all duration-300 bg-[#06111F] ${
           isScrolled
             ? 'shadow-lg shadow-softnex-blue/5 border-b border-white/10'
             : 'border-b border-white/5'
         }`}
       >
-        <nav className="container mx-auto px-6 py-4">
+        <nav className="container mx-auto px-6 py-2">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="group flex items-center">
               <Image
-                src="/logo.png"
+                src="/logo-header.png"
                 alt="Softnex"
-                width={220}
+                width={971}
                 height={220}
-                className="object-contain group-hover:scale-105 transition-transform duration-300 h-16 md:h-20 w-auto"
+                className="object-contain group-hover:scale-105 transition-transform duration-300 h-10 md:h-12 w-auto"
                 priority
               />
             </Link>
@@ -72,10 +72,13 @@ export default function Header() {
 
               <Link
                 href="#contacto"
-                className="group flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-softnex-blue to-softnex-cyan text-white rounded-full text-xs font-bold tracking-wider transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-softnex-blue/30"
+                className="group relative flex items-center gap-1.5 px-6 py-2.5 bg-gradient-to-r from-softnex-blue to-softnex-cyan text-white rounded-full text-xs font-bold tracking-wider shadow-md shadow-softnex-blue/20 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-softnex-blue/40"
               >
-                CONTACTO
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                {/* Borde brillante */}
+                <div className="absolute inset-0 rounded-full ring-1 ring-white/20" />
+
+                <Sparkles className="w-3.5 h-3.5 group-hover:rotate-12 group-hover:scale-110 transition-all" />
+                <span className="relative">CONTACTO</span>
               </Link>
             </div>
 

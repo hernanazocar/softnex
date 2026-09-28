@@ -1,15 +1,35 @@
 'use client'
 
 import { useEffect, useRef, useState, memo } from 'react'
+import { ArrowRight, Sparkles } from 'lucide-react'
 
 function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationFrameRef = useRef<number | undefined>(undefined)
   const isVisibleRef = useRef(true)
   const [isMounted, setIsMounted] = useState(false)
+  const [currentWord, setCurrentWord] = useState(0)
+  const mouseRef = useRef({ x: 0, y: 0 })
+
+  const words = ['TECNOLOGÍA', 'INNOVACIÓN', 'SOLUCIONES', 'SOFTWARE']
 
   useEffect(() => {
     setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    // Respetar preferencia de reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (prefersReducedMotion) {
+      // Dejar la primera palabra fija si el usuario prefiere menos movimiento
+      return
+    }
+
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length)
+    }, 3000)
+    return () => clearInterval(interval)
   }, [])
 
   useEffect(() => {
@@ -21,19 +41,24 @@ function Hero() {
 
     // Optimización: usar devicePixelRatio para pantallas de alta densidad
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
-    const width = window.innerWidth
-    const height = window.innerHeight
 
-    canvas.width = width * dpr
-    canvas.height = height * dpr
-    canvas.style.width = `${width}px`
-    canvas.style.height = `${height}px`
-    ctx.scale(dpr, dpr)
+    // Usar objeto mutable para dimensiones que se puede actualizar en resize
+    const dimensions = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
 
-    // Capturados como primitivos para que TypeScript no pierda el
-    // null-check de `canvas` dentro de la clase anidada (closures).
-    const canvasWidth = canvas.width
-    const canvasHeight = canvas.height
+    const resizeCanvas = () => {
+      dimensions.width = window.innerWidth
+      dimensions.height = window.innerHeight
+      canvas.width = dimensions.width * dpr
+      canvas.height = dimensions.height * dpr
+      canvas.style.width = `${dimensions.width}px`
+      canvas.style.height = `${dimensions.height}px`
+      ctx.scale(dpr, dpr)
+    }
+
+    resizeCanvas()
 
     class Particle {
       x: number
@@ -41,39 +66,53 @@ function Hero() {
       vx: number
       vy: number
       size: number
+      opacity: number
+      depth: number // Para efecto de profundidad
 
       constructor() {
-        this.x = Math.random() * width
-        this.y = Math.random() * height
+        this.x = Math.random() * dimensions.width
+        this.y = Math.random() * dimensions.height
         this.vx = (Math.random() - 0.5) * 0.5
         this.vy = (Math.random() - 0.5) * 0.5
-        this.size = Math.random() * 2 + 1
+        this.depth = Math.random() // 0-1, determina profundidad
+        this.size = 0.5 + this.depth * 2.5 // Varía de 0.5 a 3
+        this.opacity = 0.2 + this.depth * 0.6 // Varía de 0.2 a 0.8
       }
 
       update() {
-        this.x += this.vx
-        this.y += this.vy
+        this.x += this.vx * (0.5 + this.depth * 0.5) // Más rápidas las más "cercanas"
+        this.y += this.vy * (0.5 + this.depth * 0.5)
 
-        // Optimización: bounce sin recalcular
-        if (this.x < 0 || this.x > width) this.vx *= -1
-        if (this.y < 0 || this.y > height) this.vy *= -1
+        // Bounce usando dimensiones actuales
+        if (this.x < 0 || this.x > dimensions.width) this.vx *= -1
+        if (this.y < 0 || this.y > dimensions.height) this.vy *= -1
+
+        // Mantener partículas dentro de los límites después de resize
+        this.x = Math.max(0, Math.min(dimensions.width, this.x))
+        this.y = Math.max(0, Math.min(dimensions.height, this.y))
       }
 
       draw() {
         if (!ctx) return
-        ctx.fillStyle = 'rgba(0, 168, 255, 0.6)'
+        ctx.fillStyle = `rgba(0, 168, 255, ${this.opacity})`
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
       }
     }
 
-    const particles: Particle[] = []
-    // Optimización: menos partículas en mobile y tablets
-    const particleCount = width < 640 ? 20 : width < 1024 ? 30 : 50
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle())
+    let particles: Particle[] = []
+
+    const initParticles = () => {
+      particles = []
+      // Optimización: menos partículas en mobile y tablets
+      const particleCount = dimensions.width < 640 ? 20 : dimensions.width < 1024 ? 30 : 50
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle())
+      }
     }
+
+    initParticles()
 
     // Optimización: pre-calcular valores constantes
     const maxDistance = 150
@@ -85,7 +124,20 @@ function Hero() {
         return
       }
 
-      ctx.clearRect(0, 0, width, height)
+      ctx.clearRect(0, 0, dimensions.width, dimensions.height)
+
+      // Efecto de mouse glow sutil (solo desktop)
+      if (dimensions.width >= 1024) {
+        const gradient = ctx.createRadialGradient(
+          mouseRef.current.x, mouseRef.current.y, 0,
+          mouseRef.current.x, mouseRef.current.y, 200
+        )
+        gradient.addColorStop(0, 'rgba(0, 168, 255, 0.15)')
+        gradient.addColorStop(0.5, 'rgba(0, 168, 255, 0.05)')
+        gradient.addColorStop(1, 'rgba(0, 168, 255, 0)')
+        ctx.fillStyle = gradient
+        ctx.fillRect(0, 0, dimensions.width, dimensions.height)
+      }
 
       // Optimización: evitar nested loops cuando sea posible
       const len = particles.length
@@ -94,7 +146,7 @@ function Hero() {
         particle.update()
         particle.draw()
 
-        // Optimización: usar distancia al cuadrado para evitar sqrt
+        // Líneas de conexión con gradiente
         for (let j = i + 1; j < len; j++) {
           const other = particles[j]
           const dx = particle.x - other.x
@@ -103,9 +155,16 @@ function Hero() {
 
           if (distSquared < maxDistanceSquared) {
             const dist = Math.sqrt(distSquared)
-            const alpha = 0.2 * (1 - dist / maxDistance)
-            ctx.strokeStyle = `rgba(0, 168, 255, ${alpha})`
-            ctx.lineWidth = 1
+            const alpha = 0.15 * (1 - dist / maxDistance) * Math.min(particle.opacity, other.opacity)
+
+            // Gradiente de línea con colores de marca
+            const gradient = ctx.createLinearGradient(particle.x, particle.y, other.x, other.y)
+            gradient.addColorStop(0, `rgba(0, 168, 255, ${alpha})`) // softnex-blue
+            gradient.addColorStop(0.5, `rgba(0, 212, 255, ${alpha})`) // softnex-cyan
+            gradient.addColorStop(1, `rgba(99, 102, 241, ${alpha * 0.8})`) // softnex-purple
+
+            ctx.strokeStyle = gradient
+            ctx.lineWidth = 0.8
             ctx.beginPath()
             ctx.moveTo(particle.x, particle.y)
             ctx.lineTo(other.x, other.y)
@@ -124,13 +183,8 @@ function Hero() {
     const handleResize = () => {
       clearTimeout(resizeTimeout)
       resizeTimeout = setTimeout(() => {
-        const newWidth = window.innerWidth
-        const newHeight = window.innerHeight
-        canvas.width = newWidth * dpr
-        canvas.height = newHeight * dpr
-        canvas.style.width = `${newWidth}px`
-        canvas.style.height = `${newHeight}px`
-        ctx.scale(dpr, dpr)
+        resizeCanvas()
+        initParticles() // Reinicializar partículas con nuevas dimensiones
       }, 150)
     }
 
@@ -139,12 +193,23 @@ function Hero() {
       isVisibleRef.current = !document.hidden
     }
 
+    // Seguimiento de mouse (solo desktop)
+    const handleMouseMove = (e: MouseEvent) => {
+      if (dimensions.width >= 1024) {
+        mouseRef.current = { x: e.clientX, y: e.clientY }
+      }
+    }
+
     window.addEventListener('resize', handleResize, { passive: true })
     document.addEventListener('visibilitychange', handleVisibilityChange)
+    if (dimensions.width >= 1024) {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    }
 
     return () => {
       window.removeEventListener('resize', handleResize)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('mousemove', handleMouseMove)
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
@@ -152,36 +217,66 @@ function Hero() {
   }, [isMounted])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#050b15] via-softnex-dark to-[#0a1628]">
-      {/* Optimización: canvas con will-change y transform para GPU acceleration */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#020408] via-[#0a0e1a] to-[#050b15]">
+      {/* Canvas con partículas */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0"
         style={{ willChange: 'transform' }}
       />
 
-      {/* Optimización: grid simplificado con CSS puro */}
+      {/* Grid animado principal */}
       <div
-        className="absolute inset-0 z-0 opacity-30"
+        className="absolute inset-0 z-0 opacity-20"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 168, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 168, 255, 0.03) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px',
+          backgroundImage: `
+            linear-gradient(rgba(0, 168, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 168, 255, 0.05) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
           animation: 'gridMove 20s linear infinite',
           willChange: 'transform'
         }}
       />
 
-      {/* Optimización: reducir blur y usar will-change */}
+      {/* Grid secundario más sutil (parallax) */}
       <div
-        className="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-gradient-to-r from-softnex-blue/15 to-softnex-cyan/8 rounded-full blur-[80px] animate-pulse"
-        style={{ animationDuration: '4s', willChange: 'opacity, transform' }}
-      />
-      <div
-        className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] bg-gradient-to-r from-softnex-purple/15 to-softnex-pink/8 rounded-full blur-[80px] animate-pulse"
-        style={{ animationDuration: '6s', willChange: 'opacity, transform' }}
+        className="absolute inset-0 z-0 opacity-10"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: '120px 120px',
+          animation: 'gridMoveSlow 40s linear infinite',
+          willChange: 'transform'
+        }}
       />
 
-      <div className="relative z-10 container mx-auto px-6 text-center pt-32 md:pt-28">
+      {/* Viñeta sutil en los bordes */}
+      <div className="absolute inset-0 z-[1] bg-gradient-radial from-transparent via-transparent to-softnex-dark/60" />
+
+      {/* Mesh gradients modernos */}
+      <div
+        className="absolute top-0 -left-1/4 w-[800px] h-[800px] bg-gradient-to-br from-softnex-blue/20 via-softnex-cyan/10 to-transparent rounded-full blur-[120px]"
+        style={{ animation: 'float 15s ease-in-out infinite', willChange: 'transform' }}
+      />
+      <div
+        className="absolute top-1/3 -right-1/4 w-[700px] h-[700px] bg-gradient-to-bl from-softnex-purple/15 via-softnex-pink/8 to-transparent rounded-full blur-[100px]"
+        style={{ animation: 'float 12s ease-in-out infinite reverse', willChange: 'transform' }}
+      />
+      <div
+        className="absolute bottom-1/4 left-1/3 w-[600px] h-[600px] bg-gradient-to-tr from-softnex-cyan/10 via-softnex-blue/5 to-transparent rounded-full blur-[90px]"
+        style={{ animation: 'float 18s ease-in-out infinite', willChange: 'transform', animationDelay: '5s' }}
+      />
+
+      {/* Capas de brillo dinámico */}
+      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-softnex-blue/5 to-transparent opacity-30"
+        style={{ animation: 'pulse 8s ease-in-out infinite' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-softnex-dark/50 via-transparent to-softnex-dark/80" />
+
+      <div className="relative z-10 container mx-auto px-6 text-center pt-32 md:pt-36">
         <div className="max-w-6xl mx-auto">
           {/* Optimización: reducir blur en el badge */}
           <div className="inline-block mb-8 relative group">
@@ -195,16 +290,20 @@ function Hero() {
             </div>
           </div>
 
-          {/* TÍTULO - TECNOLOGÍA PROTAGONISTA */}
+          {/* TÍTULO - PALABRA DINÁMICA */}
           <h1 className="font-black mb-8 leading-tight">
             <span className="block text-white text-4xl md:text-6xl lg:text-7xl mb-2">Transformamos</span>
             <span className="block text-white text-4xl md:text-6xl lg:text-7xl mb-4">ideas en</span>
-            <span className="block text-[13vw] xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl relative whitespace-nowrap" style={{
-              color: '#00a8ff',
-              textShadow: '0 0 40px rgba(0, 168, 255, 0.8), 0 0 80px rgba(0, 168, 255, 0.6), 0 0 120px rgba(0, 168, 255, 0.4), 0 0 160px rgba(0, 168, 255, 0.2)',
-              letterSpacing: '0.02em'
-            }}>
-              TECNOLOGÍA
+            <span
+              className="block text-4xl md:text-6xl lg:text-7xl relative transition-all duration-500 ease-in-out"
+              style={{
+                color: '#00a8ff',
+                letterSpacing: '0.02em'
+              }}
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {words[currentWord]}
             </span>
           </h1>
 
@@ -218,36 +317,44 @@ function Hero() {
           </div>
 
           {/* Optimización: CTAs con blur reducido */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
             <a
               href="#contacto"
-              className="group relative px-10 py-4 overflow-hidden rounded-full transition-all duration-200 hover:scale-105"
+              className="group relative px-10 py-4 overflow-hidden rounded-full transition-all duration-300 hover:scale-[1.05]"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-75 blur-sm" />
-              <div className="relative px-8 py-3 bg-gradient-to-r from-softnex-blue to-softnex-cyan rounded-full text-white font-bold text-base tracking-wide flex items-center gap-3">
-                <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+              {/* Glow animado más pronunciado */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-75 blur-md group-hover:opacity-100 group-hover:blur-lg group-hover:-inset-2 transition-all duration-300" />
+
+              {/* Gradiente del botón con animación */}
+              <div className="absolute inset-0 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full"
+                style={{
+                  backgroundSize: '200% 100%',
+                  animation: 'gradientShift 3s ease infinite'
+                }}
+              />
+
+              {/* Brillo superior */}
+              <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent rounded-full opacity-50 group-hover:opacity-70 transition-opacity" />
+
+              {/* Contenido */}
+              <div className="relative px-8 py-3 text-white font-bold text-base tracking-wide flex items-center gap-3">
+                <Sparkles className="w-4 h-4 group-hover:rotate-12 group-hover:scale-110 transition-all" />
                 Comienza tu proyecto
-                <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </div>
             </a>
 
             <a
               href="#servicios"
-              className="group relative px-10 py-4 rounded-full border-2 border-softnex-blue/30 hover:border-softnex-blue transition-all duration-300 hover:scale-105"
+              className="group text-white/80 hover:text-white font-semibold text-base transition-colors flex items-center gap-2"
             >
-              <span className="relative text-white font-semibold text-base tracking-wide flex items-center gap-2">
-                Conoce nuestros servicios
-                <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              Conoce nuestros servicios
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
 
           {/* Optimización: stats con blur reducido y transiciones más rápidas */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto mb-16">
             {[
               { value: '50+', label: 'Proyectos' },
               { value: '30+', label: 'Clientes' },
@@ -256,11 +363,11 @@ function Hero() {
             ].map((stat, index) => (
               <div key={stat.label} className="group relative">
                 <div className="absolute -inset-0.5 bg-softnex-blue/30 rounded-2xl blur-sm opacity-50 group-hover:opacity-100 transition duration-300" />
-                <div className="relative glass-card p-8 rounded-2xl hover:scale-105 transition-all duration-200 border border-white/10">
-                  <div className="text-4xl md:text-5xl font-black text-softnex-blue mb-2">
+                <div className="relative glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-200 border border-white/10">
+                  <div className="text-3xl md:text-4xl font-black text-softnex-blue mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-white/60 tracking-wider uppercase font-semibold">
+                  <div className="text-xs text-white/70 tracking-wider uppercase font-semibold">
                     {stat.label}
                   </div>
                 </div>
@@ -270,7 +377,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce-slow">
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce-slow" aria-hidden="true">
         <div className="flex gap-1">
           <div className="w-1 h-1 bg-softnex-blue rounded-full animate-pulse" />
           <div className="w-1 h-1 bg-softnex-cyan rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
@@ -282,7 +389,28 @@ function Hero() {
       <style jsx>{`
         @keyframes gridMove {
           0% { transform: translateY(0); }
-          100% { transform: translateY(50px); }
+          100% { transform: translateY(60px); }
+        }
+
+        @keyframes gridMoveSlow {
+          0% { transform: translateY(0) translateX(0); }
+          100% { transform: translateY(120px) translateX(60px); }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.8;
+          }
+          50% {
+            transform: translate(30px, -30px) scale(1.1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes gradientShift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
       `}</style>
     </section>

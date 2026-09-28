@@ -8,31 +8,25 @@ const steps = [
     icon: Search,
     number: '01',
     title: 'Descubrimiento',
-    desc: 'Analizamos tu negocio, procesos y objetivos para definir el alcance real del proyecto y evitar sorpresas de presupuesto.',
+    desc: 'Entendemos tu negocio, objetivos y necesidades',
   },
   {
     icon: PenTool,
     number: '02',
-    title: 'Diseño y arquitectura',
-    desc: 'Prototipamos la experiencia y definimos la arquitectura técnica: base de datos, integraciones y stack a usar.',
+    title: 'Diseño',
+    desc: 'Creamos prototipos y validamos la experiencia',
   },
   {
     icon: Code2,
     number: '03',
-    title: 'Desarrollo iterativo',
-    desc: 'Construimos en sprints cortos con entregas visibles cada semana, para que puedas dar feedback a tiempo.',
+    title: 'Desarrollo',
+    desc: 'Construimos la solución con las mejores prácticas',
   },
   {
     icon: Rocket,
     number: '04',
-    title: 'Lanzamiento',
-    desc: 'Desplegamos en producción con monitoreo, documentación y capacitación a tu equipo.',
-  },
-  {
-    icon: LineChart,
-    number: '05',
-    title: 'Soporte y evolución',
-    desc: 'Acompañamos post-lanzamiento con mantenimiento, mejoras y nuevas funcionalidades a medida que creces.',
+    title: 'Entrega y Soporte',
+    desc: 'Lanzamos y acompañamos el crecimiento',
   },
 ]
 
@@ -60,8 +54,8 @@ export default function Process() {
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
             Un proceso <span className="text-softnex-cyan">claro y transparente</span>
           </h2>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
-            Sin cajas negras. Sabés en qué etapa está tu proyecto en todo momento.
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            Un proceso claro y colaborativo en cada etapa
           </p>
         </motion.div>
 
@@ -69,7 +63,7 @@ export default function Process() {
           {/* Connector line - desktop only */}
           <div className="hidden lg:block absolute top-14 left-0 right-0 h-px bg-gradient-to-r from-transparent via-softnex-blue/30 to-transparent" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
             {steps.map((step, index) => {
               const Icon = step.icon
               return (
@@ -91,7 +85,7 @@ export default function Process() {
                     </span>
                   </div>
                   <h3 className="text-white font-bold text-base mb-2">{step.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed max-w-[220px]">{step.desc}</p>
+                  <p className="text-white/70 text-sm leading-relaxed max-w-[220px]">{step.desc}</p>
                 </motion.div>
               )
             })}
