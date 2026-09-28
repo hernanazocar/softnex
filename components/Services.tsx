@@ -10,6 +10,8 @@ import {
   BrainCircuit,
   ArrowRight,
 } from 'lucide-react'
+import FloatingBlob from './graphics/FloatingBlob'
+import NetworkIllustration from './graphics/NetworkIllustration'
 
 const services = [
   {
@@ -75,9 +77,22 @@ export default function Services() {
   return (
     <section id="servicios" className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
       {/* Subtle background for light theme */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-dots-pattern opacity-5" />
-        <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-gradient-to-r from-softnex-blue/5 to-softnex-purple/3 rounded-full blur-[100px]" />
+        <FloatingBlob
+          className="top-1/2 right-1/4"
+          color="from-softnex-blue/10 to-softnex-purple/5"
+          size={400}
+          duration={18}
+        />
+        <FloatingBlob
+          className="bottom-0 -left-10"
+          color="from-softnex-cyan/8 to-transparent"
+          size={320}
+          duration={14}
+          delay={2}
+          reverse
+        />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -87,8 +102,9 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
         >
+          <NetworkIllustration className="hidden md:block absolute -top-6 right-0 w-40 h-28 text-softnex-blue/60 -z-10" />
           <div className="inline-block mb-4 px-6 py-2 bg-softnex-blue/5 border border-softnex-blue/20 rounded-full">
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">
               SERVICIOS
@@ -115,13 +131,17 @@ export default function Services() {
                 whileInView="visible"
                 viewport={{ once: true, margin: '-60px' }}
                 variants={fadeUp}
-                className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 border border-gray-100 overflow-hidden"
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-100 overflow-hidden"
               >
                 {/* Top gradient line */}
                 <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${service.gradient} opacity-70 group-hover:opacity-100 transition-opacity`} />
 
+                {/* Glow al hover */}
+                <div className={`absolute -inset-8 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-[0.06] blur-2xl transition-opacity duration-500 pointer-events-none`} />
+
                 {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 bg-gradient-to-br ${service.gradient} bg-opacity-10 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 bg-gradient-to-br ${service.gradient} bg-opacity-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
                   <Icon className="w-6 h-6 text-white" strokeWidth={2} />
                 </div>
 

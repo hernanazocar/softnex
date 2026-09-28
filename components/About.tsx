@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { Sparkles, ShieldCheck, HeartHandshake } from 'lucide-react'
+import FloatingBlob from './graphics/FloatingBlob'
+import CodeWindowMockup from './graphics/CodeWindowMockup'
 
 const techStack = [
   { name: 'React', gradient: 'from-cyan-400 to-blue-500' },
@@ -37,9 +39,15 @@ export default function About() {
   return (
     <section id="nosotros" className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-softnex-dark via-softnex-dark-light to-softnex-dark">
       {/* Dark background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-gradient-to-r from-softnex-cyan/10 to-softnex-blue/5 rounded-full blur-[100px]" />
+        <FloatingBlob
+          className="bottom-0 left-1/3"
+          color="from-softnex-cyan/10 to-softnex-blue/5"
+          size={400}
+          duration={17}
+          delay={1}
+        />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -99,14 +107,16 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* Right - Tech stack */}
+            {/* Right - Tech stack + mockup de código */}
             <motion.div
               initial={{ opacity: 0, x: 24 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="relative"
+              className="relative space-y-6"
             >
+              <CodeWindowMockup className="max-w-sm mx-auto lg:mx-0 lg:-ml-4" />
+
               <div className="glass-card rounded-2xl p-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-softnex-blue/20 to-softnex-cyan/10 rounded-full blur-2xl" />
 
