@@ -68,7 +68,8 @@ export default function FAQ() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.4, delay: index * 0.06 }}
-                className="glass-card rounded-xl overflow-hidden border border-white/10"
+                whileHover={{ scale: 1.01 }}
+                className="glass-card rounded-xl overflow-hidden border border-white/10 hover:border-softnex-blue/30 transition-colors"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
@@ -76,7 +77,7 @@ export default function FAQ() {
                   className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
                 >
                   <span className="flex items-center gap-3 text-white font-semibold text-sm md:text-base">
-                    <HelpCircle className="w-[18px] h-[18px] text-softnex-blue flex-shrink-0" strokeWidth={2} />
+                    <HelpCircle className={`w-[18px] h-[18px] text-softnex-blue flex-shrink-0 transition-transform ${isOpen ? 'scale-110' : ''}`} strokeWidth={2} />
                     {item.q}
                   </span>
                   <ChevronDown
