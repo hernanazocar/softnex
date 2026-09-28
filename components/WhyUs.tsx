@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Gauge, Users, Code, Headset, Quote, UserCircle2 } from 'lucide-react'
+import FloatingBlob from './graphics/FloatingBlob'
 
 const differentiators = [
   {
@@ -50,9 +51,15 @@ const testimonials = [
 export default function WhyUs() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-dots-pattern opacity-5" />
-        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-gradient-to-r from-softnex-cyan/5 to-softnex-blue/3 rounded-full blur-[100px]" />
+        <FloatingBlob
+          className="bottom-0 left-1/4"
+          color="from-softnex-cyan/6 to-softnex-blue/3"
+          size={400}
+          duration={20}
+          reverse
+        />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -87,9 +94,10 @@ export default function WhyUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                whileHover={{ y: -4 }}
+                className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100"
               >
-                <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-softnex-purple/10 mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-softnex-purple/10 mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
                   <Icon className="w-5 h-5 text-softnex-purple" strokeWidth={2} />
                 </div>
                 <h3 className="text-gray-900 font-bold text-base mb-2">{item.title}</h3>
@@ -125,7 +133,8 @@ export default function WhyUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.45, delay: index * 0.1 }}
-              className="relative bg-white rounded-2xl p-7 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+              whileHover={{ y: -4 }}
+              className="relative bg-white rounded-2xl p-7 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
             >
               <Quote className="w-8 h-8 text-softnex-blue/20 mb-3" strokeWidth={2} />
               <p className="text-gray-700 text-sm leading-relaxed mb-5 italic">
