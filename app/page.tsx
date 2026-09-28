@@ -4,6 +4,7 @@ import Services from '@/components/Services'
 import Process from '@/components/Process'
 import About from '@/components/About'
 import WhyUs from '@/components/WhyUs'
+import CaseStudies from '@/components/CaseStudies'
 import FAQ from '@/components/FAQ'
 import CTAFinal from '@/components/CTAFinal'
 import Contact from '@/components/Contact'
@@ -18,6 +19,7 @@ export default function Home() {
       <Process />
       <About />
       <WhyUs />
+      <CaseStudies />
       <FAQ />
       <CTAFinal />
       <Contact />

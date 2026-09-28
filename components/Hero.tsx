@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, memo } from 'react'
 import { ArrowRight, Sparkles } from 'lucide-react'
+import DashboardMockup from './graphics/DashboardMockup'
 
 function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -294,8 +295,9 @@ function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-softnex-dark/50 via-transparent to-softnex-dark/80" />
 
-      <div className="relative z-10 container mx-auto px-6 text-center pt-32 md:pt-36">
-        <div className="max-w-6xl mx-auto">
+      <div className="relative z-10 container mx-auto px-6 pt-32 md:pt-36">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center text-center lg:text-left">
+        <div>
           {/* Optimización: reducir blur en el badge */}
           <div className="inline-block mb-8 relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-50 group-hover:opacity-100 blur-sm transition duration-300" />
@@ -372,7 +374,7 @@ function Hero() {
           </div>
 
           {/* Optimización: stats con blur reducido y transiciones más rápidas */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto lg:mx-0 mb-16">
             {[
               { value: '50+', label: 'Proyectos' },
               { value: '30+', label: 'Clientes' },
@@ -391,6 +393,12 @@ function Hero() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+          {/* Mockup de producto: refuerza la promesa con algo visual y tangible */}
+          <div className="hidden lg:block">
+            <DashboardMockup />
           </div>
         </div>
       </div>
