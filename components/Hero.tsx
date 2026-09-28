@@ -301,11 +301,11 @@ function Hero() {
           {/* Optimización: reducir blur en el badge */}
           <div className="inline-block mb-8 relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-50 group-hover:opacity-100 blur-sm transition duration-300" />
-            <div className="relative px-8 py-3 glass-card rounded-full border border-softnex-blue/30">
-              <p className="text-xs tracking-[0.3em] text-softnex-blue font-bold uppercase flex items-center gap-2 justify-center">
-                <span className="w-2 h-2 bg-softnex-blue rounded-full animate-pulse" />
+            <div className="relative px-4 py-2.5 md:px-8 md:py-3 glass-card rounded-full border border-softnex-blue/30">
+              <p className="text-[10px] md:text-xs tracking-[0.1em] md:tracking-[0.3em] text-softnex-blue font-bold uppercase flex items-center gap-2 justify-center whitespace-nowrap">
+                <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-softnex-blue rounded-full animate-pulse shrink-0" />
                 Soluciones para el futuro
-                <span className="w-2 h-2 bg-softnex-cyan rounded-full animate-pulse" />
+                <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-softnex-cyan rounded-full animate-pulse shrink-0" />
               </p>
             </div>
           </div>
@@ -357,10 +357,10 @@ function Hero() {
               <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent rounded-full opacity-50 group-hover:opacity-70 transition-opacity" />
 
               {/* Contenido */}
-              <div className="relative px-8 py-3 text-white font-bold text-base tracking-wide flex items-center gap-3">
-                <Sparkles className="w-4 h-4 group-hover:rotate-12 group-hover:scale-110 transition-all" />
+              <div className="relative px-5 py-3 md:px-8 text-white font-bold text-sm md:text-base tracking-wide flex items-center gap-2 md:gap-3 whitespace-nowrap">
+                <Sparkles className="w-4 h-4 shrink-0 group-hover:rotate-12 group-hover:scale-110 transition-all" />
                 Comienza tu proyecto
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 shrink-0 group-hover:translate-x-2 transition-transform" />
               </div>
             </a>
 
