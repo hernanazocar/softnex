@@ -113,7 +113,7 @@ export default function Footer() {
           </div>
 
           {/* Empresa y contacto */}
-          <div className="lg:col-span-3 grid grid-cols-2 lg:grid-cols-1 gap-8">
+          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-8">
             <div>
               <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-softnex-blue mb-5">Empresa</h3>
               <ul className="space-y-3">
@@ -129,12 +129,12 @@ export default function Footer() {
               <ul className="space-y-3 text-sm">
                 <li>
                   <a href="mailto:contacto@softnex.com" className="flex items-center gap-2.5 text-white/60 hover:text-white transition-colors">
-                    <Mail className="w-4 h-4 text-softnex-blue" strokeWidth={2} />
+                    <Mail className="w-4 h-4 flex-shrink-0 text-softnex-blue" strokeWidth={2} />
                     contacto@softnex.com
                   </a>
                 </li>
                 <li className="flex items-center gap-2.5 text-white/60">
-                  <MapPin className="w-4 h-4 text-softnex-blue" strokeWidth={2} />
+                  <MapPin className="w-4 h-4 flex-shrink-0 text-softnex-blue" strokeWidth={2} />
                   Santiago, Chile
                 </li>
               </ul>

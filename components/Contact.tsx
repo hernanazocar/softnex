@@ -67,7 +67,7 @@ export default function Contact() {
   const perks = ['Consultoría inicial sin costo', 'Propuesta concreta y sin compromiso']
 
   return (
-    <section id="contacto" className="relative pt-20 md:pt-28 pb-12 md:pb-16 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+    <section id="contacto" className="relative pt-16 md:pt-28 pb-12 md:pb-16 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       {/* Light background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
@@ -82,7 +82,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center mb-10 md:mb-12"
           >
             <div className="inline-block mb-4 px-6 py-2 glass rounded-full border border-gray-200">
               <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold flex items-center justify-center gap-2">
