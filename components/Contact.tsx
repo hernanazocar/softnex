@@ -257,12 +257,10 @@ export default function Contact() {
                         <option value="">Selecciona...</option>
                         <option value="web">Desarrollo Web</option>
                         <option value="mobile">Apps Móviles</option>
-                        <option value="custom">Sistemas a Medida</option>
-                        <option value="erp">Sistemas ERP</option>
-                        <option value="automation">Automatización</option>
+                        <option value="custom">Sistemas a Medida y ERP</option>
+                        <option value="automation">Automatización e Integraciones</option>
                         <option value="ai">Agentes IA</option>
-                        <option value="cloud">Cloud</option>
-                        <option value="integrations">Integraciones</option>
+                        <option value="cloud">Cloud e Infraestructura</option>
                       </select>
                     </div>
                   </div>

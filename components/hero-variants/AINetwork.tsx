@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Globe, Smartphone, ServerCog, Boxes, Workflow, Bot, Cloud, Plug, Sparkles, Layers } from 'lucide-react'
+import { Globe, Smartphone, Boxes, Workflow, Bot, Cloud, Sparkles, Layers } from 'lucide-react'
 import Float, { floatCard } from './Float'
 
 const W = 520
@@ -14,14 +14,12 @@ const R = 180
 const nodes = [
   { icon: Globe, label: 'Web' },
   { icon: Smartphone, label: 'Apps' },
-  { icon: ServerCog, label: 'Sistemas' },
-  { icon: Boxes, label: 'ERP' },
+  { icon: Boxes, label: 'Sistemas y ERP' },
   { icon: Workflow, label: 'Automatización' },
   { icon: Bot, label: 'Agentes IA' },
   { icon: Cloud, label: 'Cloud' },
-  { icon: Plug, label: 'Integraciones' },
 ].map((n, i) => {
-  const rad = ((-90 + i * 45) * Math.PI) / 180
+  const rad = ((-90 + i * 60) * Math.PI) / 180
   return { ...n, x: CX + R * Math.cos(rad), y: CY + R * Math.sin(rad) }
 })
 
@@ -183,7 +181,7 @@ export default function AINetwork() {
           <Layers className="w-4 h-4 text-softnex-blue" />
         </div>
         <div>
-          <p className="text-[11px] font-bold text-white">8 soluciones</p>
+          <p className="text-[11px] font-bold text-white">6 soluciones</p>
           <p className="text-[10px] text-emerald-400 font-semibold">conectadas en un ecosistema</p>
         </div>
       </Float>

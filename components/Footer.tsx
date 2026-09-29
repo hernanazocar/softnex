@@ -28,12 +28,10 @@ const socials = [
 const services = [
   'Desarrollo Web',
   'Apps Móviles',
-  'Sistemas a Medida',
-  'Sistemas ERP',
-  'Automatización',
+  'Sistemas a Medida y ERP',
+  'Automatización e Integraciones',
   'Agentes IA',
-  'Cloud',
-  'Integraciones',
+  'Cloud e Infraestructura',
 ]
 
 const company = [

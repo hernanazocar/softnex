@@ -4,12 +4,10 @@ import { motion } from 'framer-motion'
 import {
   Globe,
   Smartphone,
-  ServerCog,
   Boxes,
   Workflow,
   Bot,
   Cloud,
-  Plug,
   ArrowRight,
   MessagesSquare,
 } from 'lucide-react'
@@ -30,25 +28,18 @@ const services = [
     features: ['React Native', 'Flutter', 'Publicación en tiendas'],
   },
   {
-    icon: ServerCog,
-    title: 'Sistemas a Medida',
-    description:
-      'Software diseñado para los procesos reales de tu negocio, con arquitectura pensada para crecer contigo.',
-    features: ['Arquitectura escalable', 'Código mantenible', 'Documentación técnica'],
-  },
-  {
     icon: Boxes,
-    title: 'Sistemas ERP',
+    title: 'Sistemas a Medida y ERP',
     description:
-      'Gestión integral de ventas, inventario, contabilidad y RRHH en una sola plataforma, con datos en tiempo real.',
-    features: ['Módulos integrados', 'Reportes en tiempo real', 'Cloud u on-premise'],
+      'Software para los procesos reales de tu negocio: desde sistemas a medida hasta ERP que integran ventas, inventario, contabilidad y RRHH.',
+    features: ['Arquitectura escalable', 'Módulos integrados', 'Reportes en tiempo real'],
   },
   {
     icon: Workflow,
-    title: 'Automatización',
+    title: 'Automatización e Integraciones',
     description:
-      'Eliminamos tareas manuales repetitivas con flujos que ahorran horas de trabajo cada semana.',
-    features: ['RPA', 'Workflows automáticos', 'Procesos sin errores'],
+      'Eliminamos tareas manuales y conectamos tus sistemas, pasarelas de pago y herramientas para que todo trabaje en conjunto.',
+    features: ['Workflows automáticos', 'APIs y pasarelas de pago', 'RPA'],
   },
   {
     icon: Bot,
@@ -59,17 +50,10 @@ const services = [
   },
   {
     icon: Cloud,
-    title: 'Cloud',
+    title: 'Cloud e Infraestructura',
     description:
-      'Infraestructura en la nube segura y escalable: despliegue, monitoreo y alta disponibilidad para tus sistemas.',
-    features: ['AWS & Vercel', 'CI/CD automatizado', 'Monitoreo 24/7'],
-  },
-  {
-    icon: Plug,
-    title: 'Integraciones',
-    description:
-      'Conectamos tus sistemas, pasarelas de pago y herramientas existentes para que todo trabaje en conjunto.',
-    features: ['APIs REST', 'Pasarelas de pago', 'Sistemas existentes'],
+      'Publicamos y mantenemos tus sistemas en la nube: servidores seguros, despliegues automáticos y monitoreo para que siempre estén en línea.',
+    features: ['AWS & Vercel', 'Despliegue automático', 'Monitoreo 24/7'],
   },
 ]
 
@@ -108,13 +92,13 @@ export default function Services() {
             Tecnología que <span className="text-softnex-blue">impulsa</span>
           </h2>
           <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-            Ocho soluciones conectadas, un solo equipo. Elegimos la tecnología correcta para
+            Seis soluciones conectadas, un solo equipo. Elegimos la tecnología correcta para
             cada problema, no al revés.
           </p>
         </motion.div>
 
         {/* Services grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 max-w-6xl mx-auto">
           {services.map((service, index) => {
             const Icon = service.icon
             return (
