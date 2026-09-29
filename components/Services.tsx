@@ -4,63 +4,72 @@ import { motion } from 'framer-motion'
 import {
   Globe,
   Smartphone,
-  Settings,
-  BarChart3,
+  ServerCog,
+  Boxes,
+  Workflow,
   Bot,
-  BrainCircuit,
+  Cloud,
+  Plug,
   ArrowRight,
+  MessagesSquare,
 } from 'lucide-react'
-import FloatingBlob from './graphics/FloatingBlob'
-import NetworkIllustration from './graphics/NetworkIllustration'
 
 const services = [
   {
     icon: Globe,
     title: 'Desarrollo Web',
     description:
-      'Sitios y plataformas web de alto rendimiento, construidos con React y Next.js. De landing pages a aplicaciones complejas con lógica de negocio real.',
-    features: ['React & Next.js', 'UI/UX de nivel producto', 'SEO técnico y Core Web Vitals'],
-    gradient: 'from-softnex-blue to-softnex-cyan',
+      'Sitios y plataformas web de alto rendimiento con React y Next.js, desde landing pages hasta aplicaciones complejas.',
+    features: ['React & Next.js', 'UI/UX de nivel producto', 'SEO técnico'],
   },
   {
     icon: Smartphone,
     title: 'Apps Móviles',
     description:
-      'Aplicaciones nativas y multiplataforma para iOS y Android, con foco en performance, offline-first y experiencias fluidas que retienen usuarios.',
+      'Aplicaciones para iOS y Android con foco en rendimiento y experiencias fluidas que retienen usuarios.',
     features: ['React Native', 'Flutter', 'Publicación en tiendas'],
-    gradient: 'from-softnex-cyan to-softnex-purple',
   },
   {
-    icon: Settings,
-    title: 'Software a Medida',
+    icon: ServerCog,
+    title: 'Sistemas a Medida',
     description:
-      'Sistemas diseñados desde cero para los procesos reales de tu negocio, no plantillas genéricas. Arquitectura pensada para crecer con vos.',
+      'Software diseñado para los procesos reales de tu negocio, con arquitectura pensada para crecer contigo.',
     features: ['Arquitectura escalable', 'Código mantenible', 'Documentación técnica'],
-    gradient: 'from-softnex-purple to-softnex-pink',
   },
   {
-    icon: BarChart3,
+    icon: Boxes,
     title: 'Sistemas ERP',
     description:
-      'Plataformas de gestión integral que centralizan ventas, inventario, contabilidad y RRHH en un solo lugar, con datos en tiempo real.',
+      'Gestión integral de ventas, inventario, contabilidad y RRHH en una sola plataforma, con datos en tiempo real.',
     features: ['Módulos integrados', 'Reportes en tiempo real', 'Cloud u on-premise'],
-    gradient: 'from-softnex-pink to-softnex-orange',
+  },
+  {
+    icon: Workflow,
+    title: 'Automatización',
+    description:
+      'Eliminamos tareas manuales repetitivas con flujos que ahorran horas de trabajo cada semana.',
+    features: ['RPA', 'Workflows automáticos', 'Procesos sin errores'],
   },
   {
     icon: Bot,
-    title: 'Automatización',
-    description:
-      'Eliminamos tareas manuales repetitivas conectando tus herramientas entre sí, con flujos que ahorran horas de trabajo cada semana.',
-    features: ['RPA', 'Workflows automáticos', 'Integración de APIs'],
-    gradient: 'from-softnex-orange to-softnex-blue',
-  },
-  {
-    icon: BrainCircuit,
     title: 'Agentes IA',
     description:
-      'Asistentes y agentes autónomos impulsados por LLMs, entrenados con el contexto de tu empresa para atender, resolver y escalar.',
+      'Asistentes autónomos impulsados por LLMs, entrenados con el contexto de tu empresa para atender y resolver.',
     features: ['LLMs avanzados', 'RAG & fine-tuning', 'Chatbots inteligentes'],
-    gradient: 'from-softnex-blue to-softnex-purple',
+  },
+  {
+    icon: Cloud,
+    title: 'Cloud',
+    description:
+      'Infraestructura en la nube segura y escalable: despliegue, monitoreo y alta disponibilidad para tus sistemas.',
+    features: ['AWS & Vercel', 'CI/CD automatizado', 'Monitoreo 24/7'],
+  },
+  {
+    icon: Plug,
+    title: 'Integraciones',
+    description:
+      'Conectamos tus sistemas, pasarelas de pago y herramientas existentes para que todo trabaje en conjunto.',
+    features: ['APIs REST', 'Pasarelas de pago', 'Sistemas existentes'],
   },
 ]
 
@@ -75,24 +84,10 @@ const fadeUp = {
 
 export default function Services() {
   return (
-    <section id="servicios" className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
-      {/* Subtle background for light theme */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-dots-pattern opacity-5" />
-        <FloatingBlob
-          className="top-1/2 right-1/4"
-          color="from-softnex-blue/10 to-softnex-purple/5"
-          size={400}
-          duration={18}
-        />
-        <FloatingBlob
-          className="bottom-0 -left-10"
-          color="from-softnex-cyan/8 to-transparent"
-          size={320}
-          duration={14}
-          delay={2}
-          reverse
-        />
+    <section id="servicios" className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-softnex-blue/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -102,10 +97,9 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16 relative"
+          className="text-center mb-14"
         >
-          <NetworkIllustration className="hidden md:block absolute -top-6 right-0 w-40 h-28 text-softnex-blue/60 -z-10" />
-          <div className="inline-block mb-4 px-6 py-2 bg-softnex-blue/5 border border-softnex-blue/20 rounded-full">
+          <div className="inline-block mb-4 px-6 py-2 glass rounded-full border border-gray-200">
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">
               SERVICIOS
             </p>
@@ -113,14 +107,14 @@ export default function Services() {
           <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
             Tecnología que <span className="text-softnex-blue">impulsa</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Seis frentes de trabajo, un solo equipo. Elegimos el stack correcto para cada
-            problema, no al revés.
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+            Ocho soluciones conectadas, un solo equipo. Elegimos la tecnología correcta para
+            cada problema, no al revés.
           </p>
         </motion.div>
 
         {/* Services grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-7xl mx-auto">
           {services.map((service, index) => {
             const Icon = service.icon
             return (
@@ -131,39 +125,33 @@ export default function Services() {
                 whileInView="visible"
                 viewport={{ once: true, margin: '-60px' }}
                 variants={fadeUp}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-100 overflow-hidden"
+                className="group relative flex flex-col bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-[0_20px_50px_-15px_rgba(0,168,255,0.35)] hover:border-softnex-blue/40 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
               >
-                {/* Top gradient line */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${service.gradient} opacity-70 group-hover:opacity-100 transition-opacity`} />
+                <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-softnex-blue to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute -top-16 -right-16 w-40 h-40 bg-softnex-blue/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Glow al hover */}
-                <div className={`absolute -inset-8 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-[0.06] blur-2xl transition-opacity duration-500 pointer-events-none`} />
+                <span className="absolute top-5 right-5 text-3xl font-black text-gray-100 group-hover:text-softnex-blue/15 transition-colors duration-300">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
 
-                {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 bg-gradient-to-br ${service.gradient} shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
-                  <Icon className="w-6 h-6 text-white" strokeWidth={2} />
+                <div className="relative inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5 bg-softnex-blue/10 border border-softnex-blue/20 group-hover:bg-softnex-blue group-hover:shadow-[0_0_20px_rgba(0,168,255,0.45)] transition-all duration-300">
+                  <Icon className="w-6 h-6 text-softnex-blue group-hover:text-white transition-colors duration-300" strokeWidth={1.8} />
                 </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-softnex-blue transition-colors">
-                  {service.title}
-                </h3>
+                <h3 className="relative text-lg font-bold text-gray-900 mb-2">{service.title}</h3>
 
-                {/* Description */}
-                <p className="text-gray-600 mb-4 leading-relaxed text-sm">
-                  {service.description}
-                </p>
+                <p className="relative text-gray-500 text-sm leading-relaxed mb-5">{service.description}</p>
 
-                {/* Features */}
-                <ul className="space-y-2">
+                <div className="relative mt-auto flex flex-wrap gap-1.5">
                   {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center text-xs text-gray-500">
-                      <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.gradient} mr-2 flex-shrink-0`} />
+                    <span
+                      key={feature}
+                      className="px-2.5 py-1 rounded-full bg-gray-50 border border-gray-200 text-[11px] font-medium text-gray-600 group-hover:bg-softnex-blue/5 group-hover:border-softnex-blue/20 group-hover:text-gray-800 transition-colors duration-300"
+                    >
                       {feature}
-                    </li>
+                    </span>
                   ))}
-                </ul>
+                </div>
               </motion.div>
             )
           })}
@@ -175,15 +163,28 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-center mt-12"
+          className="max-w-7xl mx-auto mt-10"
         >
-          <a
-            href="#contacto"
-            className="group inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-softnex-purple to-softnex-pink text-white rounded-full font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-softnex-purple/30"
-          >
-            Solicita una consultoría gratuita
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
+          <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-5 rounded-2xl bg-softnex-dark px-6 md:px-8 py-6 overflow-hidden">
+            <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+            <div className="absolute -left-10 top-1/2 -translate-y-1/2 w-60 h-60 bg-softnex-blue/25 rounded-full blur-3xl" />
+            <div className="relative flex items-center gap-4">
+              <div className="hidden sm:flex flex-shrink-0 w-12 h-12 rounded-xl bg-softnex-blue/20 border border-softnex-blue/40 items-center justify-center">
+                <MessagesSquare className="w-6 h-6 text-softnex-blue" strokeWidth={1.8} />
+              </div>
+              <div>
+                <p className="text-base md:text-lg font-bold text-white">¿No sabes qué solución necesitas?</p>
+                <p className="text-sm text-white/60">Te asesoramos sin costo y te recomendamos el camino correcto.</p>
+              </div>
+            </div>
+            <a
+              href="#contacto"
+              className="relative group flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-softnex-blue text-white rounded-full font-bold text-sm shadow-lg shadow-softnex-blue/30 hover:shadow-softnex-blue/50 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              Solicita una consultoría gratuita
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

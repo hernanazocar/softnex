@@ -11,20 +11,25 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Paleta de marca Softnex, declarada en formato nativo de Tailwind v4.
-     Antes solo existia en tailwind.config.ts (formato v3), que esta
-     version de Tailwind no lee automaticamente sin un @config, por lo
-     que ninguna clase de color softnex generaba CSS real (quedaban
-     invisibles o transparentes en toda la web). */
   --color-softnex-dark: #0a1628;
   --color-softnex-dark-light: #0f1f38;
   --color-softnex-blue: #00a8ff;
   --color-softnex-blue-light: #33b8ff;
   --color-softnex-blue-dark: #0088cc;
-  --color-softnex-cyan: #00d4ff;
+  --color-softnex-cyan: #00a8ff;
   --color-softnex-purple: #6366f1;
   --color-softnex-pink: #ec4899;
   --color-softnex-orange: #f97316;
+
+  --animate-bounce-slow: bounce 3s infinite;
+}
+
+@utility bg-grid-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300a8ff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+@utility bg-dots-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2300a8ff' fill-opacity='0.15' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='1.5'/%3E%3Ccircle cx='13' cy='13' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -110,6 +115,16 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+@keyframes shine {
+  0% { left: -60%; }
+  60%, 100% { left: 130%; }
+}
+
+@keyframes bg-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 ::selection {

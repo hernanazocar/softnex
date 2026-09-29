@@ -2,8 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { ArrowRight, TrendingUp, Users, Zap } from 'lucide-react'
-import FloatingBlob from './graphics/FloatingBlob'
-import BarChartIllustration from './graphics/BarChartIllustration'
 
 const cases = [
   {
@@ -13,7 +11,7 @@ const cases = [
     tech: 'React, Node.js, PostgreSQL, AWS',
     gradient: 'from-softnex-blue to-softnex-cyan',
     icon: TrendingUp,
-    chart: [30, 45, 55, 70, 95],
+    image: '/api/placeholder/400/250',
   },
   {
     title: '[PLACEHOLDER - App Móvil]',
@@ -22,7 +20,7 @@ const cases = [
     tech: 'React Native, Firebase, Stripe',
     gradient: 'from-softnex-purple to-softnex-pink',
     icon: Users,
-    chart: [50, 40, 65, 60, 85],
+    image: '/api/placeholder/400/250',
   },
   {
     title: '[PLACEHOLDER - E-commerce]',
@@ -31,7 +29,7 @@ const cases = [
     tech: 'Next.js, PostgreSQL, Vercel',
     gradient: 'from-softnex-cyan to-softnex-blue',
     icon: Zap,
-    chart: [25, 50, 45, 80, 90],
+    image: '/api/placeholder/400/250',
   },
 ]
 
@@ -39,22 +37,10 @@ export default function CaseStudies() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
       {/* Background effects */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0">
         <div className="absolute inset-0 bg-dots-pattern opacity-5" />
-        <FloatingBlob
-          className="bottom-0 right-1/4"
-          color="from-softnex-purple/6 to-softnex-blue/3"
-          size={500}
-          duration={22}
-        />
-        <FloatingBlob
-          className="top-0 left-1/4"
-          color="from-softnex-cyan/6 to-transparent"
-          size={350}
-          duration={16}
-          delay={3}
-          reverse
-        />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-r from-softnex-purple/5 to-softnex-blue/3 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-gradient-to-br from-softnex-cyan/5 to-transparent rounded-full blur-[100px]" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -90,31 +76,23 @@ export default function CaseStudies() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -6 }}
-                className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-100 overflow-hidden relative"
+                className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-100 overflow-hidden relative"
               >
                 {/* Top gradient line */}
                 <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${case_.gradient} opacity-70 group-hover:opacity-100 transition-opacity`} />
 
-                {/* Gráfico de resultados ilustrativo, reemplaza el placeholder de imagen */}
-                <div className="relative w-full h-40 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-100 p-4">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${case_.gradient} opacity-[0.04] group-hover:opacity-10 transition-opacity`} />
-                  <div className="absolute top-2 right-2 z-10">
-                    <div className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm border border-gray-200">
+                {/* Image placeholder */}
+                <div className="relative w-full h-40 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-gray-100 to-gray-200">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${case_.gradient} opacity-10 group-hover:opacity-20 transition-opacity`} />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Icon className={`w-16 h-16 text-gray-300 group-hover:scale-110 transition-transform`} />
+                  </div>
+                  <div className="absolute top-2 right-2">
+                    <div className={`px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm border border-gray-200`}>
                       <p className="text-xs font-bold bg-gradient-to-r from-softnex-blue to-softnex-purple bg-clip-text text-transparent">
                         PROYECTO
                       </p>
                     </div>
-                  </div>
-                  <div className="absolute bottom-2 left-2 z-10 flex items-center gap-1.5">
-                    <Icon className="w-4 h-4 text-gray-400" strokeWidth={2} />
-                  </div>
-                  <div className="relative z-0 h-full px-1 pt-6 pb-1">
-                    <BarChartIllustration
-                      values={case_.chart}
-                      colorFrom={`${case_.gradient.split(' ')[0]}/30`}
-                      colorTo={case_.gradient.split(' ')[1]}
-                    />
                   </div>
                 </div>
 

@@ -1,69 +1,49 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Gauge, Users, Code, Headset, Quote, UserCircle2 } from 'lucide-react'
-import FloatingBlob from './graphics/FloatingBlob'
+import { Gauge, Users, Code, Headset, Check, X, ArrowRight } from 'lucide-react'
 
 const differentiators = [
   {
     icon: Gauge,
     title: 'Entregas rápidas y medibles',
-    desc: 'Sprints cortos con demos reales cada semana. Ves progreso tangible desde el día uno, no promesas.',
+    desc: 'Sprints cortos con demos reales cada semana. Progreso tangible desde el día uno, no promesas.',
   },
   {
     icon: Code,
     title: 'Ingeniería, no solo diseño',
-    desc: 'Equipo con experiencia real en producción: performance, seguridad y escalabilidad desde el primer commit.',
+    desc: 'Experiencia real en producción: rendimiento, seguridad y escalabilidad desde el primer commit.',
   },
   {
     icon: Users,
-    title: 'Trato directo, sin intermediarios',
-    desc: 'Hablás directo con quienes construyen tu producto. Sin capas comerciales que distorsionan el mensaje.',
+    title: 'Trato directo',
+    desc: 'Hablas con quienes construyen tu producto, sin capas comerciales que distorsionan el mensaje.',
   },
   {
     icon: Headset,
-    title: 'Soporte post-lanzamiento real',
-    desc: 'El proyecto no termina cuando se despliega. Seguimos disponibles para mantenimiento y mejoras.',
+    title: 'Soporte post-lanzamiento',
+    desc: 'El proyecto no termina en el deploy. Seguimos contigo con mantenimiento y mejoras.',
   },
 ]
 
-const testimonials = [
-  {
-    quote:
-      'Necesitábamos digitalizar procesos que hacíamos a mano en planillas. El equipo entendió el negocio antes de escribir una línea de código, y el resultado se nota en el día a día.',
-    name: 'Gerencia de Operaciones',
-    role: 'Empresa de logística (referencia interna)',
-  },
-  {
-    quote:
-      'Lo que más valoro es la comunicación: siempre supimos en qué etapa estaba el proyecto y qué faltaba. Cero sorpresas al final.',
-    name: 'Dirección Comercial',
-    role: 'Empresa de retail (referencia interna)',
-  },
-  {
-    quote:
-      'Pasamos de un sistema legado lento a una plataforma moderna sin detener la operación ni un solo día.',
-    name: 'Gerencia General',
-    role: 'Empresa de servicios (referencia interna)',
-  },
+const comparison = [
+  { them: 'Plantillas genéricas', us: 'Software a medida de tu negocio' },
+  { them: 'Ves el resultado al final', us: 'Demos funcionales cada semana' },
+  { them: 'Intermediarios comerciales', us: 'Trato directo con el equipo' },
+  { them: 'Soporte limitado o con costo extra', us: 'Acompañamiento post-lanzamiento' },
+  { them: 'Código cerrado', us: 'El código es 100% tuyo' },
 ]
 
 export default function WhyUs() {
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-dots-pattern opacity-5" />
-        <FloatingBlob
-          className="bottom-0 left-1/4"
-          color="from-softnex-cyan/6 to-softnex-blue/3"
-          size={400}
-          duration={20}
-          reverse
-        />
+    <section id="ventajas" className="relative py-20 md:py-28 overflow-hidden bg-softnex-dark">
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+        <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-softnex-blue/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-softnex-blue/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* Why us */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -71,86 +51,110 @@ export default function WhyUs() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
         >
-          <div className="inline-block mb-4 px-6 py-2 bg-softnex-purple/5 border border-softnex-purple/20 rounded-full">
-            <p className="text-xs tracking-[0.25em] text-softnex-purple font-bold">
-              POR QUÉ ELEGIRNOS
-            </p>
+          <div className="inline-block mb-4 px-6 py-2 glass rounded-full">
+            <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">POR QUÉ ELEGIRNOS</p>
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
-            No somos una <span className="text-softnex-purple">fábrica de templates</span>
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
+            No somos una <span className="text-softnex-blue">fábrica de templates</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">
             Cada decisión técnica está atada a un objetivo de negocio concreto.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-24">
-          {differentiators.map((item, index) => {
-            const Icon = item.icon
-            return (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-                whileHover={{ y: -4 }}
-                className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-              >
-                <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-softnex-purple/10 mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                  <Icon className="w-5 h-5 text-softnex-purple" strokeWidth={2} />
-                </div>
-                <h3 className="text-gray-900 font-bold text-base mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
-              </motion.div>
-            )
-          })}
-        </div>
-
-        {/* Testimonials */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <div className="inline-block mb-4 px-6 py-2 bg-softnex-blue/5 border border-softnex-blue/20 rounded-full">
-            <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">
-              TESTIMONIOS
-            </p>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900">
-            Lo que dicen quienes trabajaron con nosotros
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {testimonials.map((t, index) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.45, delay: index * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="relative bg-white rounded-2xl p-7 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-            >
-              <Quote className="w-8 h-8 text-softnex-blue/20 mb-3" strokeWidth={2} />
-              <p className="text-gray-700 text-sm leading-relaxed mb-5 italic">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-              <div className="pt-4 border-t border-gray-100 flex items-center gap-3">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-softnex-blue/10 border border-softnex-blue/20 flex items-center justify-center">
-                  <UserCircle2 className="w-5 h-5 text-softnex-blue" strokeWidth={2} />
-                </div>
-                <div>
-                  <p className="text-gray-900 font-bold text-sm">{t.name}</p>
-                  <p className="text-gray-500 text-xs">{t.role}</p>
-                </div>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+          {/* Comparación */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6 }}
+            className="relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden flex flex-col lg:order-2"
+          >
+            <div className="grid grid-cols-2 border-b border-white/10">
+              <div className="px-5 md:px-6 py-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">Agencia tradicional</p>
               </div>
-            </motion.div>
-          ))}
+              <div className="px-5 md:px-6 py-4 bg-softnex-blue/10 border-l border-softnex-blue/30 flex items-center gap-2">
+                <svg viewBox="0 0 100 100" className="w-3.5 h-3.5" aria-hidden="true">
+                  <polygon points="6,4 30,4 94,96 70,96" fill="#00a8ff" />
+                  <polygon points="70,4 94,4 30,96 6,96" fill="#33c3ff" />
+                </svg>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-softnex-blue">Con Softnex</p>
+              </div>
+            </div>
+
+            <div className="flex-1 flex flex-col">
+              {comparison.map((row, i) => (
+                <motion.div
+                  key={row.us}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: 0.1 + i * 0.07 }}
+                  className="flex-1 grid grid-cols-2 border-b border-white/5"
+                >
+                  <div className="px-5 md:px-6 py-4 flex items-center gap-2.5">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-white/5 flex items-center justify-center">
+                      <X className="w-3 h-3 text-white/30" strokeWidth={3} />
+                    </span>
+                    <span className="text-sm text-white/40 line-through decoration-white/20">{row.them}</span>
+                  </div>
+                  <div className="px-5 md:px-6 py-4 flex items-center gap-2.5 bg-softnex-blue/[0.06] border-l border-softnex-blue/30">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-softnex-blue flex items-center justify-center shadow-[0_0_10px_rgba(0,168,255,0.5)]">
+                      <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                    </span>
+                    <span className="text-sm font-semibold text-white">{row.us}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Cierre con CTA */}
+            <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-5 md:px-6 py-5 bg-gradient-to-r from-softnex-blue/15 via-softnex-blue/5 to-transparent">
+              <div>
+                <p className="text-sm font-bold text-white">¿Listo para trabajar distinto?</p>
+                <p className="text-xs text-white/50">Cuéntanos tu idea y te proponemos un plan concreto.</p>
+              </div>
+              <a
+                href="#contacto"
+                className="group flex-shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-softnex-blue text-white text-xs font-bold shadow-lg shadow-softnex-blue/30 hover:shadow-softnex-blue/50 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                Hablemos
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" strokeWidth={2.5} />
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Diferenciadores */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:order-1">
+            {differentiators.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className="group relative rounded-2xl p-6 border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden hover:border-softnex-blue/40 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,168,255,0.35)] transition-all duration-300"
+                >
+                  <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-softnex-blue to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute -top-12 -right-12 w-32 h-32 bg-softnex-blue/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  <span className="absolute top-5 right-5 text-3xl font-black text-white/[0.06] group-hover:text-softnex-blue/20 transition-colors duration-300">
+                    0{index + 1}
+                  </span>
+
+                  <div className="relative w-11 h-11 rounded-xl bg-softnex-blue/15 border border-softnex-blue/30 flex items-center justify-center mb-5 group-hover:bg-softnex-blue group-hover:shadow-[0_0_20px_rgba(0,168,255,0.5)] transition-all duration-300">
+                    <Icon className="w-5 h-5 text-softnex-blue group-hover:text-white transition-colors duration-300" strokeWidth={2} />
+                  </div>
+                  <h3 className="relative text-white font-bold text-base mb-2">{item.title}</h3>
+                  <p className="relative text-white/60 text-sm leading-relaxed">{item.desc}</p>
+                </motion.div>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>
