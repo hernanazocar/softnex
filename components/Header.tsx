@@ -66,7 +66,7 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 pt-1 transition-all duration-300 border-b ${
           isScrolled || isMobileMenuOpen
-            ? 'bg-[#06111F]/95 backdrop-blur-xl border-white/10 shadow-lg shadow-black/20'
+            ? 'bg-[#06111F] border-white/10 shadow-lg shadow-black/20'
             : 'bg-transparent border-transparent'
         }`}
       >
@@ -79,7 +79,7 @@ export default function Header() {
                   alt="Softnex"
                   width={575}
                   height={220}
-                  className="object-contain mix-blend-screen origin-left group-hover:scale-105 transition-transform duration-300 h-9 md:h-10 w-auto"
+                  className="object-contain mix-blend-lighten origin-left group-hover:scale-105 transition-transform duration-300 h-9 md:h-10 w-auto"
                   priority
                 />
               </Link>

@@ -32,7 +32,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
   }, [])
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#020408] via-[#0a0e1a] to-[#050b15]">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#06111F] via-[#0a0e1a] to-[#050b15]">
       {/* Grid animado principal */}
       <div
         className="absolute inset-0 z-0 opacity-20"
