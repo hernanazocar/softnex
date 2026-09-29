@@ -134,17 +134,30 @@ export default function Header() {
               isMobileMenuOpen ? 'max-h-[28rem] mt-4 opacity-100' : 'max-h-0 opacity-0'
             }`}
           >
-            <div className="glass-strong rounded-xl p-4 space-y-1">
-              {[...NAV_LINKS, { href: '#contacto', label: 'CONTACTO' }].map((link, index) => (
-                <Link
-                  key={index}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-white/80 hover:text-white text-sm font-bold tracking-wide transition-colors py-2.5 px-2 rounded-lg hover:bg-white/5"
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-2 mb-3">
+              {NAV_LINKS.map((link) => {
+                const isActive = activeSection === link.href
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-xs font-bold tracking-[0.15em] transition-colors ${
+                      isActive ? 'bg-softnex-blue/15 text-white' : 'text-white/70 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {link.label}
+                    <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-softnex-blue' : 'bg-white/15'}`} />
+                  </Link>
+                )
+              })}
+              <Link
+                href="#contacto"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-softnex-blue text-white text-xs font-bold tracking-[0.15em] shadow-lg shadow-softnex-blue/30"
+              >
+                CONTACTAR
+              </Link>
             </div>
           </div>
         </nav>
