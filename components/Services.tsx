@@ -84,7 +84,7 @@ const fadeUp = {
 
 export default function Services() {
   return (
-    <section id="servicios" className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+    <section id="servicios" className="relative py-16 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-softnex-blue/10 rounded-full blur-[120px]" />
@@ -97,7 +97,7 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
           <div className="inline-block mb-4 px-6 py-2 glass rounded-full border border-gray-200">
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">
@@ -114,7 +114,7 @@ export default function Services() {
         </motion.div>
 
         {/* Services grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-7xl mx-auto">
           {services.map((service, index) => {
             const Icon = service.icon
             return (
@@ -125,7 +125,7 @@ export default function Services() {
                 whileInView="visible"
                 viewport={{ once: true, margin: '-60px' }}
                 variants={fadeUp}
-                className="group relative flex flex-col bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-[0_20px_50px_-15px_rgba(0,168,255,0.35)] hover:border-softnex-blue/40 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+                className="group relative flex flex-col bg-white rounded-2xl p-5 sm:p-6 border border-gray-200 shadow-sm hover:shadow-[0_20px_50px_-15px_rgba(0,168,255,0.35)] hover:border-softnex-blue/40 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
               >
                 <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-softnex-blue to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute -top-16 -right-16 w-40 h-40 bg-softnex-blue/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -134,15 +134,15 @@ export default function Services() {
                   {String(index + 1).padStart(2, '0')}
                 </span>
 
-                <div className="relative inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5 bg-softnex-blue/10 border border-softnex-blue/20 group-hover:bg-softnex-blue group-hover:shadow-[0_0_20px_rgba(0,168,255,0.45)] transition-all duration-300">
+                <div className="relative inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl mb-3 sm:mb-5 bg-softnex-blue/10 border border-softnex-blue/20 group-hover:bg-softnex-blue group-hover:shadow-[0_0_20px_rgba(0,168,255,0.45)] transition-all duration-300">
                   <Icon className="w-6 h-6 text-softnex-blue group-hover:text-white transition-colors duration-300" strokeWidth={1.8} />
                 </div>
 
                 <h3 className="relative text-lg font-bold text-gray-900 mb-2">{service.title}</h3>
 
-                <p className="relative text-gray-500 text-sm leading-relaxed mb-5">{service.description}</p>
+                <p className="relative text-gray-500 text-sm leading-relaxed sm:mb-5">{service.description}</p>
 
-                <div className="relative mt-auto flex flex-wrap gap-1.5">
+                <div className="relative mt-auto hidden sm:flex flex-wrap gap-1.5">
                   {service.features.map((feature) => (
                     <span
                       key={feature}

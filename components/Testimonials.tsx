@@ -51,7 +51,7 @@ export default function Testimonials() {
   const TagIcon = t.tagIcon
 
   return (
-    <section id="testimonios" className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+    <section id="testimonios" className="relative py-16 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] h-[600px] bg-softnex-blue/10 rounded-full blur-[120px]" />
@@ -63,7 +63,7 @@ export default function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
           <div className="inline-block mb-4 px-6 py-2 glass rounded-full border border-gray-200">
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">TESTIMONIOS</p>
@@ -86,9 +86,9 @@ export default function Testimonials() {
           className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 rounded-3xl bg-white border border-gray-200 shadow-[0_30px_80px_-30px_rgba(0,168,255,0.35)] overflow-hidden"
         >
           {/* Cita destacada */}
-          <div className="relative lg:col-span-3 p-8 md:p-12 flex flex-col min-h-[340px]">
+          <div className="relative lg:col-span-3 p-6 sm:p-8 md:p-12 flex flex-col min-h-[300px] sm:min-h-[340px]">
             <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-softnex-blue via-softnex-blue/40 to-transparent" />
-            <Quote className="absolute top-8 right-8 w-20 h-20 text-softnex-blue/10" strokeWidth={1.2} />
+            <Quote className="absolute top-6 right-6 sm:top-8 sm:right-8 w-14 h-14 sm:w-20 sm:h-20 text-softnex-blue/10" strokeWidth={1.2} />
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -104,7 +104,7 @@ export default function Testimonials() {
                   {t.tag}
                 </span>
 
-                <blockquote className="text-xl md:text-2xl font-semibold text-gray-900 leading-snug tracking-tight mb-8">
+                <blockquote className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 leading-snug tracking-tight mb-8">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
 

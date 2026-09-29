@@ -121,7 +121,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
           <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center mb-10">
             <a
               href="#contacto"
-              className="group inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-softnex-blue text-white text-[13px] font-bold tracking-wide shadow-lg shadow-softnex-blue/30 hover:shadow-softnex-blue/50 hover:-translate-y-0.5 transition-all duration-300"
+              className="group w-full sm:w-auto justify-center inline-flex items-center gap-1.5 px-5 py-3 sm:py-2.5 rounded-full bg-softnex-blue text-white text-[13px] font-bold tracking-wide shadow-lg shadow-softnex-blue/30 hover:shadow-softnex-blue/50 hover:-translate-y-0.5 transition-all duration-300"
             >
               <Rocket className="w-3.5 h-3.5" strokeWidth={2.5} />
               Comienza tu proyecto
@@ -130,7 +130,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
 
             <a
               href="#servicios"
-              className="group inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-white/20 text-white/80 text-[13px] font-semibold hover:border-softnex-blue hover:text-white hover:bg-softnex-blue/10 transition-all duration-300"
+              className="group w-full sm:w-auto justify-center inline-flex items-center gap-1.5 px-5 py-3 sm:py-2.5 rounded-full border border-white/20 text-white/80 text-[13px] font-semibold hover:border-softnex-blue hover:text-white hover:bg-softnex-blue/10 transition-all duration-300"
             >
               <LayoutGrid className="w-3.5 h-3.5 text-softnex-blue" strokeWidth={2.5} />
               Ver servicios

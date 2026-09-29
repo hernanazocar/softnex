@@ -62,7 +62,7 @@ const commitments = [
 
 export default function About() {
   return (
-    <section id="nosotros" className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+    <section id="nosotros" className="relative py-16 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-softnex-blue/10 rounded-full blur-[120px]" />
@@ -75,7 +75,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
           <div className="inline-block mb-4 px-6 py-2 glass rounded-full border border-gray-200">
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">NOSOTROS</p>
@@ -142,7 +142,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-3 relative"
           >
-            <div className="relative h-full rounded-2xl bg-white border border-gray-200 shadow-sm p-6 md:p-7 overflow-hidden">
+            <div className="relative h-full rounded-2xl bg-white border border-gray-200 shadow-sm p-5 sm:p-6 md:p-7 overflow-hidden">
               <div className="absolute -top-16 -right-16 w-48 h-48 bg-softnex-blue/10 rounded-full blur-3xl" />
 
               <div className="relative flex flex-wrap items-start justify-between gap-3 mb-6">
@@ -172,7 +172,7 @@ export default function About() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.3, delay: (gi * 3 + ti) * 0.05 }}
-                          className="group flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-gray-50 border border-gray-100 hover:bg-white hover:border-softnex-blue/40 hover:shadow-md hover:shadow-softnex-blue/10 hover:-translate-y-0.5 transition-all duration-300"
+                          className="group flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2.5 px-2 sm:px-3 py-2.5 rounded-xl bg-gray-50 border border-gray-100 hover:bg-white hover:border-softnex-blue/40 hover:shadow-md hover:shadow-softnex-blue/10 hover:-translate-y-0.5 transition-all duration-300"
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
@@ -181,7 +181,7 @@ export default function About() {
                             className="w-6 h-6 flex-shrink-0 object-contain group-hover:scale-110 transition-transform duration-300"
                             loading="lazy"
                           />
-                          <span className="text-xs sm:text-sm font-semibold text-gray-700 truncate">{tech.name}</span>
+                          <span className="text-[11px] sm:text-sm font-semibold text-gray-700 sm:truncate">{tech.name}</span>
                         </motion.div>
                       ))}
                     </div>
