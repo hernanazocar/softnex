@@ -75,11 +75,11 @@ export default function Header() {
             <div className="flex items-center gap-8">
               <Link href="/" className="group flex items-center">
                 <Image
-                  src="/logo-header-crop.png"
+                  src="/logo-softnex.png"
                   alt="Softnex"
                   width={575}
                   height={220}
-                  className="object-contain mix-blend-lighten origin-left group-hover:scale-105 transition-transform duration-300 h-9 md:h-10 w-auto"
+                  className="object-contain origin-left group-hover:scale-105 transition-transform duration-300 h-9 md:h-10 w-auto"
                   priority
                 />
               </Link>
