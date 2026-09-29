@@ -1,210 +1,200 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useState, memo } from 'react'
+import { ArrowRight, Rocket, LayoutGrid, FolderKanban, Users, Award, Headset } from 'lucide-react'
+import AINetwork from './hero-variants/AINetwork'
 
-export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+const stats = [
+  { value: '50+', label: 'Proyectos', icon: FolderKanban },
+  { value: '30+', label: 'Clientes', icon: Users },
+  { value: '5+', label: 'Años', icon: Award },
+  { value: '24/7', label: 'Soporte', icon: Headset },
+]
+
+function Hero({ visual }: { visual?: React.ReactNode }) {
+  const [currentWord, setCurrentWord] = useState(0)
+
+  const words = ['TECNOLOGÍA', 'INNOVACIÓN', 'SOLUCIONES', 'SOFTWARE']
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    // Respetar preferencia de reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-
-    class Particle {
-      x: number
-      y: number
-      vx: number
-      vy: number
-      size: number
-
-      constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
-        this.vx = (Math.random() - 0.5) * 0.5
-        this.vy = (Math.random() - 0.5) * 0.5
-        this.size = Math.random() * 2 + 1
-      }
-
-      update() {
-        this.x += this.vx
-        this.y += this.vy
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1
-      }
-
-      draw() {
-        if (!ctx) return
-        ctx.fillStyle = 'rgba(0, 168, 255, 0.6)'
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fill()
-      }
+    if (prefersReducedMotion) {
+      // Dejar la primera palabra fija si el usuario prefiere menos movimiento
+      return
     }
 
-    const particles: Particle[] = []
-    // Reduce particles on mobile for better performance
-    const particleCount = window.innerWidth < 768 ? 40 : 60
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle())
-    }
-
-    function animate() {
-      if (!ctx || !canvas) return
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      particles.forEach((particle, i) => {
-        particle.update()
-        particle.draw()
-
-        particles.slice(i + 1).forEach(otherParticle => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < 150) {
-            ctx.strokeStyle = `rgba(0, 168, 255, ${0.2 * (1 - distance / 150)})`
-            ctx.lineWidth = 1
-            ctx.beginPath()
-            ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(otherParticle.x, otherParticle.y)
-            ctx.stroke()
-          }
-        })
-      })
-
-      requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length)
+    }, 3000)
+    return () => clearInterval(interval)
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#050b15] via-softnex-dark to-[#0a1628]">
-      <canvas ref={canvasRef} className="absolute inset-0 z-0" />
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#06111F] via-[#0a0e1a] to-[#050b15]">
+      {/* Grid animado principal */}
+      <div
+        className="absolute inset-0 z-0 opacity-20"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(0, 168, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 168, 255, 0.05) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+          animation: 'gridMove 20s linear infinite',
+          willChange: 'transform'
+        }}
+      />
 
-      <div className="absolute inset-0 z-0" style={{
-        backgroundImage: `linear-gradient(rgba(0, 168, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 168, 255, 0.03) 1px, transparent 1px)`,
-        backgroundSize: '50px 50px',
-        animation: 'gridMove 20s linear infinite'
-      }} />
+      {/* Grid secundario más sutil (parallax) */}
+      <div
+        className="absolute inset-0 z-0 opacity-10"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: '120px 120px',
+          animation: 'gridMoveSlow 40s linear infinite',
+          willChange: 'transform'
+        }}
+      />
 
-      <div className="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-gradient-to-r from-softnex-blue/20 to-softnex-cyan/10 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '4s' }} />
-      <div className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] bg-gradient-to-r from-softnex-purple/20 to-softnex-pink/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s' }} />
+      {/* Viñeta sutil en los bordes */}
+      <div className="absolute inset-0 z-[1] bg-gradient-radial from-transparent via-transparent to-softnex-dark/60" />
 
-      <div className="relative z-10 container mx-auto px-6 text-center pt-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="inline-block mb-8 relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-50 group-hover:opacity-100 blur transition duration-500" />
-            <div className="relative px-8 py-3 glass-card rounded-full border border-softnex-blue/30">
-              <p className="text-xs tracking-[0.3em] text-softnex-blue font-bold uppercase flex items-center gap-2 justify-center">
-                <span className="w-2 h-2 bg-softnex-blue rounded-full animate-pulse" />
-                Soluciones para el futuro
-                <span className="w-2 h-2 bg-softnex-cyan rounded-full animate-pulse" />
-              </p>
-            </div>
-          </div>
+      {/* Mesh gradients modernos */}
+      <div
+        className="absolute top-0 -left-1/4 w-[800px] h-[800px] bg-gradient-to-br from-softnex-blue/20 via-softnex-cyan/10 to-transparent rounded-full blur-[120px]"
+        style={{ animation: 'float 15s ease-in-out infinite', willChange: 'transform' }}
+      />
+      <div
+        className="absolute top-1/3 -right-1/4 w-[700px] h-[700px] bg-gradient-to-bl from-softnex-purple/15 via-softnex-pink/8 to-transparent rounded-full blur-[100px]"
+        style={{ animation: 'float 12s ease-in-out infinite reverse', willChange: 'transform' }}
+      />
+      <div
+        className="absolute bottom-1/4 left-1/3 w-[600px] h-[600px] bg-gradient-to-tr from-softnex-cyan/10 via-softnex-blue/5 to-transparent rounded-full blur-[90px]"
+        style={{ animation: 'float 18s ease-in-out infinite', willChange: 'transform', animationDelay: '5s' }}
+      />
 
-          {/* TÍTULO BALANCEADO - TECNOLOGÍA PROTAGONISTA */}
-          <h1 className="font-black mb-8 leading-tight">
-            <span className="block text-white text-4xl md:text-5xl lg:text-6xl mb-2">Transformamos</span>
-            <span className="block text-white text-4xl md:text-5xl lg:text-6xl mb-3">ideas en</span>
-            <span className="block text-5xl md:text-7xl lg:text-8xl relative" style={{
-              color: '#00a8ff',
-              letterSpacing: '0.02em'
-            }}>
-              TECNOLOGÍA
-            </span>
-          </h1>
+      {/* Capas de brillo dinámico */}
+      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-softnex-blue/5 to-transparent opacity-30"
+        style={{ animation: 'pulse 8s ease-in-out infinite' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-softnex-dark/50 via-transparent to-softnex-dark/80" />
 
-          <div className="text-lg md:text-xl text-white/70 mb-12 max-w-4xl mx-auto leading-relaxed">
-            <p>
-              Desarrollo de <span className="text-softnex-cyan font-semibold">software a medida</span>,
-              <span className="text-softnex-purple font-semibold"> aplicaciones móviles</span>,
-              <span className="text-softnex-pink font-semibold"> sistemas ERP</span> y
-              soluciones de <span className="text-softnex-blue font-semibold">automatización con IA</span>
+      <div className="relative z-10 container mx-auto px-6 pt-28 pb-16 md:pt-32 lg:pb-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center max-w-7xl mx-auto">
+        <div className="text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 mb-5 px-3.5 py-1 glass-card rounded-full border border-softnex-blue/30">
+            <span className="relative flex w-2 h-2"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" /><span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" /></span>
+            <p className="text-[10px] tracking-[0.2em] text-softnex-blue font-bold uppercase">
+              Soluciones para el futuro
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
+          {/* TÍTULO - PALABRA DINÁMICA */}
+          <h1 className="font-black mb-5 leading-[1.05] tracking-tight">
+            <span className="block text-white text-3xl sm:text-4xl xl:text-5xl">Transformamos</span>
+            <span className="block text-white text-3xl sm:text-4xl xl:text-5xl">ideas en</span>
+            <span
+              className="block relative mt-1 text-5xl sm:text-6xl xl:text-7xl transition-all duration-500 ease-in-out"
+              style={{
+                color: '#00a8ff',
+                letterSpacing: '0.02em'
+              }}
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {words[currentWord]}
+            </span>
+          </h1>
+
+          <p className="text-sm md:text-base text-white/70 mb-7 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+            Desarrollo de <span className="text-softnex-blue font-semibold">software a medida</span>,
+            <span className="text-white font-semibold"> aplicaciones móviles</span>,
+            <span className="text-white font-semibold"> sistemas ERP</span> y
+            soluciones de <span className="text-softnex-blue font-semibold">automatización con IA</span>
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center mb-10">
             <a
               href="#contacto"
-              className="group relative px-10 py-4 overflow-hidden rounded-full transition-all duration-300 hover:scale-110"
+              className="group inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-softnex-blue text-white text-[13px] font-bold tracking-wide shadow-lg shadow-softnex-blue/30 hover:shadow-softnex-blue/50 hover:-translate-y-0.5 transition-all duration-300"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-full opacity-75 blur" />
-              <div className="relative px-8 py-3 bg-gradient-to-r from-softnex-blue to-softnex-cyan rounded-full text-white font-bold text-base tracking-wide flex items-center gap-3">
-                <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                Comienza tu proyecto
-                <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </div>
+              <Rocket className="w-3.5 h-3.5" strokeWidth={2.5} />
+              Comienza tu proyecto
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
             </a>
 
             <a
               href="#servicios"
-              className="group relative px-10 py-4 rounded-full border-2 border-softnex-blue/30 hover:border-softnex-blue transition-all duration-300 hover:scale-105"
+              className="group inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-white/20 text-white/80 text-[13px] font-semibold hover:border-softnex-blue hover:text-white hover:bg-softnex-blue/10 transition-all duration-300"
             >
-              <span className="relative text-white font-semibold text-base tracking-wide flex items-center gap-2">
-                Conoce nuestros servicios
-                <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
+              <LayoutGrid className="w-3.5 h-3.5 text-softnex-blue" strokeWidth={2.5} />
+              Ver servicios
             </a>
           </div>
 
-          {/* STATS ARREGLADAS */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {[
-              { value: '50+', label: 'Proyectos' },
-              { value: '30+', label: 'Clientes' },
-              { value: '5+', label: 'Años' },
-              { value: '24/7', label: 'Soporte' },
-            ].map((stat, index) => (
-              <div key={index} className="group relative">
-                <div className="absolute -inset-0.5 bg-softnex-blue/30 rounded-2xl blur opacity-50 group-hover:opacity-100 transition duration-500" />
-                <div className="relative glass-card p-8 rounded-2xl hover:scale-110 transition-all duration-300 border border-white/10">
-                  <div className="text-4xl md:text-5xl font-black text-softnex-blue mb-2">
-                    {stat.value}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-lg mx-auto lg:mx-0">
+            {stats.map((stat) => {
+              const Icon = stat.icon
+              return (
+                <div
+                  key={stat.label}
+                  className="group flex items-center min-w-0 gap-2 glass-card px-2.5 py-2 rounded-xl border border-white/10 hover:border-softnex-blue/40 transition-all duration-300"
+                >
+                  <div className="flex-shrink-0 w-7 h-7 rounded-md bg-softnex-blue/15 border border-softnex-blue/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Icon className="w-3.5 h-3.5 text-softnex-blue" strokeWidth={2.2} />
                   </div>
-                  <div className="text-xs text-white/60 tracking-wider uppercase font-semibold">
-                    {stat.label}
+                  <div className="text-left leading-tight">
+                    <div className="text-base font-black text-white">{stat.value}</div>
+                    <div className="text-[9px] text-white/50 tracking-wide uppercase font-semibold">
+                      {stat.label}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
-      </div>
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 animate-bounce-slow">
-        <div className="flex gap-1">
-          <div className="w-1 h-1 bg-softnex-blue rounded-full animate-pulse" />
-          <div className="w-1 h-1 bg-softnex-cyan rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
-          <div className="w-1 h-1 bg-softnex-purple rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+        <div className="hidden lg:block">
+          {visual ?? <AINetwork />}
         </div>
-        <div className="w-px h-12 bg-gradient-to-b from-softnex-blue via-softnex-cyan to-transparent" />
+        </div>
       </div>
 
       <style jsx>{`
         @keyframes gridMove {
           0% { transform: translateY(0); }
-          100% { transform: translateY(50px); }
+          100% { transform: translateY(60px); }
+        }
+
+        @keyframes gridMoveSlow {
+          0% { transform: translateY(0) translateX(0); }
+          100% { transform: translateY(120px) translateX(60px); }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.8;
+          }
+          50% {
+            transform: translate(30px, -30px) scale(1.1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes gradientShift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
       `}</style>
     </section>
   )
 }
+
+export default memo(Hero)

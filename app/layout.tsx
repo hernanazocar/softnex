@@ -13,23 +13,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Softnex - Soluciones Tecnológicas para el Futuro",
-  description: "Desarrollo de software a medida, aplicaciones móviles, sistemas ERP y soluciones de automatización con IA. Transformamos ideas en tecnología.",
-  keywords: ["desarrollo web", "software a medida", "apps móviles", "ERP", "automatización", "IA", "agentes", "Next.js", "React"],
+  metadataBase: new URL("https://softnex.com"),
+  title: "Softnex - Transformamos ideas en tecnología",
+  description: "Desarrollo de software a medida, aplicaciones móviles, sistemas ERP y soluciones de automatización con IA. Convertimos tu idea en realidad digital.",
+  keywords: ["desarrollo software", "aplicaciones móviles", "sistemas ERP", "automatización", "inteligencia artificial", "desarrollo web", "Next.js", "React"],
   authors: [{ name: "Softnex" }],
   openGraph: {
-    title: "Softnex - Soluciones Tecnológicas",
-    description: "Transformamos ideas en tecnología. Desarrollo web, apps móviles, ERP y automatización con IA.",
+    title: "Softnex - Transformamos ideas en tecnología",
+    description: "Desarrollo de software a medida, aplicaciones móviles, sistemas ERP y soluciones de automatización con IA",
+    url: "https://softnex.com",
+    siteName: "Softnex",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Softnex - Soluciones tecnológicas",
+      },
+    ],
+    locale: "es_CL",
     type: "website",
-    locale: "es_ES",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Softnex - Soluciones Tecnológicas",
-    description: "Transformamos ideas en tecnología",
+    title: "Softnex - Transformamos ideas en tecnología",
+    description: "Desarrollo de software a medida, aplicaciones móviles y soluciones de automatización con IA",
+    images: ["/logo.png"],
   },
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#00a8ff",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -38,7 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col scroll-smooth">{children}</body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
