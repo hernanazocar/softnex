@@ -14,10 +14,10 @@ export default {
         softnex: {
           dark: '#0a1628',
           'dark-light': '#0f1f38',
-          blue: '#00a8ff',
+          blue: '#00a8ff',    // Color corporativo - X del logo
           'blue-light': '#33b8ff',
           'blue-dark': '#0088cc',
-          cyan: '#00d4ff',
+          cyan: '#00a8ff',    // Unificado con blue para consistencia
           purple: '#6366f1',
           pink: '#ec4899',
           orange: '#f97316',

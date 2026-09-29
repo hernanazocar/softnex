@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Sparkles, CheckCircle2, MessageCircle, User, MessageSquare } from 'lucide-react'
+import { Mail, Phone, MapPin, CheckCircle2, MessageCircle, User, MessageSquare, ArrowUpRight, Send } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -59,21 +59,23 @@ export default function Contact() {
   }
 
   const contactInfo = [
-    { icon: Mail, title: 'Email', value: 'contacto@softnex.com' },
-    { icon: Phone, title: 'Teléfono', value: '+56 9 XXXX XXXX' },
-    { icon: MapPin, title: 'Ubicación', value: 'Santiago, Chile' },
+    { icon: Mail, title: 'Email', value: 'contacto@softnex.com', href: 'mailto:contacto@softnex.com' },
+    { icon: Phone, title: 'Teléfono', value: '+56 9 XXXX XXXX', href: null },
+    { icon: MapPin, title: 'Ubicación', value: 'Santiago, Chile', href: null },
   ]
 
+  const perks = ['Consultoría inicial sin costo', 'Propuesta concreta y sin compromiso']
+
   return (
-    <section id="contacto" className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+    <section id="contacto" className="relative pt-20 md:pt-28 pb-12 md:pb-16 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       {/* Light background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-dots-pattern opacity-5" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-softnex-purple/5 to-softnex-pink/3 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-softnex-blue/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -82,8 +84,8 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <div className="inline-block mb-4 px-6 py-2 bg-softnex-pink/5 border border-softnex-pink/20 rounded-full">
-              <p className="text-xs tracking-[0.25em] text-softnex-pink font-bold flex items-center justify-center gap-2">
+            <div className="inline-block mb-4 px-6 py-2 glass rounded-full border border-gray-200">
+              <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold flex items-center justify-center gap-2">
                 <MessageCircle className="w-3.5 h-3.5" />
                 CONTACTO
               </p>
@@ -104,23 +106,62 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5 }}
-              className="space-y-4"
+              className="h-full"
             >
-              {contactInfo.map((info) => {
-                const Icon = info.icon
-                return (
-                  <div
-                    key={info.title}
-                    className="group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100"
-                  >
-                    <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-softnex-blue/10 mb-3 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="w-5 h-5 text-softnex-blue" strokeWidth={2} />
-                    </div>
-                    <h3 className="text-gray-900 font-bold text-base mb-1">{info.title}</h3>
-                    <p className="text-gray-600 text-sm">{info.value}</p>
+              <div className="relative h-full flex flex-col rounded-2xl bg-softnex-dark p-7 md:p-8 overflow-hidden shadow-xl shadow-softnex-dark/20">
+                <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+                <div className="absolute -top-20 -right-20 w-56 h-56 bg-softnex-blue/25 rounded-full blur-3xl" />
+                <svg viewBox="0 0 100 100" className="absolute -bottom-6 -right-6 w-40 h-40 opacity-[0.07]" aria-hidden="true">
+                  <polygon points="6,4 30,4 94,96 70,96" fill="#00a8ff" />
+                  <polygon points="70,4 94,4 30,96 6,96" fill="#00a8ff" />
+                </svg>
+
+                <div className="relative flex-1 flex flex-col">
+                  <h3 className="text-xl font-black text-white mb-1">Información de contacto</h3>
+                  <p className="text-sm text-white/50 mb-7">Elige el canal que prefieras.</p>
+
+                  <div className="space-y-2">
+                    {contactInfo.map((info) => {
+                      const Icon = info.icon
+                      const content = (
+                        <>
+                          <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-softnex-blue/15 border border-softnex-blue/30 flex items-center justify-center group-hover:bg-softnex-blue transition-colors duration-300">
+                            <Icon className="w-5 h-5 text-softnex-blue group-hover:text-white transition-colors duration-300" strokeWidth={2} />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">{info.title}</p>
+                            <p className="text-sm font-semibold text-white truncate">{info.value}</p>
+                          </div>
+                          {info.href && (
+                            <ArrowUpRight className="w-4 h-4 text-softnex-blue opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                          )}
+                        </>
+                      )
+                      const cls = 'group flex items-center gap-4 p-3 -mx-3 rounded-xl hover:bg-white/5 transition-colors duration-300'
+                      return info.href ? (
+                        <a key={info.title} href={info.href} className={cls}>
+                          {content}
+                        </a>
+                      ) : (
+                        <div key={info.title} className={cls}>
+                          {content}
+                        </div>
+                      )
+                    })}
                   </div>
-                )
-              })}
+
+                  <div className="mt-auto pt-7">
+                    <div className="border-t border-white/10 pt-6 space-y-3">
+                      {perks.map((perk) => (
+                        <div key={perk} className="flex items-center gap-2.5 text-sm text-white/80">
+                          <CheckCircle2 className="w-4 h-4 text-softnex-blue flex-shrink-0" strokeWidth={2.2} />
+                          {perk}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
             {/* Contact form */}
@@ -129,7 +170,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="lg:col-span-2"
+              className="lg:col-span-2 h-full"
             >
               {isSubmitted ? (
                 <div className="h-full flex flex-col items-center justify-center text-center bg-white p-8 rounded-2xl shadow-xl border border-gray-100 min-h-[320px]">
@@ -141,7 +182,7 @@ export default function Contact() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl space-y-5 border border-gray-100">
+                <form onSubmit={handleSubmit} className="h-full bg-white p-7 md:p-8 rounded-2xl shadow-xl space-y-5 border border-gray-200">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-gray-700 mb-2 text-sm font-medium">
@@ -175,7 +216,7 @@ export default function Contact() {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-softnex-cyan focus:ring-2 focus:ring-softnex-cyan/20 transition-all"
+                          className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-softnex-blue focus:ring-2 focus:ring-softnex-blue/20 transition-all"
                           placeholder="juan@empresa.com"
                         />
                       </div>
@@ -195,7 +236,7 @@ export default function Contact() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-softnex-purple focus:ring-2 focus:ring-softnex-purple/20 transition-all"
+                          className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-softnex-blue focus:ring-2 focus:ring-softnex-blue/20 transition-all"
                           placeholder="+56 9 XXXX XXXX"
                         />
                       </div>
@@ -211,15 +252,17 @@ export default function Contact() {
                         value={formData.service}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 text-sm focus:outline-none focus:border-softnex-pink focus:ring-2 focus:ring-softnex-pink/20 transition-all"
+                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 text-sm focus:outline-none focus:border-softnex-blue focus:ring-2 focus:ring-softnex-blue/20 transition-all"
                       >
                         <option value="">Selecciona...</option>
                         <option value="web">Desarrollo Web</option>
                         <option value="mobile">Apps Móviles</option>
-                        <option value="custom">Software a Medida</option>
-                        <option value="erp">Sistema ERP</option>
+                        <option value="custom">Sistemas a Medida</option>
+                        <option value="erp">Sistemas ERP</option>
                         <option value="automation">Automatización</option>
                         <option value="ai">Agentes IA</option>
+                        <option value="cloud">Cloud</option>
+                        <option value="integrations">Integraciones</option>
                       </select>
                     </div>
                   </div>
@@ -246,45 +289,20 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="group relative w-full px-8 py-4 overflow-hidden rounded-xl font-bold text-lg tracking-wide transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    className="group w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-softnex-blue text-white font-bold text-base shadow-lg shadow-softnex-blue/30 hover:shadow-softnex-blue/50 hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                   >
-                    {/* Glow animado de fondo */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple rounded-xl opacity-75 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-300" />
-
-                    {/* Gradiente del botón con animación */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-softnex-blue via-softnex-cyan to-softnex-purple opacity-100 group-hover:opacity-90 transition-opacity"
-                      style={{
-                        backgroundSize: '200% 100%',
-                        animation: 'gradientShift 3s ease infinite'
-                      }}
-                    />
-
-                    {/* Brillo superior */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent opacity-50 group-hover:opacity-70 transition-opacity" />
-
-                    {/* Contenido */}
-                    <span className="relative flex items-center gap-3 text-white">
-                      {isLoading ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Enviando...
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles className="w-5 h-5 group-hover:rotate-12 group-hover:scale-110 transition-all" />
-                          Enviar mensaje
-                          <Sparkles className="w-5 h-5 group-hover:-rotate-12 group-hover:scale-110 transition-all" />
-                        </>
-                      )}
-                    </span>
+                    {isLoading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        Enviando...
+                      </>
+                    ) : (
+                      <>
+                        Enviar mensaje
+                        <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" strokeWidth={2.5} />
+                      </>
+                    )}
                   </button>
-
-                  <style jsx>{`
-                    @keyframes gradientShift {
-                      0%, 100% { background-position: 0% 50%; }
-                      50% { background-position: 100% 50%; }
-                    }
-                  `}</style>
 
                   {/* Success message */}
                   {isSubmitted && (

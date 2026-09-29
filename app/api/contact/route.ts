@@ -80,6 +80,15 @@ export async function POST(request: Request) {
       `,
     })
 
+    // Verificar si hubo error en el envío
+    if ('error' in data) {
+      console.error('Error de Resend:', data.error)
+      return NextResponse.json(
+        { error: 'Error al enviar el mensaje. Por favor intenta nuevamente.' },
+        { status: 502 }
+      )
+    }
+
     return NextResponse.json({ success: true, data }, { status: 200 })
   } catch (error) {
     console.error('Error enviando email:', error)
