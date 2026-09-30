@@ -112,10 +112,10 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
           </h1>
 
           <p className="text-sm md:text-base text-white/70 mb-7 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-            Desarrollamos <span className="text-softnex-blue font-semibold">software SaaS</span>,
-            <span className="text-white font-semibold"> sistemas a medida y ERP</span>,
-            <span className="text-white font-semibold"> webs y apps móviles</span>, y soluciones de
-            <span className="text-softnex-blue font-semibold"> automatización con agentes IA</span>
+            Desarrollo de <span className="text-softnex-blue font-semibold">software a medida</span>,
+            <span className="text-white font-semibold"> sistemas de gestión</span>,
+            <span className="text-white font-semibold"> automatización</span> y soluciones con
+            <span className="text-softnex-blue font-semibold"> agentes IA</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center mb-10">
