@@ -113,7 +113,8 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
 
           <p className="text-sm md:text-base text-white/70 mb-7 max-w-lg mx-auto lg:mx-0 leading-relaxed">
             Creamos <span className="text-softnex-blue font-semibold">software SaaS</span>,
-            <span className="text-white font-semibold"> sistemas a medida</span> y
+            <span className="text-white font-semibold"> sistemas a medida</span>,
+            <span className="text-white font-semibold"> webs y apps</span>, y
             <span className="text-softnex-blue font-semibold"> automatizaciones con agentes IA</span> que trabajan por tu negocio
           </p>
 
