@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, memo } from 'react'
-import GlitchText from './GlitchText'
+import ScanText from './ScanText'
 import { ArrowRight, Rocket, LayoutGrid, FolderKanban, Users, Award, Headset } from 'lucide-react'
 import AINetwork from './hero-variants/AINetwork'
 
@@ -115,7 +115,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
               aria-live="polite"
               aria-atomic="true"
             >
-              <GlitchText text={words[currentWord]} />
+              <ScanText text={words[currentWord]} />
             </span>
           </h1>
 
