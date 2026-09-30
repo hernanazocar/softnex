@@ -27,7 +27,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
 
     const interval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % words.length)
-    }, 3000)
+    }, 2000)
     return () => clearInterval(interval)
   }, [])
 
