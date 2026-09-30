@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, CheckCircle2, MessageCircle, User, MessageSquare, ArrowUpRight, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, CheckCircle2, User, MessageSquare, ArrowUpRight, Send } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -86,8 +86,7 @@ export default function Contact() {
           >
             <div className="inline-flex items-center gap-2 mb-4 px-5 py-2 rounded-full bg-softnex-blue/10 border border-softnex-blue/25">
               <span className="w-1.5 h-1.5 rounded-full bg-softnex-blue shadow-[0_0_8px_#00a8ff] animate-pulse" />
-              <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold flex items-center justify-center gap-2">
-                <MessageCircle className="w-3.5 h-3.5" />
+              <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">
                 CONTACTO
               </p>
             </div>
