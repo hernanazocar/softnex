@@ -83,7 +83,7 @@ export default function Services() {
           transition={{ duration: 0.5 }}
           className="text-center mb-10 md:mb-14"
         >
-          <div className="inline-block mb-4 px-6 py-2 glass rounded-full border border-gray-200">
+          <div className="inline-block mb-4 px-6 py-2 rounded-full bg-softnex-blue/10 border border-softnex-blue/25">
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">
               SERVICIOS
             </p>

@@ -84,7 +84,7 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="text-center mb-10 md:mb-12"
           >
-            <div className="inline-block mb-4 px-6 py-2 glass rounded-full border border-gray-200">
+            <div className="inline-block mb-4 px-6 py-2 rounded-full bg-softnex-blue/10 border border-softnex-blue/25">
               <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold flex items-center justify-center gap-2">
                 <MessageCircle className="w-3.5 h-3.5" />
                 CONTACTO
