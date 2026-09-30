@@ -20,7 +20,6 @@ export default function RevealWords({
     setBlur(window.matchMedia('(min-width: 1024px)').matches)
   }, [])
 
-  if (reduce) return <span className={className}>{text}</span>
 
   return (
     <span className={className}>
@@ -31,7 +30,7 @@ export default function RevealWords({
           initial={blur ? { opacity: 0, y: '0.35em', filter: 'blur(6px)' } : { opacity: 0, y: '0.35em' }}
           whileInView={blur ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.5, delay: delay + i * 0.08, ease: 'easeOut' }}
+          transition={reduce ? { duration: 0 } : { duration: 0.5, delay: delay + i * 0.08, ease: 'easeOut' }}
         >
           {word}
           {i < words.length - 1 && ' '}

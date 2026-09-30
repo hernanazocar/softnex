@@ -160,14 +160,14 @@ export default function Testimonials() {
                       </p>
                     </div>
                   </div>
-                  {isActive && !reduce && (
+                  {isActive && (
                     <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10">
                       <motion.div
                         key={`${active}-${paused}`}
                         className="h-full bg-softnex-blue"
                         initial={{ width: '0%' }}
-                        animate={{ width: paused ? '0%' : '100%' }}
-                        transition={{ duration: paused ? 0 : ROTATE_MS / 1000, ease: 'linear' }}
+                        animate={{ width: paused || reduce ? '0%' : '100%' }}
+                        transition={{ duration: paused || reduce ? 0 : ROTATE_MS / 1000, ease: 'linear' }}
                       />
                     </div>
                   )}

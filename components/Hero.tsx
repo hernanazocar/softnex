@@ -51,29 +51,27 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#06111F] via-[#0a0e1a] to-[#050b15]">
       {/* Grid animado principal */}
       <div
-        className="hero-heavy-anim absolute inset-0 z-0 opacity-20"
+        className="absolute inset-0 z-0 opacity-20"
         style={{
           backgroundImage: `
             linear-gradient(rgba(0, 168, 255, 0.05) 1px, transparent 1px),
             linear-gradient(90deg, rgba(0, 168, 255, 0.05) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
-          animation: 'gridMove 20s linear infinite',
-          willChange: 'transform'
+          animation: 'gridMove 20s linear infinite'
         }}
       />
 
       {/* Grid secundario más sutil (parallax) */}
       <div
-        className="hero-heavy-anim absolute inset-0 z-0 opacity-10"
+        className="absolute inset-0 z-0 opacity-10"
         style={{
           backgroundImage: `
             linear-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px),
             linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px)
           `,
           backgroundSize: '120px 120px',
-          animation: 'gridMoveSlow 40s linear infinite',
-          willChange: 'transform'
+          animation: 'gridMoveSlow 40s linear infinite'
         }}
       />
 
@@ -82,20 +80,20 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
 
       {/* Mesh gradients modernos */}
       <div
-        className="hero-heavy-anim absolute top-0 -left-1/4 w-[800px] h-[800px] bg-gradient-to-br from-softnex-blue/20 via-softnex-cyan/10 to-transparent rounded-full blur-[120px]"
-        style={{ animation: 'float 15s ease-in-out infinite', willChange: 'transform' }}
+        className="absolute top-0 -left-1/4 w-[800px] h-[800px] bg-gradient-to-br from-softnex-blue/20 via-softnex-cyan/10 to-transparent rounded-full blur-[120px]"
+        style={{ animation: 'float 15s ease-in-out infinite' }}
       />
       <div
-        className="hero-heavy-anim absolute top-1/3 -right-1/4 w-[700px] h-[700px] bg-gradient-to-bl from-softnex-purple/15 via-softnex-pink/8 to-transparent rounded-full blur-[100px]"
-        style={{ animation: 'float 12s ease-in-out infinite reverse', willChange: 'transform' }}
+        className="absolute top-1/3 -right-1/4 w-[700px] h-[700px] bg-gradient-to-bl from-softnex-purple/15 via-softnex-pink/8 to-transparent rounded-full blur-[100px]"
+        style={{ animation: 'float 12s ease-in-out infinite reverse' }}
       />
       <div
-        className="hero-heavy-anim absolute bottom-1/4 left-1/3 w-[600px] h-[600px] bg-gradient-to-tr from-softnex-cyan/10 via-softnex-blue/5 to-transparent rounded-full blur-[90px]"
-        style={{ animation: 'float 18s ease-in-out infinite', willChange: 'transform', animationDelay: '5s' }}
+        className="absolute bottom-1/4 left-1/3 w-[600px] h-[600px] bg-gradient-to-tr from-softnex-cyan/10 via-softnex-blue/5 to-transparent rounded-full blur-[90px]"
+        style={{ animation: 'float 18s ease-in-out infinite', animationDelay: '5s' }}
       />
 
       {/* Capas de brillo dinámico */}
-      <div className="hero-heavy-anim absolute inset-0 bg-gradient-to-t from-transparent via-softnex-blue/5 to-transparent opacity-30"
+      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-softnex-blue/5 to-transparent opacity-30"
         style={{ animation: 'pulse 8s ease-in-out infinite' }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-softnex-dark/50 via-transparent to-softnex-dark/80" />

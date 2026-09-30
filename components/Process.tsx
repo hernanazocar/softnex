@@ -75,13 +75,11 @@ export default function Process() {
               viewport={{ once: true }}
               transition={{ duration: 1.4, ease: 'easeInOut', delay: 0.3 }}
             />
-            {!reduce && (
-              <motion.span
-                className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-softnex-blue shadow-[0_0_14px_4px_rgba(0,168,255,0.6)]"
-                animate={{ left: ['0%', '100%'] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.8 }}
-              />
-            )}
+            <motion.span
+              className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-softnex-blue shadow-[0_0_14px_4px_rgba(0,168,255,0.6)]"
+              animate={reduce ? { left: '0%' } : { left: ['0%', '100%'] }}
+              transition={reduce ? { duration: 0 } : { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.8 }}
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
