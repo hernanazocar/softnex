@@ -61,10 +61,7 @@ export default function AINetwork({ compact = false }: { compact?: boolean }) {
           className="absolute rounded-full border border-dashed border-softnex-blue/20 animate-[spin_60s_linear_infinite]"
           style={{ width: R * 2, height: R * 2 }}
         />
-        <div className="absolute w-[240px] h-[240px] rounded-full border border-softnex-blue/10 animate-[spin_30s_linear_infinite_reverse]">
-          <span className="absolute -top-1 left-1/2 w-2 h-2 rounded-full bg-softnex-blue shadow-[0_0_10px_#00a8ff]" />
-          <span className="absolute -bottom-1 left-1/2 w-1.5 h-1.5 rounded-full bg-softnex-blue/70" />
-        </div>
+        <div className="absolute w-[240px] h-[240px] rounded-full border border-softnex-blue/10" />
       </div>
 
       {/* Conexiones */}
