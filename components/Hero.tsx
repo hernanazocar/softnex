@@ -13,6 +13,16 @@ const stats = [
 
 function Hero({ visual }: { visual?: React.ReactNode }) {
   const [currentWord, setCurrentWord] = useState(0)
+  // Solo se monta una instancia de la Red IA (escritorio o móvil) para no duplicar animaciones
+  const [isDesktop, setIsDesktop] = useState(true)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   const words = ['TECNOLOGÍA', 'INNOVACIÓN', 'SOLUCIONES', 'SOFTWARE']
 
@@ -137,6 +147,14 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
             </a>
           </div>
 
+          {!isDesktop && (
+            <div className="lg:hidden relative mx-auto w-[338px] h-[312px] sm:w-[468px] sm:h-[432px] -mt-4 mb-6">
+              <div className="absolute top-0 left-0 origin-top-left scale-[0.65] sm:scale-90">
+                <AINetwork compact />
+              </div>
+            </div>
+          )}
+
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-lg mx-auto lg:mx-0">
             {stats.map((stat) => {
               const Icon = stat.icon
@@ -161,7 +179,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
         </div>
 
         <div className="hidden lg:block">
-          {visual ?? <AINetwork />}
+          {isDesktop && (visual ?? <AINetwork />)}
         </div>
         </div>
       </div>

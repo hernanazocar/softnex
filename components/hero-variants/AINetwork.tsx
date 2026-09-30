@@ -42,7 +42,7 @@ function LogoX() {
   )
 }
 
-export default function AINetwork() {
+export default function AINetwork({ compact = false }: { compact?: boolean }) {
   const reduce = useReducedMotion()
   const [active, setActive] = useState(0)
 
@@ -166,6 +166,8 @@ export default function AINetwork() {
         )
       })}
 
+      {!compact && (
+        <>
       <Float delay={0.8} className={`${floatCard} top-2 -left-6`}>
         <div className="w-8 h-8 rounded-lg bg-softnex-blue/20 flex items-center justify-center">
           <Sparkles className="w-4 h-4 text-softnex-blue" />
@@ -185,6 +187,8 @@ export default function AINetwork() {
           <p className="text-[10px] text-emerald-400 font-semibold">conectadas en un ecosistema</p>
         </div>
       </Float>
+        </>
+      )}
     </div>
   )
 }
