@@ -255,12 +255,12 @@ export default function Contact() {
                         className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 text-sm focus:outline-none focus:border-softnex-blue focus:ring-2 focus:ring-softnex-blue/20 transition-all"
                       >
                         <option value="">Selecciona...</option>
-                        <option value="web">Desarrollo Web</option>
-                        <option value="mobile">Apps Móviles</option>
+                        <option value="saas">Software SaaS</option>
                         <option value="custom">Sistemas a Medida y ERP</option>
                         <option value="automation">Automatización e Integraciones</option>
                         <option value="ai">Agentes IA</option>
-                        <option value="cloud">Cloud e Infraestructura</option>
+                        <option value="web">Desarrollo Web</option>
+                        <option value="mobile">Apps Móviles</option>
                       </select>
                     </div>
                   </div>

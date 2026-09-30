@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Globe, Smartphone, Boxes, Workflow, Bot, Cloud, Sparkles, Layers } from 'lucide-react'
+import { Globe, Smartphone, Boxes, Workflow, Bot, LayoutDashboard, Sparkles, Layers } from 'lucide-react'
 import Float, { floatCard } from './Float'
 
 const W = 520
@@ -12,12 +12,12 @@ const CY = H / 2
 const R = 180
 
 const nodes = [
-  { icon: Globe, label: 'Web' },
-  { icon: Smartphone, label: 'Apps' },
+  { icon: LayoutDashboard, label: 'SaaS' },
   { icon: Boxes, label: 'Sistemas y ERP' },
   { icon: Workflow, label: 'Automatización' },
   { icon: Bot, label: 'Agentes IA' },
-  { icon: Cloud, label: 'Cloud' },
+  { icon: Globe, label: 'Web' },
+  { icon: Smartphone, label: 'Apps' },
 ].map((n, i) => {
   const rad = ((-90 + i * 60) * Math.PI) / 180
   return { ...n, x: CX + R * Math.cos(rad), y: CY + R * Math.sin(rad) }

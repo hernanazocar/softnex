@@ -7,25 +7,18 @@ import {
   Boxes,
   Workflow,
   Bot,
-  Cloud,
+  LayoutDashboard,
   ArrowRight,
   MessagesSquare,
 } from 'lucide-react'
 
 const services = [
   {
-    icon: Globe,
-    title: 'Desarrollo Web',
+    icon: LayoutDashboard,
+    title: 'Software SaaS',
     description:
-      'Sitios y plataformas web de alto rendimiento con React y Next.js, desde landing pages hasta aplicaciones complejas.',
-    features: ['React & Next.js', 'UI/UX de nivel producto', 'SEO técnico'],
-  },
-  {
-    icon: Smartphone,
-    title: 'Apps Móviles',
-    description:
-      'Aplicaciones para iOS y Android con foco en rendimiento y experiencias fluidas que retienen usuarios.',
-    features: ['React Native', 'Flutter', 'Publicación en tiendas'],
+      'Plataformas por suscripción listas para vender: usuarios, planes, pagos y panel de administración.',
+    features: ['Suscripciones y pagos', 'Multiusuario', 'Panel de administración'],
   },
   {
     icon: Boxes,
@@ -49,11 +42,18 @@ const services = [
     features: ['LLMs avanzados', 'RAG & fine-tuning', 'Chatbots inteligentes'],
   },
   {
-    icon: Cloud,
-    title: 'Cloud e Infraestructura',
+    icon: Globe,
+    title: 'Desarrollo Web',
     description:
-      'Publicamos y mantenemos tus sistemas en la nube: servidores seguros, despliegues automáticos y monitoreo para que siempre estén en línea.',
-    features: ['AWS & Vercel', 'Despliegue automático', 'Monitoreo 24/7'],
+      'Sitios y plataformas web de alto rendimiento con React y Next.js, desde landing pages hasta aplicaciones complejas.',
+    features: ['React & Next.js', 'UI/UX de nivel producto', 'SEO técnico'],
+  },
+  {
+    icon: Smartphone,
+    title: 'Apps Móviles',
+    description:
+      'Aplicaciones para iOS y Android con foco en rendimiento y experiencias fluidas que retienen usuarios.',
+    features: ['React Native', 'Flutter', 'Publicación en tiendas'],
   },
 ]
 
