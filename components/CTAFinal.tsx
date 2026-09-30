@@ -31,7 +31,7 @@ export default function CTAFinal() {
 
             <div className="relative z-10 text-center">
               <div className="inline-flex items-center gap-2 mb-4 px-5 py-2 rounded-full bg-softnex-blue/10 border border-softnex-blue/30 shadow-[0_0_20px_rgba(0,168,255,0.15)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-softnex-blue shadow-[0_0_8px_#00a8ff] animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-softnex-blue shadow-[0_0_8px_#00a8ff]" />
                 <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold uppercase">Comencemos algo grande</p>
               </div>
 

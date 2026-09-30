@@ -85,7 +85,7 @@ export default function AINetwork({ compact = false }: { compact?: boolean }) {
                 strokeWidth={isActive ? 2 : 1.2}
                 strokeOpacity={isActive ? 0.9 : 0.3}
                 strokeDasharray="4 6"
-                animate={reduce ? undefined : { strokeDashoffset: [0, -20] }}
+                animate={reduce || compact ? undefined : { strokeDashoffset: [0, -20] }}
                 transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
                 style={{ transition: 'stroke-opacity 0.4s, stroke-width 0.4s' }}
               />
@@ -121,7 +121,7 @@ export default function AINetwork({ compact = false }: { compact?: boolean }) {
           <motion.div
             className="w-16 h-16"
             style={{ filter: 'drop-shadow(0 0 12px rgba(0,168,255,0.7))' }}
-            animate={reduce ? undefined : { scale: [1, 1.06, 1] }}
+            animate={reduce || compact ? undefined : { scale: [1, 1.06, 1] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           >
             <LogoX />

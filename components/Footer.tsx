@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { Mail, MapPin, ArrowUp, ArrowRight } from 'lucide-react'
 import { socials } from './socials'
 
@@ -48,7 +47,8 @@ export default function Footer() {
           {/* Marca */}
           <div className="lg:col-span-5 space-y-5">
             <a href="#" className="inline-block" aria-label="Softnex - volver al inicio">
-              <Image src="/logo-softnex.png" alt="Softnex" width={575} height={220} className="h-10 w-auto object-contain" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo-softnex.png" alt="Softnex" width={575} height={220} loading="lazy" className="h-10 w-auto object-contain" />
             </a>
             <p className="text-white/60 text-sm leading-relaxed max-w-sm">
               Transformamos ideas en tecnología. Software a medida, apps móviles, ERP y soluciones de IA

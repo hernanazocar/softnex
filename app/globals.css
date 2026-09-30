@@ -206,6 +206,21 @@ html {
   animation: drift 16s ease-in-out infinite;
 }
 
+/* En celular y tablet se apagan los efectos más costosos para la GPU (fluidez y sin parpadeos) */
+@media (max-width: 1023px) {
+  .drift,
+  .hero-heavy-anim {
+    animation: none !important;
+  }
+  [class*='backdrop-blur'],
+  .glass,
+  .glass-strong,
+  .glass-card {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
 @keyframes bg-pan {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
