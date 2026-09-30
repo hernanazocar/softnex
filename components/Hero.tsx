@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, memo } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import ScrambleText from './ScrambleText'
 import { ArrowRight, Rocket, LayoutGrid, FolderKanban, Users, Award, Headset } from 'lucide-react'
 import AINetwork from './hero-variants/AINetwork'
 
@@ -115,18 +115,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
               aria-live="polite"
               aria-atomic="true"
             >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={words[currentWord]}
-                  className="inline-block"
-                  initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: -18, filter: 'blur(8px)' }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
-                >
-                  {words[currentWord]}
-                </motion.span>
-              </AnimatePresence>
+              <ScrambleText text={words[currentWord]} />
             </span>
           </h1>
 
