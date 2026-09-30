@@ -9,10 +9,12 @@ import FAQ from '@/components/FAQ'
 import Contact from '@/components/Contact'
 import CTAFinal from '@/components/CTAFinal'
 import Footer from '@/components/Footer'
+import SpotlightTracker from '@/components/fx/SpotlightTracker'
 
 export default function Home() {
   return (
     <>
+      <SpotlightTracker />
       <Header />
       <main>
         <Hero />

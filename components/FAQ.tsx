@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import RevealWords from './fx/RevealWords'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, MessagesSquare, ArrowRight } from 'lucide-react'
 
@@ -56,7 +57,7 @@ export default function FAQ() {
     <section id="faq" className="relative py-16 md:py-28 overflow-hidden bg-softnex-dark">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-softnex-blue/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-softnex-blue/10 rounded-full blur-[120px] drift" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -75,7 +76,7 @@ export default function FAQ() {
                 <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">PREGUNTAS FRECUENTES</p>
               </div>
               <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
-                Dudas <span className="text-softnex-blue">resueltas</span>
+                <RevealWords text="Dudas" />{' '}<RevealWords text="resueltas" className="text-softnex-blue" delay={0.08} />
               </h2>
               <p className="text-base md:text-lg text-white/60 lg:mb-8 max-w-md mx-auto lg:mx-0">
                 Lo que más nos preguntan antes de empezar un proyecto.

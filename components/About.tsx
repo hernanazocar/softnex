@@ -1,6 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import RevealWords from './fx/RevealWords'
+import LogoMarquee from './fx/LogoMarquee'
 import { Sparkles, ShieldCheck, HeartHandshake, CalendarCheck, KeyRound, MessagesSquare, BadgeCheck } from 'lucide-react'
 
 const stackGroups = [
@@ -65,7 +67,7 @@ export default function About() {
     <section id="nosotros" className="relative py-16 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-softnex-blue/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-softnex-blue/10 rounded-full blur-[120px] drift" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -82,7 +84,7 @@ export default function About() {
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">NOSOTROS</p>
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
-            Construimos el <span className="text-softnex-blue">futuro digital</span>
+            <RevealWords text="Construimos el" />{' '}<RevealWords text="futuro digital" className="text-softnex-blue" delay={0.16} />
           </h2>
           <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
             Un equipo de desarrolladores, diseñadores y estrategas que lleva ideas de negocio a
@@ -116,7 +118,7 @@ export default function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ duration: 0.45, delay: index * 0.1 }}
-                  className="group relative flex-1 flex items-center gap-4 rounded-2xl bg-white border border-gray-200 p-5 shadow-sm hover:shadow-[0_20px_50px_-15px_rgba(0,168,255,0.35)] hover:border-softnex-blue/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                  className="spotlight group relative flex-1 flex items-center gap-4 rounded-2xl bg-white border border-gray-200 p-5 shadow-sm hover:shadow-[0_20px_50px_-15px_rgba(0,168,255,0.35)] hover:border-softnex-blue/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                 >
                   <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-softnex-blue to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="absolute top-3 right-4 text-3xl font-black text-gray-100 group-hover:text-softnex-blue/15 transition-colors duration-300">
@@ -124,7 +126,7 @@ export default function About() {
                   </span>
 
                   <div className="relative flex-shrink-0 w-12 h-12 rounded-xl bg-softnex-blue/10 border border-softnex-blue/20 flex items-center justify-center group-hover:bg-softnex-blue group-hover:shadow-[0_0_20px_rgba(0,168,255,0.45)] transition-all duration-300">
-                    <Icon className="w-6 h-6 text-softnex-blue group-hover:text-white transition-colors duration-300" strokeWidth={1.8} />
+                    <Icon className="w-6 h-6 text-softnex-blue group-hover:text-white transition-colors duration-300 icon-pop" strokeWidth={1.8} />
                   </div>
                   <div className="relative pr-8">
                     <h3 className="text-gray-900 font-bold text-base mb-1">{item.title}</h3>
@@ -143,7 +145,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="lg:col-span-3 relative"
           >
-            <div className="relative h-full rounded-2xl bg-white border border-gray-200 shadow-sm p-5 sm:p-6 md:p-7 overflow-hidden">
+            <div className="spotlight relative h-full rounded-2xl bg-white border border-gray-200 shadow-sm p-5 sm:p-6 md:p-7 overflow-hidden">
               <div className="absolute -top-16 -right-16 w-48 h-48 bg-softnex-blue/10 rounded-full blur-3xl" />
 
               <div className="relative flex flex-wrap items-start justify-between gap-3 mb-6">
@@ -208,6 +210,10 @@ export default function About() {
               </div>
             </div>
           </motion.div>
+        </div>
+
+        <div className="max-w-7xl mx-auto mt-10">
+          <LogoMarquee />
         </div>
       </div>
     </section>

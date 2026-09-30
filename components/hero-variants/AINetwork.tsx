@@ -95,6 +95,8 @@ export default function AINetwork({ compact = false }: { compact?: boolean }) {
               {!reduce && (
                 <motion.circle
                   r={3.5}
+                  cx={CX}
+                  cy={CY}
                   fill="#00a8ff"
                   style={{ filter: 'drop-shadow(0 0 6px #00a8ff)' }}
                   animate={{ cx: [CX, n.x], cy: [CY, n.y], opacity: [0, 1, 0] }}

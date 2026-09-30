@@ -4,12 +4,13 @@ import { useEffect, useState, memo } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Rocket, LayoutGrid, Users, CalendarCheck, Headset } from 'lucide-react'
 import AINetwork from './hero-variants/AINetwork'
+import CountUp from './fx/CountUp'
 
 const stats = [
-  { value: '50', suffix: '+', label: 'Proyectos', icon: Rocket },
-  { value: '30', suffix: '+', label: 'Clientes', icon: Users },
-  { value: '5', suffix: '+', label: 'Años', icon: CalendarCheck },
-  { value: '24/7', suffix: '', label: 'Soporte', icon: Headset },
+  { value: '50', suffix: '+', label: 'Proyectos', icon: Rocket, anim: 'icon-launch' },
+  { value: '30', suffix: '+', label: 'Clientes', icon: Users, anim: 'icon-bounce' },
+  { value: '5', suffix: '+', label: 'Años', icon: CalendarCheck, anim: 'icon-pop' },
+  { value: '24/7', suffix: '', label: 'Soporte', icon: Headset, anim: 'icon-wiggle' },
 ]
 
 function Hero({ visual }: { visual?: React.ReactNode }) {
@@ -174,12 +175,12 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
                 >
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-softnex-blue/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-softnex-blue/35 to-softnex-blue/10 border border-softnex-blue/40 flex items-center justify-center shadow-[0_0_12px_rgba(0,168,255,0.25)] group-hover:from-softnex-blue group-hover:to-softnex-blue transition-colors duration-300">
-                    <Icon className="w-4 h-4 text-softnex-blue group-hover:text-white transition-colors duration-300" strokeWidth={2.2} />
+                    <Icon className={`w-4 h-4 text-softnex-blue group-hover:text-white transition-colors duration-300 ${stat.anim}`} strokeWidth={2.2} />
                   </div>
                   <div className="text-left leading-none">
                     <div className="text-lg font-black text-white tracking-tight">
-                      {stat.value}
-                      {stat.suffix && <span className="text-softnex-blue">{stat.suffix}</span>}
+                      {/^\d+$/.test(stat.value) ? <CountUp to={Number(stat.value)} /> : stat.value}
+                      {stat.suffix && <span className="text-softnex-blue ml-0.5">{stat.suffix}</span>}
                     </div>
                     <div className="mt-1 text-[9px] text-white/55 tracking-[0.15em] sm:tracking-[0.08em] uppercase font-semibold">
                       {stat.label}

@@ -122,6 +122,90 @@ html {
   60%, 100% { left: 130%; }
 }
 
+/* ===== Animaciones de secciones ===== */
+
+/* Luz que sigue al cursor en tarjetas (solo dispositivos con mouse) */
+@media (hover: hover) {
+  .spotlight::before,
+  .spotlight::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .spotlight::before {
+    background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 168, 255, 0.1), transparent 45%);
+  }
+  .spotlight::after {
+    padding: 1px;
+    background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 168, 255, 0.75), transparent 45%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  .spotlight:hover::before,
+  .spotlight:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Micro-animaciones de íconos al pasar el mouse */
+@keyframes icon-pop {
+  0%, 100% { transform: scale(1) rotate(0); }
+  40% { transform: scale(1.18) rotate(-8deg); }
+  70% { transform: scale(0.96) rotate(5deg); }
+}
+@keyframes icon-spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+@keyframes icon-wiggle {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-14deg); }
+  40% { transform: rotate(12deg); }
+  60% { transform: rotate(-8deg); }
+  80% { transform: rotate(5deg); }
+}
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  35% { transform: translateY(-5px); }
+  65% { transform: translateY(1px); }
+}
+@keyframes icon-launch {
+  0%, 100% { transform: translate(0, 0); }
+  45% { transform: translate(3px, -5px); }
+  60% { transform: translate(3px, -5px); }
+}
+.group:hover .icon-pop { animation: icon-pop 0.6s ease-in-out; }
+.group:hover .icon-spin { animation: icon-spin 0.8s ease-in-out; }
+.group:hover .icon-wiggle { animation: icon-wiggle 0.7s ease-in-out; }
+.group:hover .icon-bounce { animation: icon-bounce 0.6s ease-in-out; }
+.group:hover .icon-launch { animation: icon-launch 0.8s ease-in-out; }
+
+/* Carrusel infinito de logos */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 6px)); }
+}
+.marquee-track {
+  animation: marquee 35s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Brillos de fondo que se mueven lentamente */
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.08); }
+}
+.drift {
+  animation: drift 16s ease-in-out infinite;
+}
+
 @keyframes bg-pan {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import RevealWords from './fx/RevealWords'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Quote, Workflow, Layers, RefreshCw } from 'lucide-react'
 
@@ -54,7 +55,7 @@ export default function Testimonials() {
     <section id="testimonios" className="relative py-16 md:py-28 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] h-[600px] bg-softnex-blue/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] h-[600px] bg-softnex-blue/10 rounded-full blur-[120px] drift" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -70,7 +71,7 @@ export default function Testimonials() {
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">TESTIMONIOS</p>
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
-            Lo que dicen nuestros <span className="text-softnex-blue">clientes</span>
+            <RevealWords text="Lo que dicen nuestros" />{' '}<RevealWords text="clientes" className="text-softnex-blue" delay={0.32} />
           </h2>
           <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
             Resultados reales de empresas que confiaron en nosotros.

@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, useReducedMotion } from 'framer-motion'
+import RevealWords from './fx/RevealWords'
 import { Search, LayoutTemplate, Code2, Rocket, Check, Clock } from 'lucide-react'
 
 const steps = [
@@ -41,7 +42,7 @@ export default function Process() {
     <section id="proceso" className="relative py-16 md:py-28 overflow-hidden bg-softnex-dark">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-softnex-blue/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-softnex-blue/10 rounded-full blur-[120px] drift" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -57,7 +58,7 @@ export default function Process() {
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">CÓMO TRABAJAMOS</p>
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
-            Un proceso <span className="text-softnex-blue">claro y transparente</span>
+            <RevealWords text="Un proceso" />{' '}<RevealWords text="claro y transparente" className="text-softnex-blue" delay={0.16} />
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
             De la idea a producción en cuatro etapas, con entregables concretos en cada una.
@@ -89,8 +90,8 @@ export default function Process() {
               return (
                 <motion.div
                   key={step.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ duration: 0.5, delay: index * 0.12 }}
                   className="group relative flex flex-col"
@@ -101,7 +102,7 @@ export default function Process() {
                       <div className="absolute -inset-2 rounded-2xl bg-softnex-blue/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <div className="relative w-[92px] h-[92px] rounded-2xl bg-[#0b1426] border border-softnex-blue/30 flex items-center justify-center shadow-lg shadow-black/30 group-hover:border-softnex-blue group-hover:-translate-y-1 transition-all duration-300">
                         <div className="w-14 h-14 rounded-xl bg-softnex-blue/15 flex items-center justify-center group-hover:bg-softnex-blue transition-colors duration-300">
-                          <Icon className="w-7 h-7 text-softnex-blue group-hover:text-white transition-colors duration-300" strokeWidth={1.8} />
+                          <Icon className="w-7 h-7 text-softnex-blue group-hover:text-white transition-colors duration-300 icon-pop" strokeWidth={1.8} />
                         </div>
                       </div>
                       <span className="absolute -top-2.5 -right-2.5 w-8 h-8 rounded-full bg-softnex-blue text-white text-[11px] font-black flex items-center justify-center shadow-[0_0_14px_rgba(0,168,255,0.6)] border-2 border-softnex-dark">
@@ -111,13 +112,13 @@ export default function Process() {
                   </div>
 
                   {/* Tarjeta */}
-                  <div className="relative flex-1 flex flex-col rounded-2xl p-5 sm:p-6 border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden group-hover:border-softnex-blue/40 group-hover:shadow-[0_10px_40px_-10px_rgba(0,168,255,0.35)] transition-all duration-300">
+                  <div className="spotlight relative flex-1 flex flex-col rounded-2xl p-5 sm:p-6 border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden group-hover:border-softnex-blue/40 group-hover:shadow-[0_10px_40px_-10px_rgba(0,168,255,0.35)] transition-all duration-300">
                     <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-softnex-blue to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                     <div className="flex items-center justify-between gap-2 mb-3">
                       <div className="flex items-center gap-3">
                         <div className="sm:hidden relative flex-shrink-0 w-10 h-10 rounded-xl bg-softnex-blue/15 border border-softnex-blue/30 flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-softnex-blue" strokeWidth={1.8} />
+                          <Icon className="w-5 h-5 text-softnex-blue icon-pop" strokeWidth={1.8} />
                           <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-softnex-blue text-white text-[9px] font-black flex items-center justify-center border-2 border-softnex-dark">
                             {index + 1}
                           </span>

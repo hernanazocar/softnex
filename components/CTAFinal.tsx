@@ -1,6 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import RevealWords from './fx/RevealWords'
+import CountUp from './fx/CountUp'
 import { ArrowRight, Rocket, Users, Headset } from 'lucide-react'
 
 export default function CTAFinal() {
@@ -35,10 +37,8 @@ export default function CTAFinal() {
 
               {/* Main heading */}
               <h2 className="text-2xl md:text-4xl font-black text-white mb-3 leading-tight">
-                ¿Tienes un proyecto{' '}
-                <span className="text-softnex-blue">
-                  en mente?
-                </span>
+                <RevealWords text="¿Tienes un proyecto" />{' '}
+                <RevealWords text="en mente?" className="text-softnex-blue" delay={0.24} />
               </h2>
 
               <p className="text-base md:text-lg text-white/70 mb-6 leading-relaxed">
@@ -69,12 +69,12 @@ export default function CTAFinal() {
               <div className="grid grid-cols-3 gap-4 border-t border-white/10 pt-5 max-w-md mx-auto">
                 <div className="text-center">
                   <Rocket className="w-4 h-4 text-softnex-blue mx-auto mb-2" strokeWidth={2} />
-                  <div className="text-xl font-black text-softnex-blue">50+</div>
+                  <div className="text-xl font-black text-softnex-blue"><CountUp to={50} />+</div>
                   <div className="text-[10px] text-white/50 uppercase tracking-wider">Proyectos</div>
                 </div>
                 <div className="text-center border-x border-white/10">
                   <Users className="w-4 h-4 text-softnex-blue mx-auto mb-2" strokeWidth={2} />
-                  <div className="text-xl font-black text-softnex-blue">30+</div>
+                  <div className="text-xl font-black text-softnex-blue"><CountUp to={30} />+</div>
                   <div className="text-[10px] text-white/50 uppercase tracking-wider">Clientes</div>
                 </div>
                 <div className="text-center">
