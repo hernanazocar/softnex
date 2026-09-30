@@ -94,7 +94,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-softnex-dark/50 via-transparent to-softnex-dark/80" />
 
-      <div className="relative z-10 container mx-auto px-6 pt-28 pb-16 md:pt-32 lg:pb-20">
+      <div className="relative z-10 container mx-auto px-6 pt-20 pb-16 md:pt-32 lg:pb-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center max-w-7xl mx-auto">
         <div className="text-center lg:text-left">
           <div className="inline-flex items-center gap-2 mb-5 px-3.5 py-1 glass-card rounded-full border border-softnex-blue/30">
