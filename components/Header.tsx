@@ -29,15 +29,17 @@ export default function Header() {
   }, [])
 
   useEffect(() => {
-    const sections = NAV_LINKS.map((l) => document.querySelector(l.href)).filter(
-      (el): el is Element => el !== null
-    )
+    // Se observan todas las secciones: al entrar en una que no está en el menú (FAQ, Contacto, CTA) se apaga el indicador
+    const sections = Array.from(document.querySelectorAll('main section'))
     if (sections.length === 0) return
+    const navHrefs = new Set(NAV_LINKS.map((l) => l.href))
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(`#${entry.target.id}`)
+          if (!entry.isIntersecting) return
+          const href = `#${entry.target.id}`
+          setActiveSection(navHrefs.has(href) ? href : null)
         })
       },
       { rootMargin: '-45% 0px -50% 0px' }
