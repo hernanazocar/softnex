@@ -12,8 +12,8 @@ const CY = H / 2
 const R = 180
 
 const nodes = [
-  { icon: LayoutDashboard, label: 'SaaS' },
-  { icon: Boxes, label: 'Sistemas y ERP' },
+  { icon: LayoutDashboard, label: 'Software' },
+  { icon: Boxes, label: 'Sistemas' },
   { icon: Workflow, label: 'Automatización' },
   { icon: Bot, label: 'Agentes IA' },
   { icon: Globe, label: 'Web' },
