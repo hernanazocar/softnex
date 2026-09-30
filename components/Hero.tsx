@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, memo } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Rocket, LayoutGrid, FolderKanban, Users, Award, Headset } from 'lucide-react'
 import AINetwork from './hero-variants/AINetwork'
 
@@ -109,15 +110,23 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
             <span className="block text-white text-3xl sm:text-4xl xl:text-5xl">Transformamos</span>
             <span className="block text-white text-3xl sm:text-4xl xl:text-5xl">ideas en</span>
             <span
-              className="block relative mt-1 text-5xl sm:text-6xl xl:text-7xl transition-all duration-500 ease-in-out"
-              style={{
-                color: '#00a8ff',
-                letterSpacing: '0.02em'
-              }}
+              className="block relative mt-1 text-5xl sm:text-6xl xl:text-7xl"
+              style={{ color: '#00a8ff', letterSpacing: '0.02em' }}
               aria-live="polite"
               aria-atomic="true"
             >
-              {words[currentWord]}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={words[currentWord]}
+                  className="inline-block"
+                  initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -18, filter: 'blur(8px)' }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                >
+                  {words[currentWord]}
+                </motion.span>
+              </AnimatePresence>
             </span>
           </h1>
 
