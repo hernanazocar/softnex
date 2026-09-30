@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles, Rocket, Users, Headset } from 'lucide-react'
+import { ArrowRight, Rocket, Users, Headset } from 'lucide-react'
 
 export default function CTAFinal() {
   return (
@@ -28,13 +28,9 @@ export default function CTAFinal() {
             <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-white/10 rounded-full blur-3xl" />
 
             <div className="relative z-10 text-center">
-              {/* Icon badge */}
-              <div className="inline-flex items-center justify-center gap-2 mb-3">
-                <Sparkles className="w-4 h-4 text-softnex-blue animate-pulse" />
-                <span className="text-xs font-bold text-softnex-blue tracking-wider uppercase">
-                  Comencemos algo grande
-                </span>
-                <Sparkles className="w-4 h-4 text-softnex-blue animate-pulse" style={{ animationDelay: '0.5s' }} />
+              <div className="inline-flex items-center gap-2 mb-4 px-5 py-2 rounded-full bg-softnex-blue/10 border border-softnex-blue/30 shadow-[0_0_20px_rgba(0,168,255,0.15)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-softnex-blue shadow-[0_0_8px_#00a8ff] animate-pulse" />
+                <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold uppercase">Comencemos algo grande</p>
               </div>
 
               {/* Main heading */}
