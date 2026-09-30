@@ -208,6 +208,11 @@ html {
 
 /* En celular y tablet se apagan los efectos más costosos para la GPU (fluidez y sin parpadeos) */
 @media (max-width: 1023px) {
+  /* Animaciones de entrada: el contenido se ve de inmediato, sin esperar al JavaScript ni parpadear */
+  [style*='opacity'][style*='transform'] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
   .drift,
   .hero-heavy-anim {
     animation: none !important;

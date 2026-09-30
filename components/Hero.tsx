@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Rocket, LayoutGrid, Users, CalendarCheck, Headset } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import CountUp from './fx/CountUp'
+import AINetworkStatic from './hero-variants/AINetworkStatic'
 
 // La animación se descarga aparte, después de lo esencial (texto, logo y menú)
 const AINetwork = dynamic(() => import('./hero-variants/AINetwork'), { ssr: false })
@@ -19,7 +20,7 @@ const stats = [
 function Hero({ visual }: { visual?: React.ReactNode }) {
   const [currentWord, setCurrentWord] = useState(0)
   // Solo se monta una instancia de la Red IA (escritorio o móvil) para no duplicar animaciones
-  const [isDesktop, setIsDesktop] = useState(true)
+  const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)')
@@ -160,13 +161,12 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
             </a>
           </div>
 
-          {!isDesktop && (
-            <div className="lg:hidden relative mx-auto w-[338px] h-[312px] sm:w-[468px] sm:h-[432px] -mt-4 mb-6">
-              <div className="absolute top-0 left-0 origin-top-left scale-[0.65] sm:scale-90">
-                <AINetwork compact />
-              </div>
+          {/* En celular: Red IA estática incluida en el HTML, visible sin esperar JavaScript */}
+          <div className="lg:hidden relative mx-auto w-[338px] h-[312px] sm:w-[468px] sm:h-[432px] -mt-4 mb-6">
+            <div className="absolute top-0 left-0 origin-top-left scale-[0.65] sm:scale-90">
+              <AINetworkStatic />
             </div>
-          )}
+          </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2 max-w-lg sm:max-w-xl mx-auto lg:mx-0">
             {stats.map((stat) => {
