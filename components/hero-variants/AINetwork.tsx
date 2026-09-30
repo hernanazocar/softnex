@@ -16,7 +16,7 @@ const nodes = [
   { icon: Boxes, label: 'Sistemas' },
   { icon: Workflow, label: 'Automatización' },
   { icon: Bot, label: 'Agentes IA' },
-  { icon: Globe, label: 'Web' },
+  { icon: Globe, label: 'Webs' },
   { icon: Smartphone, label: 'Apps' },
 ].map((n, i) => {
   const rad = ((-90 + i * 60) * Math.PI) / 180
