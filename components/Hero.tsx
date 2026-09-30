@@ -115,7 +115,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
             Desarrollo de <span className="text-softnex-blue font-semibold">software a medida</span>,
             <span className="text-white font-semibold"> sistemas de gestión</span>,
             <span className="text-white font-semibold"> automatización</span> y soluciones con
-            <span className="text-softnex-blue font-semibold"> agentes IA</span>
+            <span className="text-softnex-blue font-semibold"> agentes IA</span> pensadas para tu negocio
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center mb-10">
