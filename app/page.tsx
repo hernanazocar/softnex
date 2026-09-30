@@ -22,8 +22,8 @@ export default function Home() {
         <WhyUs />
         <Testimonials />
         <FAQ />
-        <Contact />
         <CTAFinal />
+        <Contact />
       </main>
       <Footer />
     </>

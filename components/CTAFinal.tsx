@@ -5,7 +5,7 @@ import { ArrowRight, Rocket, Users, Headset } from 'lucide-react'
 
 export default function CTAFinal() {
   return (
-    <section className="relative pt-4 pb-16 md:pb-20 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+    <section className="relative pt-16 md:pt-24 pb-2 md:pb-4 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-dots-pattern opacity-5" />

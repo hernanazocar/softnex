@@ -70,7 +70,7 @@ export default function WhyUs() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
-            className="relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden flex flex-col lg:order-2"
+            className="relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden flex flex-col order-2"
           >
             <div className="grid grid-cols-2 border-b border-white/10">
               <div className="px-3 sm:px-5 md:px-6 py-3.5 sm:py-4">
@@ -128,7 +128,7 @@ export default function WhyUs() {
           </motion.div>
 
           {/* Diferenciadores */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:order-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 order-1">
             {differentiators.map((item, index) => {
               const Icon = item.icon
               return (

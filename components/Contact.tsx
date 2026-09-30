@@ -106,7 +106,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5 }}
-              className="h-full"
+              className="h-full order-2 lg:order-1"
             >
               <div className="relative h-full flex flex-col rounded-2xl bg-softnex-dark p-7 md:p-8 overflow-hidden shadow-xl shadow-softnex-dark/20">
                 <div className="absolute inset-0 bg-grid-pattern opacity-20" />
@@ -170,7 +170,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="lg:col-span-2 h-full"
+              className="lg:col-span-2 h-full order-1 lg:order-2"
             >
               {isSubmitted ? (
                 <div className="h-full flex flex-col items-center justify-center text-center bg-white p-8 rounded-2xl shadow-xl border border-gray-100 min-h-[320px]">

@@ -1,15 +1,15 @@
 'use client'
 
 import { useEffect, useState, memo } from 'react'
-import ScanText from './ScanText'
-import { ArrowRight, Rocket, LayoutGrid, FolderKanban, Users, Award, Headset } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRight, Rocket, LayoutGrid, Users, CalendarCheck, Headset } from 'lucide-react'
 import AINetwork from './hero-variants/AINetwork'
 
 const stats = [
-  { value: '50+', label: 'Proyectos', icon: FolderKanban },
-  { value: '30+', label: 'Clientes', icon: Users },
-  { value: '5+', label: 'Años', icon: Award },
-  { value: '24/7', label: 'Soporte', icon: Headset },
+  { value: '50', suffix: '+', label: 'Proyectos', icon: Rocket },
+  { value: '30', suffix: '+', label: 'Clientes', icon: Users },
+  { value: '5', suffix: '+', label: 'Años', icon: CalendarCheck },
+  { value: '24/7', suffix: '', label: 'Soporte', icon: Headset },
 ]
 
 function Hero({ visual }: { visual?: React.ReactNode }) {
@@ -115,7 +115,18 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
               aria-live="polite"
               aria-atomic="true"
             >
-              <ScanText text={words[currentWord]} />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={words[currentWord]}
+                  className="inline-block"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                >
+                  {words[currentWord]}
+                </motion.span>
+              </AnimatePresence>
             </span>
           </h1>
 
@@ -153,20 +164,24 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
             </div>
           )}
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-lg mx-auto lg:mx-0">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2 max-w-lg sm:max-w-xl mx-auto lg:mx-0">
             {stats.map((stat) => {
               const Icon = stat.icon
               return (
                 <div
                   key={stat.label}
-                  className="group flex items-center min-w-0 gap-2 glass-card px-2.5 py-2 rounded-xl border border-white/10 hover:border-softnex-blue/40 transition-all duration-300"
+                  className="group relative flex items-center min-w-0 gap-2.5 sm:gap-2 px-3 sm:px-2.5 py-2.5 rounded-xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] border border-white/10 hover:border-softnex-blue/50 hover:shadow-[0_0_20px_rgba(0,168,255,0.2)] transition-all duration-300 overflow-hidden"
                 >
-                  <div className="flex-shrink-0 w-7 h-7 rounded-md bg-softnex-blue/15 border border-softnex-blue/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Icon className="w-3.5 h-3.5 text-softnex-blue" strokeWidth={2.2} />
+                  <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-softnex-blue/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-softnex-blue/35 to-softnex-blue/10 border border-softnex-blue/40 flex items-center justify-center shadow-[0_0_12px_rgba(0,168,255,0.25)] group-hover:from-softnex-blue group-hover:to-softnex-blue transition-colors duration-300">
+                    <Icon className="w-4 h-4 text-softnex-blue group-hover:text-white transition-colors duration-300" strokeWidth={2.2} />
                   </div>
-                  <div className="text-left leading-tight">
-                    <div className="text-base font-black text-white">{stat.value}</div>
-                    <div className="text-[9px] text-white/50 tracking-wide uppercase font-semibold">
+                  <div className="text-left leading-none">
+                    <div className="text-lg font-black text-white tracking-tight">
+                      {stat.value}
+                      {stat.suffix && <span className="text-softnex-blue">{stat.suffix}</span>}
+                    </div>
+                    <div className="mt-1 text-[9px] text-white/55 tracking-[0.15em] sm:tracking-[0.08em] uppercase font-semibold">
                       {stat.label}
                     </div>
                   </div>

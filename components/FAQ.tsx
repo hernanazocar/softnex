@@ -28,7 +28,29 @@ const faqs = [
 ]
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const helpCard = (
+    <div className="relative text-left rounded-2xl border border-softnex-blue/30 bg-gradient-to-br from-softnex-blue/15 via-softnex-blue/5 to-transparent p-6 overflow-hidden max-w-md mx-auto lg:mx-0">
+      <div className="absolute -top-12 -right-12 w-40 h-40 bg-softnex-blue/20 rounded-full blur-3xl" />
+      <div className="relative flex items-start gap-4">
+        <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-softnex-blue flex items-center justify-center shadow-[0_0_20px_rgba(0,168,255,0.5)]">
+          <MessagesSquare className="w-5 h-5 text-white" strokeWidth={2} />
+        </div>
+        <div>
+          <p className="text-white font-bold mb-1">¿No encontraste tu respuesta?</p>
+          <p className="text-sm text-white/60 mb-4">Escríbenos y te respondemos directamente.</p>
+          <a
+            href="#contacto"
+            className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-softnex-blue text-white text-xs font-bold shadow-lg shadow-softnex-blue/30 hover:shadow-softnex-blue/50 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            Hacer una pregunta
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" strokeWidth={2.5} />
+          </a>
+        </div>
+      </div>
+    </div>
+  )
 
   return (
     <section id="faq" className="relative py-16 md:py-28 overflow-hidden bg-softnex-dark">
@@ -55,29 +77,11 @@ export default function FAQ() {
               <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
                 Dudas <span className="text-softnex-blue">resueltas</span>
               </h2>
-              <p className="text-base md:text-lg text-white/60 mb-8 max-w-md mx-auto lg:mx-0">
+              <p className="text-base md:text-lg text-white/60 lg:mb-8 max-w-md mx-auto lg:mx-0">
                 Lo que más nos preguntan antes de empezar un proyecto.
               </p>
 
-              <div className="relative text-left rounded-2xl border border-softnex-blue/30 bg-gradient-to-br from-softnex-blue/15 via-softnex-blue/5 to-transparent p-6 overflow-hidden max-w-md mx-auto lg:mx-0">
-                <div className="absolute -top-12 -right-12 w-40 h-40 bg-softnex-blue/20 rounded-full blur-3xl" />
-                <div className="relative flex items-start gap-4">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-softnex-blue flex items-center justify-center shadow-[0_0_20px_rgba(0,168,255,0.5)]">
-                    <MessagesSquare className="w-5 h-5 text-white" strokeWidth={2} />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold mb-1">¿No encontraste tu respuesta?</p>
-                    <p className="text-sm text-white/60 mb-4">Escríbenos y te respondemos directamente.</p>
-                    <a
-                      href="#contacto"
-                      className="group inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-softnex-blue text-white text-xs font-bold shadow-lg shadow-softnex-blue/30 hover:shadow-softnex-blue/50 hover:-translate-y-0.5 transition-all duration-300"
-                    >
-                      Hacer una pregunta
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" strokeWidth={2.5} />
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <div className="hidden lg:block">{helpCard}</div>
             </div>
           </motion.div>
 
@@ -145,6 +149,9 @@ export default function FAQ() {
               )
             })}
           </div>
+
+          {/* En móvil la tarjeta va después de las preguntas */}
+          <div className="lg:hidden">{helpCard}</div>
         </div>
       </div>
     </section>

@@ -122,45 +122,6 @@ html {
   60%, 100% { left: 130%; }
 }
 
-/* Efecto escáner láser de la palabra rotativa del Hero */
-.scan-reveal {
-  animation: scan-reveal 0.65s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-
-.scan-bar {
-  position: absolute;
-  top: -8%;
-  bottom: -8%;
-  left: 0;
-  width: 3px;
-  border-radius: 2px;
-  background: #ffffff;
-  box-shadow: 0 0 10px 2px #00a8ff, 0 0 28px 8px rgba(0, 168, 255, 0.55);
-  animation: scan-bar 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  pointer-events: none;
-}
-
-.scan-bar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 3px;
-  width: 70px;
-  background: linear-gradient(to right, transparent, rgba(0, 168, 255, 0.25));
-}
-
-@keyframes scan-reveal {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
-
-@keyframes scan-bar {
-  0% { left: 0%; opacity: 1; }
-  85% { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
-}
-
 @keyframes bg-pan {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
