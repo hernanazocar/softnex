@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, memo } from 'react'
-import ScrambleText from './ScrambleText'
+import GlitchText from './GlitchText'
 import { ArrowRight, Rocket, LayoutGrid, FolderKanban, Users, Award, Headset } from 'lucide-react'
 import AINetwork from './hero-variants/AINetwork'
 
@@ -115,7 +115,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
               aria-live="polite"
               aria-atomic="true"
             >
-              <ScrambleText text={words[currentWord]} />
+              <GlitchText text={words[currentWord]} />
             </span>
           </h1>
 
