@@ -59,7 +59,7 @@ export default function Contact() {
   }
 
   const contactInfo = [
-    { icon: Mail, title: 'Email', value: 'contacto@softnex.com', href: 'mailto:contacto@softnex.com' },
+    { icon: Mail, title: 'Email', value: 'hola@softnex.cl', href: 'mailto:hola@softnex.cl' },
     { icon: Phone, title: 'Teléfono', value: '+56 9 XXXX XXXX', href: null },
     { icon: MapPin, title: 'Ubicación', value: 'Santiago, Chile', href: null },
   ]

@@ -126,9 +126,9 @@ export default function Footer() {
               <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-softnex-blue mb-5">Contacto</h3>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <a href="mailto:contacto@softnex.com" className="flex items-center gap-2.5 text-white/60 hover:text-white transition-colors">
+                  <a href="mailto:hola@softnex.cl" className="flex items-center gap-2.5 text-white/60 hover:text-white transition-colors">
                     <Mail className="w-4 h-4 flex-shrink-0 text-softnex-blue" strokeWidth={2} />
-                    contacto@softnex.com
+                    hola@softnex.cl
                   </a>
                 </li>
                 <li className="flex items-center gap-2.5 text-white/60">
