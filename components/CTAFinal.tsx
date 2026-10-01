@@ -1,11 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles, Rocket, Users, Headset } from 'lucide-react'
+import RevealWords from './fx/RevealWords'
+import CountUp from './fx/CountUp'
+import { ArrowRight, Rocket, Users, Headset } from 'lucide-react'
 
 export default function CTAFinal() {
   return (
-    <section className="relative pt-4 pb-16 md:pb-20 overflow-hidden bg-gradient-to-br from-white to-gray-50">
+    <section className="relative pt-16 md:pt-24 pb-2 md:pb-4 overflow-hidden bg-gradient-to-br from-white to-gray-50">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-dots-pattern opacity-5" />
@@ -28,21 +30,15 @@ export default function CTAFinal() {
             <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-white/10 rounded-full blur-3xl" />
 
             <div className="relative z-10 text-center">
-              {/* Icon badge */}
-              <div className="inline-flex items-center justify-center gap-2 mb-3">
-                <Sparkles className="w-4 h-4 text-softnex-blue animate-pulse" />
-                <span className="text-xs font-bold text-softnex-blue tracking-wider uppercase">
-                  Comencemos algo grande
-                </span>
-                <Sparkles className="w-4 h-4 text-softnex-blue animate-pulse" style={{ animationDelay: '0.5s' }} />
+              <div className="inline-flex items-center gap-2 mb-4 px-5 py-2 rounded-full bg-softnex-blue/10 border border-softnex-blue/30 shadow-[0_0_20px_rgba(0,168,255,0.15)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-softnex-blue shadow-[0_0_8px_#00a8ff]" />
+                <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold uppercase">Comencemos algo grande</p>
               </div>
 
               {/* Main heading */}
               <h2 className="text-2xl md:text-4xl font-black text-white mb-3 leading-tight">
-                ¿Tienes un proyecto{' '}
-                <span className="text-softnex-blue">
-                  en mente?
-                </span>
+                <RevealWords text="¿Tienes un proyecto" />{' '}
+                <RevealWords text="en mente?" className="text-softnex-blue" delay={0.24} />
               </h2>
 
               <p className="text-base md:text-lg text-white/70 mb-6 leading-relaxed">
@@ -73,12 +69,12 @@ export default function CTAFinal() {
               <div className="grid grid-cols-3 gap-4 border-t border-white/10 pt-5 max-w-md mx-auto">
                 <div className="text-center">
                   <Rocket className="w-4 h-4 text-softnex-blue mx-auto mb-2" strokeWidth={2} />
-                  <div className="text-xl font-black text-softnex-blue">50+</div>
+                  <div className="text-xl font-black text-softnex-blue"><CountUp to={50} />+</div>
                   <div className="text-[10px] text-white/50 uppercase tracking-wider">Proyectos</div>
                 </div>
                 <div className="text-center border-x border-white/10">
                   <Users className="w-4 h-4 text-softnex-blue mx-auto mb-2" strokeWidth={2} />
-                  <div className="text-xl font-black text-softnex-blue">30+</div>
+                  <div className="text-xl font-black text-softnex-blue"><CountUp to={30} />+</div>
                   <div className="text-[10px] text-white/50 uppercase tracking-wider">Clientes</div>
                 </div>
                 <div className="text-center">

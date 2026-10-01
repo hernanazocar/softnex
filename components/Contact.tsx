@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import RevealWords from './fx/RevealWords'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, CheckCircle2, MessageCircle, User, MessageSquare, ArrowUpRight, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, CheckCircle2, User, MessageSquare, ArrowUpRight, Send } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -59,7 +60,7 @@ export default function Contact() {
   }
 
   const contactInfo = [
-    { icon: Mail, title: 'Email', value: 'contacto@softnex.com', href: 'mailto:contacto@softnex.com' },
+    { icon: Mail, title: 'Email', value: 'hola@softnex.cl', href: 'mailto:hola@softnex.cl' },
     { icon: Phone, title: 'Teléfono', value: '+56 9 XXXX XXXX', href: null },
     { icon: MapPin, title: 'Ubicación', value: 'Santiago, Chile', href: null },
   ]
@@ -71,7 +72,7 @@ export default function Contact() {
       {/* Light background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-softnex-blue/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-softnex-blue/10 rounded-full blur-[120px] drift" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -84,14 +85,14 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="text-center mb-10 md:mb-12"
           >
-            <div className="inline-block mb-4 px-6 py-2 glass rounded-full border border-gray-200">
-              <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold flex items-center justify-center gap-2">
-                <MessageCircle className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 mb-4 px-5 py-2 rounded-full bg-softnex-blue/10 border border-softnex-blue/25">
+              <span className="w-1.5 h-1.5 rounded-full bg-softnex-blue shadow-[0_0_8px_#00a8ff]" />
+              <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">
                 CONTACTO
               </p>
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-4">
-              Hablemos de tu <span className="text-softnex-blue">proyecto</span>
+              <RevealWords text="Hablemos de tu" />{' '}<RevealWords text="proyecto" className="text-softnex-blue" delay={0.24} />
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Contanos tu idea y te respondemos con una propuesta concreta, no un genérico
@@ -106,7 +107,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5 }}
-              className="h-full"
+              className="h-full order-2 lg:order-1"
             >
               <div className="relative h-full flex flex-col rounded-2xl bg-softnex-dark p-7 md:p-8 overflow-hidden shadow-xl shadow-softnex-dark/20">
                 <div className="absolute inset-0 bg-grid-pattern opacity-20" />
@@ -170,7 +171,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="lg:col-span-2 h-full"
+              className="lg:col-span-2 h-full order-1 lg:order-2"
             >
               {isSubmitted ? (
                 <div className="h-full flex flex-col items-center justify-center text-center bg-white p-8 rounded-2xl shadow-xl border border-gray-100 min-h-[320px]">
@@ -255,14 +256,12 @@ export default function Contact() {
                         className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 text-sm focus:outline-none focus:border-softnex-blue focus:ring-2 focus:ring-softnex-blue/20 transition-all"
                       >
                         <option value="">Selecciona...</option>
+                        <option value="saas">Software SaaS</option>
+                        <option value="custom">Sistemas a Medida y ERP</option>
+                        <option value="automation">Automatización e Integraciones</option>
+                        <option value="ai">Agentes IA</option>
                         <option value="web">Desarrollo Web</option>
                         <option value="mobile">Apps Móviles</option>
-                        <option value="custom">Sistemas a Medida</option>
-                        <option value="erp">Sistemas ERP</option>
-                        <option value="automation">Automatización</option>
-                        <option value="ai">Agentes IA</option>
-                        <option value="cloud">Cloud</option>
-                        <option value="integrations">Integraciones</option>
                       </select>
                     </div>
                   </div>

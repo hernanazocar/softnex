@@ -1,18 +1,34 @@
 'use client'
 
 import { useEffect, useState, memo } from 'react'
-import { ArrowRight, Rocket, LayoutGrid, FolderKanban, Users, Award, Headset } from 'lucide-react'
-import AINetwork from './hero-variants/AINetwork'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRight, Rocket, LayoutGrid, Users, CalendarCheck, Headset } from 'lucide-react'
+import dynamic from 'next/dynamic'
+import CountUp from './fx/CountUp'
+import AINetworkStatic from './hero-variants/AINetworkStatic'
+
+// La animación se descarga aparte, después de lo esencial (texto, logo y menú)
+const AINetwork = dynamic(() => import('./hero-variants/AINetwork'), { ssr: false })
 
 const stats = [
-  { value: '50+', label: 'Proyectos', icon: FolderKanban },
-  { value: '30+', label: 'Clientes', icon: Users },
-  { value: '5+', label: 'Años', icon: Award },
-  { value: '24/7', label: 'Soporte', icon: Headset },
+  { value: '50', suffix: '+', label: 'Proyectos', icon: Rocket, anim: 'icon-launch' },
+  { value: '30', suffix: '+', label: 'Clientes', icon: Users, anim: 'icon-bounce' },
+  { value: '5', suffix: '+', label: 'Años', icon: CalendarCheck, anim: 'icon-pop' },
+  { value: '24/7', suffix: '', label: 'Soporte', icon: Headset, anim: 'icon-wiggle' },
 ]
 
 function Hero({ visual }: { visual?: React.ReactNode }) {
   const [currentWord, setCurrentWord] = useState(0)
+  // Solo se monta una instancia de la Red IA (escritorio o móvil) para no duplicar animaciones
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   const words = ['TECNOLOGÍA', 'INNOVACIÓN', 'SOLUCIONES', 'SOFTWARE']
 
@@ -27,7 +43,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
 
     const interval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % words.length)
-    }, 3000)
+    }, 2000)
     return () => clearInterval(interval)
   }, [])
 
@@ -42,8 +58,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
             linear-gradient(90deg, rgba(0, 168, 255, 0.05) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
-          animation: 'gridMove 20s linear infinite',
-          willChange: 'transform'
+          animation: 'gridMove 20s linear infinite'
         }}
       />
 
@@ -56,8 +71,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
             linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px)
           `,
           backgroundSize: '120px 120px',
-          animation: 'gridMoveSlow 40s linear infinite',
-          willChange: 'transform'
+          animation: 'gridMoveSlow 40s linear infinite'
         }}
       />
 
@@ -67,15 +81,15 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
       {/* Mesh gradients modernos */}
       <div
         className="absolute top-0 -left-1/4 w-[800px] h-[800px] bg-gradient-to-br from-softnex-blue/20 via-softnex-cyan/10 to-transparent rounded-full blur-[120px]"
-        style={{ animation: 'float 15s ease-in-out infinite', willChange: 'transform' }}
+        style={{ animation: 'float 15s ease-in-out infinite' }}
       />
       <div
         className="absolute top-1/3 -right-1/4 w-[700px] h-[700px] bg-gradient-to-bl from-softnex-purple/15 via-softnex-pink/8 to-transparent rounded-full blur-[100px]"
-        style={{ animation: 'float 12s ease-in-out infinite reverse', willChange: 'transform' }}
+        style={{ animation: 'float 12s ease-in-out infinite reverse' }}
       />
       <div
         className="absolute bottom-1/4 left-1/3 w-[600px] h-[600px] bg-gradient-to-tr from-softnex-cyan/10 via-softnex-blue/5 to-transparent rounded-full blur-[90px]"
-        style={{ animation: 'float 18s ease-in-out infinite', willChange: 'transform', animationDelay: '5s' }}
+        style={{ animation: 'float 18s ease-in-out infinite', animationDelay: '5s' }}
       />
 
       {/* Capas de brillo dinámico */}
@@ -84,7 +98,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-softnex-dark/50 via-transparent to-softnex-dark/80" />
 
-      <div className="relative z-10 container mx-auto px-6 pt-28 pb-16 md:pt-32 lg:pb-20">
+      <div className="relative z-10 container mx-auto px-6 pt-20 pb-16 md:pt-32 lg:pb-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center max-w-7xl mx-auto">
         <div className="text-center lg:text-left">
           <div className="inline-flex items-center gap-2 mb-5 px-3.5 py-1 glass-card rounded-full border border-softnex-blue/30">
@@ -99,23 +113,31 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
             <span className="block text-white text-3xl sm:text-4xl xl:text-5xl">Transformamos</span>
             <span className="block text-white text-3xl sm:text-4xl xl:text-5xl">ideas en</span>
             <span
-              className="block relative mt-1 text-5xl sm:text-6xl xl:text-7xl transition-all duration-500 ease-in-out"
-              style={{
-                color: '#00a8ff',
-                letterSpacing: '0.02em'
-              }}
+              className="block relative mt-1 text-5xl sm:text-6xl xl:text-7xl"
+              style={{ color: '#00a8ff', letterSpacing: '0.02em' }}
               aria-live="polite"
               aria-atomic="true"
             >
-              {words[currentWord]}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={words[currentWord]}
+                  className="inline-block"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                >
+                  {words[currentWord]}
+                </motion.span>
+              </AnimatePresence>
             </span>
           </h1>
 
           <p className="text-sm md:text-base text-white/70 mb-7 max-w-lg mx-auto lg:mx-0 leading-relaxed">
             Desarrollo de <span className="text-softnex-blue font-semibold">software a medida</span>,
-            <span className="text-white font-semibold"> aplicaciones móviles</span>,
-            <span className="text-white font-semibold"> sistemas ERP</span> y
-            soluciones de <span className="text-softnex-blue font-semibold">automatización con IA</span>
+            <span className="text-white font-semibold"> sistemas web y móviles</span>,
+            <span className="text-white font-semibold"> automatizaciones inteligentes</span> y
+            <span className="text-softnex-blue font-semibold"> agentes IA</span> para tu negocio.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center mb-10">
@@ -137,20 +159,31 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-lg mx-auto lg:mx-0">
+          {/* En celular: Red IA estática incluida en el HTML, visible sin esperar JavaScript */}
+          <div className="lg:hidden relative mx-auto w-[338px] h-[312px] sm:w-[468px] sm:h-[432px] -mt-4 mb-6">
+            <div className="absolute top-0 left-0 origin-top-left scale-[0.65] sm:scale-90">
+              <AINetworkStatic />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2 max-w-lg sm:max-w-xl mx-auto lg:mx-0">
             {stats.map((stat) => {
               const Icon = stat.icon
               return (
                 <div
                   key={stat.label}
-                  className="group flex items-center min-w-0 gap-2 glass-card px-2.5 py-2 rounded-xl border border-white/10 hover:border-softnex-blue/40 transition-all duration-300"
+                  className="group relative flex items-center min-w-0 gap-2.5 sm:gap-2 px-3 sm:px-2.5 py-2.5 rounded-xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] border border-white/10 hover:border-softnex-blue/50 hover:shadow-[0_0_20px_rgba(0,168,255,0.2)] transition-all duration-300 overflow-hidden"
                 >
-                  <div className="flex-shrink-0 w-7 h-7 rounded-md bg-softnex-blue/15 border border-softnex-blue/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Icon className="w-3.5 h-3.5 text-softnex-blue" strokeWidth={2.2} />
+                  <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-softnex-blue/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-softnex-blue/35 to-softnex-blue/10 border border-softnex-blue/40 flex items-center justify-center shadow-[0_0_12px_rgba(0,168,255,0.25)] group-hover:from-softnex-blue group-hover:to-softnex-blue transition-colors duration-300">
+                    <Icon className={`w-4 h-4 text-softnex-blue group-hover:text-white transition-colors duration-300 ${stat.anim}`} strokeWidth={2.2} />
                   </div>
-                  <div className="text-left leading-tight">
-                    <div className="text-base font-black text-white">{stat.value}</div>
-                    <div className="text-[9px] text-white/50 tracking-wide uppercase font-semibold">
+                  <div className="text-left leading-none">
+                    <div className="text-lg font-black text-white tracking-tight">
+                      {/^\d+$/.test(stat.value) ? <CountUp to={Number(stat.value)} /> : stat.value}
+                      {stat.suffix && <span className="text-softnex-blue ml-0.5">{stat.suffix}</span>}
+                    </div>
+                    <div className="mt-1 text-[9px] text-white/55 tracking-[0.15em] sm:tracking-[0.08em] uppercase font-semibold">
                       {stat.label}
                     </div>
                   </div>
@@ -161,7 +194,7 @@ function Hero({ visual }: { visual?: React.ReactNode }) {
         </div>
 
         <div className="hidden lg:block">
-          {visual ?? <AINetwork />}
+          {isDesktop && (visual ?? <AINetwork />)}
         </div>
         </div>
       </div>

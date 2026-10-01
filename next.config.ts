@@ -30,10 +30,10 @@ const nextConfig = {
             key: 'X-DNS-Prefetch-Control',
             value: 'on'
           },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
-          },
+          // En desarrollo se omite para poder ver localhost en el Simple Browser de VS Code
+          ...(process.env.NODE_ENV === 'production'
+            ? [{ key: 'X-Frame-Options', value: 'SAMEORIGIN' }]
+            : []),
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff'

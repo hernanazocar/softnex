@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Globe, Smartphone, ServerCog, Boxes, Workflow, Bot, Cloud, Plug, Sparkles, Layers } from 'lucide-react'
+import { Globe, Smartphone, Boxes, Workflow, Bot, LayoutDashboard, Sparkles, Layers } from 'lucide-react'
 import Float, { floatCard } from './Float'
 
 const W = 520
@@ -12,16 +12,14 @@ const CY = H / 2
 const R = 180
 
 const nodes = [
-  { icon: Globe, label: 'Web' },
-  { icon: Smartphone, label: 'Apps' },
-  { icon: ServerCog, label: 'Sistemas' },
-  { icon: Boxes, label: 'ERP' },
+  { icon: LayoutDashboard, label: 'Software' },
+  { icon: Boxes, label: 'Sistemas' },
   { icon: Workflow, label: 'Automatización' },
   { icon: Bot, label: 'Agentes IA' },
-  { icon: Cloud, label: 'Cloud' },
-  { icon: Plug, label: 'Integraciones' },
+  { icon: Globe, label: 'Webs' },
+  { icon: Smartphone, label: 'Apps' },
 ].map((n, i) => {
-  const rad = ((-90 + i * 45) * Math.PI) / 180
+  const rad = ((-90 + i * 60) * Math.PI) / 180
   return { ...n, x: CX + R * Math.cos(rad), y: CY + R * Math.sin(rad) }
 })
 
@@ -44,7 +42,7 @@ function LogoX() {
   )
 }
 
-export default function AINetwork() {
+export default function AINetwork({ compact = false }: { compact?: boolean }) {
   const reduce = useReducedMotion()
   const [active, setActive] = useState(0)
 
@@ -63,10 +61,7 @@ export default function AINetwork() {
           className="absolute rounded-full border border-dashed border-softnex-blue/20 animate-[spin_60s_linear_infinite]"
           style={{ width: R * 2, height: R * 2 }}
         />
-        <div className="absolute w-[240px] h-[240px] rounded-full border border-softnex-blue/10 animate-[spin_30s_linear_infinite_reverse]">
-          <span className="absolute -top-1 left-1/2 w-2 h-2 rounded-full bg-softnex-blue shadow-[0_0_10px_#00a8ff]" />
-          <span className="absolute -bottom-1 left-1/2 w-1.5 h-1.5 rounded-full bg-softnex-blue/70" />
-        </div>
+        <div className="absolute w-[240px] h-[240px] rounded-full border border-softnex-blue/10" />
       </div>
 
       {/* Conexiones */}
@@ -90,13 +85,15 @@ export default function AINetwork() {
                 strokeWidth={isActive ? 2 : 1.2}
                 strokeOpacity={isActive ? 0.9 : 0.3}
                 strokeDasharray="4 6"
-                animate={reduce ? undefined : { strokeDashoffset: [0, -20] }}
+                animate={reduce || compact ? undefined : { strokeDashoffset: [0, -20] }}
                 transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
                 style={{ transition: 'stroke-opacity 0.4s, stroke-width 0.4s' }}
               />
               {!reduce && (
                 <motion.circle
                   r={3.5}
+                  cx={CX}
+                  cy={CY}
                   fill="#00a8ff"
                   style={{ filter: 'drop-shadow(0 0 6px #00a8ff)' }}
                   animate={{ cx: [CX, n.x], cy: [CY, n.y], opacity: [0, 1, 0] }}
@@ -124,7 +121,7 @@ export default function AINetwork() {
           <motion.div
             className="w-16 h-16"
             style={{ filter: 'drop-shadow(0 0 12px rgba(0,168,255,0.7))' }}
-            animate={reduce ? undefined : { scale: [1, 1.06, 1] }}
+            animate={reduce || compact ? undefined : { scale: [1, 1.06, 1] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           >
             <LogoX />
@@ -168,6 +165,8 @@ export default function AINetwork() {
         )
       })}
 
+      {!compact && (
+        <>
       <Float delay={0.8} className={`${floatCard} top-2 -left-6`}>
         <div className="w-8 h-8 rounded-lg bg-softnex-blue/20 flex items-center justify-center">
           <Sparkles className="w-4 h-4 text-softnex-blue" />
@@ -183,10 +182,12 @@ export default function AINetwork() {
           <Layers className="w-4 h-4 text-softnex-blue" />
         </div>
         <div>
-          <p className="text-[11px] font-bold text-white">8 soluciones</p>
+          <p className="text-[11px] font-bold text-white">6 soluciones</p>
           <p className="text-[10px] text-emerald-400 font-semibold">conectadas en un ecosistema</p>
         </div>
       </Float>
+        </>
+      )}
     </div>
   )
 }

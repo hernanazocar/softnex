@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import RevealWords from './fx/RevealWords'
 import { Gauge, Users, Code, Headset, Check, X, ArrowRight } from 'lucide-react'
 
 const differentiators = [
@@ -39,8 +40,8 @@ export default function WhyUs() {
     <section id="ventajas" className="relative py-16 md:py-28 overflow-hidden bg-softnex-dark">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-softnex-blue/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-softnex-blue/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-softnex-blue/10 rounded-full blur-[120px] drift" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-softnex-blue/10 rounded-full blur-[120px] drift" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
@@ -51,11 +52,12 @@ export default function WhyUs() {
           transition={{ duration: 0.5 }}
           className="text-center mb-10 md:mb-14"
         >
-          <div className="inline-block mb-4 px-6 py-2 glass rounded-full">
+          <div className="inline-flex items-center gap-2 mb-4 px-5 py-2 rounded-full bg-softnex-blue/10 border border-softnex-blue/30 shadow-[0_0_20px_rgba(0,168,255,0.15)]">
+            <span className="w-1.5 h-1.5 rounded-full bg-softnex-blue shadow-[0_0_8px_#00a8ff]" />
             <p className="text-xs tracking-[0.25em] text-softnex-blue font-bold">POR QUÉ ELEGIRNOS</p>
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4">
-            No somos una <span className="text-softnex-blue">fábrica de templates</span>
+            <RevealWords text="No somos una" />{' '}<RevealWords text="fábrica de templates" className="text-softnex-blue" delay={0.24} />
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
             Cada decisión técnica está atada a un objetivo de negocio concreto.
@@ -69,7 +71,7 @@ export default function WhyUs() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.6 }}
-            className="relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden flex flex-col lg:order-2"
+            className="spotlight relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden flex flex-col order-2"
           >
             <div className="grid grid-cols-2 border-b border-white/10">
               <div className="px-3 sm:px-5 md:px-6 py-3.5 sm:py-4">
@@ -127,7 +129,7 @@ export default function WhyUs() {
           </motion.div>
 
           {/* Diferenciadores */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:order-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 order-1">
             {differentiators.map((item, index) => {
               const Icon = item.icon
               return (
@@ -137,7 +139,7 @@ export default function WhyUs() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ duration: 0.45, delay: index * 0.08 }}
-                  className="group relative rounded-2xl p-5 sm:p-6 border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden hover:border-softnex-blue/40 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,168,255,0.35)] transition-all duration-300"
+                  className="spotlight group relative rounded-2xl p-5 sm:p-6 border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden hover:border-softnex-blue/40 hover:-translate-y-1 hover:shadow-[0_10px_40px_-10px_rgba(0,168,255,0.35)] transition-all duration-300"
                 >
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-softnex-blue to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute -top-12 -right-12 w-32 h-32 bg-softnex-blue/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -147,7 +149,7 @@ export default function WhyUs() {
                   </span>
 
                   <div className="relative w-11 h-11 rounded-xl bg-softnex-blue/15 border border-softnex-blue/30 flex items-center justify-center mb-5 group-hover:bg-softnex-blue group-hover:shadow-[0_0_20px_rgba(0,168,255,0.5)] transition-all duration-300">
-                    <Icon className="w-5 h-5 text-softnex-blue group-hover:text-white transition-colors duration-300" strokeWidth={2} />
+                    <Icon className="w-5 h-5 text-softnex-blue group-hover:text-white transition-colors duration-300 icon-pop" strokeWidth={2} />
                   </div>
                   <h3 className="relative text-white font-bold text-base mb-2">{item.title}</h3>
                   <p className="relative text-white/60 text-sm leading-relaxed">{item.desc}</p>
