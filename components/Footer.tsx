@@ -3,8 +3,8 @@ import { socials } from './socials'
 
 
 const services = [
-  'Software SaaS',
-  'Sistemas a Medida y ERP',
+  'Software a Medida',
+  'Sistemas de Gestión y ERP',
   'Automatización e Integraciones',
   'Agentes IA',
   'Desarrollo Web',
