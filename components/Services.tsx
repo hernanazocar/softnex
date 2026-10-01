@@ -16,7 +16,7 @@ import {
 const services = [
   {
     icon: LayoutDashboard,
-    title: 'Software SaaS',
+    title: 'Software a Medida',
     anim: 'icon-pop',
     description:
       'Plataformas por suscripción listas para vender: usuarios, planes, pagos y panel de administración.',
@@ -24,7 +24,7 @@ const services = [
   },
   {
     icon: Boxes,
-    title: 'Sistemas a Medida y ERP',
+    title: 'Sistemas de Gestión y ERP',
     anim: 'icon-bounce',
     description:
       'Software para los procesos reales de tu negocio: desde sistemas a medida hasta ERP que integran ventas, inventario, contabilidad y RRHH.',
