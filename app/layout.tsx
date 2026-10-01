@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://softnex.com"),
+  metadataBase: new URL("https://www.softnex.cl"),
   title: "Softnex - Transformamos ideas en tecnología",
   description: "Desarrollo de software a medida, aplicaciones móviles, sistemas ERP y soluciones de automatización con IA. Convertimos tu idea en realidad digital.",
   keywords: ["desarrollo software", "aplicaciones móviles", "sistemas ERP", "automatización", "inteligencia artificial", "desarrollo web", "Next.js", "React"],
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Softnex - Transformamos ideas en tecnología",
     description: "Desarrollo de software a medida, aplicaciones móviles, sistemas ERP y soluciones de automatización con IA",
-    url: "https://softnex.com",
+    url: "https://www.softnex.cl",
     siteName: "Softnex",
     images: [
       {
