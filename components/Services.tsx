@@ -16,19 +16,19 @@ import {
 const services = [
   {
     icon: LayoutDashboard,
-    title: 'Software SaaS',
+    title: 'Software a Medida',
     anim: 'icon-pop',
     description:
-      'Plataformas por suscripción listas para vender: usuarios, planes, pagos y panel de administración.',
-    features: ['Suscripciones y pagos', 'Multiusuario', 'Panel de administración'],
+      'Software diseñado desde cero para los procesos y objetivos de tu negocio, con arquitectura pensada para crecer contigo.',
+    features: ['Arquitectura escalable', 'Código mantenible', 'Plataformas SaaS'],
   },
   {
     icon: Boxes,
-    title: 'Sistemas a Medida y ERP',
+    title: 'Sistemas de Gestión y ERP',
     anim: 'icon-bounce',
     description:
-      'Software para los procesos reales de tu negocio: desde sistemas a medida hasta ERP que integran ventas, inventario, contabilidad y RRHH.',
-    features: ['Arquitectura escalable', 'Módulos integrados', 'Reportes en tiempo real'],
+      'Plataformas que integran ventas, inventario, contabilidad y RRHH en un solo lugar, con datos en tiempo real.',
+    features: ['Módulos integrados', 'Reportes en tiempo real', 'Cloud u on-premise'],
   },
   {
     icon: Workflow,
